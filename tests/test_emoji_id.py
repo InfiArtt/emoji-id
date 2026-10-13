@@ -140,12 +140,28 @@ def run_tests():
     )
 
     test(
-        "Prefix configuration",
+        "Prefix configuration and prefix once with spaces/commas",
         lambda: [
             assert_eq(matcher.replace_in_text("😀", prefix="emoji"), "emoji wajah gembira"),
             assert_eq(
                 matcher.replace_in_text("😀👍", prefix="emoji", prefix_once=True),
                 "emoji wajah gembira jempol ke atas",
+            ),
+            assert_eq(
+                matcher.replace_in_text("😂, 👋, 👨‍🦯", prefix="emoji", prefix_once=True),
+                "emoji wajah gembira berurai air mata, tangan melambai, pria dengan tongkat",
+            ),
+            assert_eq(
+                matcher.replace_in_text("😂 👋 👨‍🦯", prefix="emoji", prefix_once=True),
+                "emoji wajah gembira berurai air mata tangan melambai pria dengan tongkat",
+            ),
+            assert_eq(
+                matcher.replace_in_text("😂 😂 😂", prefix="emoji", prefix_once=True, collapse_repeated=True),
+                "emoji 3 kali wajah gembira berurai air mata",
+            ),
+            assert_eq(
+                matcher.replace_in_text("😂, 😂, 😂", prefix="emoji", prefix_once=True, collapse_repeated=True),
+                "emoji 3 kali wajah gembira berurai air mata",
             ),
         ],
     )

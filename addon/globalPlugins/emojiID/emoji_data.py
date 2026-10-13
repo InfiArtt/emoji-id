@@ -282,17 +282,6 @@ class EmojiMatcher:
 
         for match in self._pattern.finditer(text):
             start, end = match.span()
-
-            # Text between previous match and this one
-            if start > last_end:
-                between_text = text[last_end:start]
-                if current_name is not None:
-                    flush_emoji(current_name, current_count)
-                    current_name = None
-                    current_count = 0
-                in_emoji_run = False
-                result_parts.append(between_text)
-
             matched = match.group()
             normalized = _VS_PATTERN.sub("", matched)
             name = self._data.get(normalized)
@@ -301,23 +290,44 @@ class EmojiMatcher:
                 name = self._build_fallback_name(normalized, skin_tone_detail)
 
             if name is None:
+                # Unrecognized emoji: flush current, append raw text, break emoji run
                 if current_name is not None:
                     flush_emoji(current_name, current_count)
                     current_name = None
                     current_count = 0
-                in_emoji_run = False
+                if start > last_end:
+                    result_parts.append(text[last_end:start])
                 result_parts.append(matched)
+                in_emoji_run = False
                 last_end = end
                 continue
 
             if not skin_tone_detail:
                 name = self._strip_skin_tone(name)
 
-            if collapse_repeated and name == current_name:
-                current_count += 1
-            else:
+            between_text = text[last_end:start] if start > last_end else ""
+            has_words = bool(re.search(r"\w", between_text)) if between_text else False
+
+            if has_words:
+                # Real words between emojis: flush current and break run
                 if current_name is not None:
                     flush_emoji(current_name, current_count)
+                    current_name = None
+                    current_count = 0
+                result_parts.append(between_text)
+                in_emoji_run = False
+                current_name = name
+                current_count = 1
+            elif collapse_repeated and name == current_name:
+                # Same emoji separated only by whitespace or separator punctuation: collapse
+                current_count += 1
+            else:
+                # Different emoji or collapse off: flush previous
+                if current_name is not None:
+                    flush_emoji(current_name, current_count)
+                if between_text:
+                    result_parts.append(between_text)
+                    # Note: in_emoji_run remains True because has_words is False!
                 current_name = name
                 current_count = 1
 

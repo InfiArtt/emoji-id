@@ -85,18 +85,18 @@ class EmojiIDSettingsPanel(SettingsPanel):
 
         # Enable/disable checkbox
         self.enabledCheckbox = sHelper.addItem(
-            wx.CheckBox(self, label=_("&Aktifkan pembacaan emoji dalam bahasa Indonesia"))
+            wx.CheckBox(self, label=_("Aktifkan pembacaan emoji dalam bahasa Indonesia"))
         )
         self.enabledCheckbox.SetValue(conf["enabled"])
 
         # Prefix section
         self.prefixCheckbox = sHelper.addItem(
-            wx.CheckBox(self, label=_("Tambahkan kata &awalan sebelum nama emoji"))
+            wx.CheckBox(self, label=_("Tambahkan kata awalan sebelum nama emoji"))
         )
         self.prefixCheckbox.SetValue(conf["prefix"])
 
         # Prefix text
-        prefixTextLabel = wx.StaticText(self, label=_("&Kata awalan:"))
+        prefixTextLabel = wx.StaticText(self, label=_("Kata awalan:"))
         self.prefixTextCtrl = wx.TextCtrl(self)
         self.prefixTextCtrl.SetValue(conf["prefixText"])
         prefixSizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -108,7 +108,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
         self.prefixOnceCheckbox = sHelper.addItem(
             wx.CheckBox(
                 self,
-                label=_("Kata awalan hanya &sekali untuk emoji berturut-turut"),
+                label=_("Kata awalan hanya sekali untuk emoji berturut-turut"),
             )
         )
         self.prefixOnceCheckbox.SetValue(conf["prefixOnce"])
@@ -117,7 +117,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
         self.collapseRepeatedCheckbox = sHelper.addItem(
             wx.CheckBox(
                 self,
-                label=_("&Gabungkan emoji berulang yang sama (misalnya '3 kali wajah gembira')"),
+                label=_("Gabungkan emoji berulang yang sama (misalnya '3 kali wajah gembira')"),
             )
         )
         self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])
@@ -126,7 +126,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
         self.skinToneDetailCheckbox = sHelper.addItem(
             wx.CheckBox(
                 self,
-                label=_("Sertakan detail &warna kulit"),
+                label=_("Sertakan detail warna kulit"),
             )
         )
         self.skinToneDetailCheckbox.SetValue(conf["skinToneDetail"])
@@ -135,7 +135,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
         self.respectSymbolLevelCheckbox = sHelper.addItem(
             wx.CheckBox(
                 self,
-                label=_("Ikuti tingkat &simbol NVDA (jika nonaktif, selalu bacakan emoji)"),
+                label=_("Ikuti tingkat simbol NVDA (jika nonaktif, selalu bacakan emoji)"),
             )
         )
         self.respectSymbolLevelCheckbox.SetValue(conf["respectSymbolLevel"])
