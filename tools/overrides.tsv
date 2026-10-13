@@ -1,0 +1,20 @@
+# Emoji ID - Hand-maintained Indonesian name overrides
+# Format: emoji<TAB>spoken_name
+# These override CLDR tts names where the default is unclear or unnatural in Indonesian.
+# Status: SUGGESTION - pending user approval
+#
+# Emoji	Indonesian Name
+🤥	bohong
+🤧	bersin
+🤢	mual
+🤤	ngiler
+💩	kotoran
+😣	wajah tidak setuju
+💨	berlari
+🙄	wajah memutar mata
+🤫	wajah diam
+🤭	wajah tersipu
+🫠	wajah meleleh
+🫣	wajah mengintip
+🫤	wajah ragu
+🫥	wajah tak terlihat
