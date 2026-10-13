@@ -307,10 +307,12 @@ def run_tests():
     )
 
     test(
-        "installTasks onInstall executes without error",
+        "First-run welcome dialog triggers and updates firstRun config",
         lambda: [
-            (it := __import__("installTasks")),
-            it.onInstall(),
+            config.conf["emojiID"].__setitem__("firstRun", True),
+            (p_first := GlobalPlugin()),
+            p_first.terminate(),
+            assert_true(not config.conf["emojiID"]["firstRun"], "firstRun should be marked False after display"),
         ],
     )
 

@@ -133,8 +133,8 @@ class DonationDetailsDialog(wx.Dialog):
         self.EndModal(wx.ID_CLOSE)
 
 
-class InstallWelcomeDialog(wx.Dialog):
-    """Welcome dialog displayed during add-on installation."""
+class WelcomeDialog(wx.Dialog):
+    """Welcome dialog displayed on first run after add-on installation."""
 
     def __init__(self, parent: wx.Window | None = None) -> None:
         super().__init__(
@@ -155,7 +155,7 @@ class InstallWelcomeDialog(wx.Dialog):
             "Kalau kamu merasa add-on ini bermanfaat dan ingin menyemangati pengembang "
             "agar terus terawat dan berkembang, yuk dukung lewat donasi sukarela melalui GoPay.\n\n"
             "Pilih 'Donasi' untuk melihat informasi GoPay, atau 'Tidak Sekarang' untuk "
-            "langsung melanjutkan proses instalasi."
+            "langsung menikmati add-on."
         )
 
         self.text_ctrl = wx.TextCtrl(
@@ -188,6 +188,10 @@ class InstallWelcomeDialog(wx.Dialog):
 
     def _on_not_now(self, evt: wx.CommandEvent) -> None:
         self.EndModal(wx.ID_CANCEL)
+
+
+# Alias for compatibility
+InstallWelcomeDialog = WelcomeDialog
 
 
 class ReminderDialog(wx.Dialog):
@@ -258,17 +262,21 @@ def show_donation_details_dialog(parent: wx.Window | None = None) -> None:
         log.warning("Emoji ID: gagal menampilkan dialog detail donasi", exc_info=True)
 
 
-def show_install_dialog(parent: wx.Window | None = None) -> None:
-    """Open the welcome and donation dialog during installation."""
+def show_welcome_dialog(parent: wx.Window | None = None) -> None:
+    """Open the welcome and donation dialog on first run."""
     try:
         import gui
 
         if parent is None:
             parent = getattr(gui, "mainFrame", None)
-        dlg = InstallWelcomeDialog(parent)
+        dlg = WelcomeDialog(parent)
         _safe_popup(dlg)
     except Exception:
-        log.warning("Emoji ID: gagal menampilkan dialog instalasi", exc_info=True)
+        log.warning("Emoji ID: gagal menampilkan dialog selamat datang", exc_info=True)
+
+
+# Alias for compatibility
+show_install_dialog = show_welcome_dialog
 
 
 def show_reminder_dialog(parent: wx.Window | None = None) -> None:

@@ -84,6 +84,7 @@ class MockConf:
                 "cleanSymbols": True,
                 "respectSymbolLevel": False,
                 "periodicDonationReminder": True,
+                "firstRun": True,
             }
         }
 
@@ -204,6 +205,7 @@ mock_wx.EVT_CHECKBOX = 0
 mock_wx.EVT_BUTTON = 1
 
 mock_wx.CallAfter = lambda fn, *args, **kwargs: fn(*args, **kwargs)
+mock_wx.CallLater = lambda ms, fn, *args, **kwargs: fn(*args, **kwargs)
 
 class DummyClipboard:
     def __init__(self):

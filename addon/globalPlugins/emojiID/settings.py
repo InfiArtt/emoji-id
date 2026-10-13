@@ -42,6 +42,7 @@ CONFSPEC = {
     "cleanSymbols": "boolean(default=True)",
     "respectSymbolLevel": "boolean(default=False)",
     "periodicDonationReminder": "boolean(default=True)",
+    "firstRun": "boolean(default=True)",
 }
 
 # Translatable strings

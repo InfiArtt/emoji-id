@@ -97,6 +97,15 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
         NVDASettingsDialog.categoryClasses.append(EmojiIDSettingsPanel)
 
+        # Trigger welcome dialog on first run after installation
+        try:
+            if config.conf["emojiID"].get("firstRun", True):
+                import wx
+
+                wx.CallLater(1500, self._showWelcomeDialog)
+        except Exception:
+            log.warning("Emoji ID: gagal memeriksa status firstRun", exc_info=True)
+
         # Schedule initial donation reminder (randomized between 20 and 45 minutes)
         if _is_reminder_enabled():
             self._scheduleDonationReminder(min_seconds=1200, max_seconds=2700)
@@ -324,4 +333,34 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
             # Reschedule subsequent reminder between 90 and 180 minutes (5400 to 10800 seconds)
             if not self._terminated and _is_reminder_enabled():
                 self._scheduleDonationReminder(min_seconds=5400, max_seconds=10800)
+
+    # ------------------------------------------------------------------ #
+    # First-run welcome dialog
+    # ------------------------------------------------------------------ #
+
+    def _showWelcomeDialog(self) -> None:
+        """Display the first-run welcome dialog on the main GUI thread."""
+        if self._terminated:
+            return
+
+        try:
+            conf = config.conf["emojiID"]
+            if not conf.get("firstRun", True):
+                return
+        except KeyError:
+            return
+
+        try:
+            from .donation import show_welcome_dialog
+
+            show_welcome_dialog()
+        except Exception:
+            log.warning("Emoji ID: gagal menampilkan dialog selamat datang", exc_info=True)
+        finally:
+            # Mark firstRun as False and save configuration
+            try:
+                config.conf["emojiID"]["firstRun"] = False
+            except Exception:
+                pass
+
 
