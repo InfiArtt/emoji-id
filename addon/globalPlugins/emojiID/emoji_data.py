@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Emoji ID - Indonesian Emoji Reader for NVDA
-# Copyright (C) 2024 Emoji ID Contributors
+# Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 

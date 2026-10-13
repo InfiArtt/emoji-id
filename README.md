@@ -26,3 +26,9 @@ python tests/test_emoji_id.py
 
 ## Membangun Paket Add-on (.nvda-addon)
 Paket add-on dibangun dengan SCons atau dikemas langsung sebagai arsip zip berekstensi `.nvda-addon`.
+
+## Pengembang dan Hak Cipta
+- Pengembang: Rexya Muhamad <rexya2017@gmail.com>
+- Lisensi: GPL-2.0-or-later
+- Hak Cipta: (c) 2026 Rexya Muhamad <rexya2017@gmail.com>
+- Dukungan Donasi: GoPay 085128011831 (a.n. Rexya Muhamad Rizki)

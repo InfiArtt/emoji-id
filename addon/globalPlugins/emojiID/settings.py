@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Emoji ID - Indonesian Emoji Reader for NVDA
-# Copyright (C) 2024 Emoji ID Contributors
+# Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 
@@ -12,6 +12,7 @@ Provides an NVDA settings panel with controls for:
 - Collapse repeated emoji
 - Skin tone detail
 - Symbol level respect
+- Periodic donation reminder and donation details
 """
 
 from __future__ import annotations
@@ -40,6 +41,7 @@ CONFSPEC = {
     "skinToneDetail": "boolean(default=True)",
     "cleanSymbols": "boolean(default=True)",
     "respectSymbolLevel": "boolean(default=False)",
+    "periodicDonationReminder": "boolean(default=True)",
 }
 
 # Translatable strings
@@ -150,9 +152,30 @@ class EmojiIDSettingsPanel(SettingsPanel):
         )
         self.respectSymbolLevelCheckbox.SetValue(conf["respectSymbolLevel"])
 
+        # Periodic donation reminder checkbox
+        self.periodicReminderCheckbox = sHelper.addItem(
+            wx.CheckBox(
+                self,
+                label=_("Tampilkan pengingat donasi berkala"),
+            )
+        )
+        self.periodicReminderCheckbox.SetValue(conf.get("periodicDonationReminder", True))
+
+        # Support developer donation button
+        self.donateButton = sHelper.addItem(
+            wx.Button(self, label=_("Dukung Pengembang (Donasi GoPay)"))
+        )
+        self.donateButton.Bind(wx.EVT_BUTTON, self._onDonateClicked)
+
         # Bind enable checkbox to update control states
         self.enabledCheckbox.Bind(wx.EVT_CHECKBOX, self._onEnabledToggle)
         self._updateControlStates()
+
+    def _onDonateClicked(self, evt: wx.CommandEvent) -> None:
+        """Open the donation details dialog."""
+        from .donation import show_donation_details_dialog
+
+        show_donation_details_dialog(self)
 
     def _onEnabledToggle(self, evt: wx.CommandEvent) -> None:
         """Handle enable checkbox toggle to update dependent control states."""
@@ -189,3 +212,4 @@ class EmojiIDSettingsPanel(SettingsPanel):
         conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
         conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
         conf["respectSymbolLevel"] = self.respectSymbolLevelCheckbox.GetValue()
+        conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()

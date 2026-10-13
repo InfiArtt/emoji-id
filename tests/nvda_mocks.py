@@ -81,7 +81,9 @@ class MockConf:
                 "prefixOnce": False,
                 "collapseRepeated": True,
                 "skinToneDetail": True,
+                "cleanSymbols": True,
                 "respectSymbolLevel": False,
+                "periodicDonationReminder": True,
             }
         }
 
@@ -90,6 +92,9 @@ class MockConf:
 
     def __setitem__(self, key: str, value: Any):
         self.data[key] = value
+
+    def get(self, key: str, default: Any = None):
+        return self.data.get(key, default)
 
 mock_config.conf = MockConf()
 mock_config.AggregatedSection = dict
@@ -133,8 +138,19 @@ class NVDASettingsDialog:
     categoryClasses = []
 mock_gui_sd.SettingsPanel = SettingsPanel
 mock_gui_sd.NVDASettingsDialog = NVDASettingsDialog
+class BoxSizerHelper:
+    def __init__(self, *args, **kwargs): pass
+    def addItem(self, item): return item
+mock_gui_helper.BoxSizerHelper = BoxSizerHelper
+
 mock_gui.settingsDialogs = mock_gui_sd
 mock_gui.guiHelper = mock_gui_helper
+
+class DummyMainFrame:
+    def prePopup(self): pass
+    def postPopup(self): pass
+
+mock_gui.mainFrame = DummyMainFrame()
 
 sys.modules["gui"] = mock_gui
 sys.modules["gui.settingsDialogs"] = mock_gui_sd
@@ -143,14 +159,30 @@ sys.modules["gui.guiHelper"] = mock_gui_helper
 # 9. Mock wx
 mock_wx = ModuleType("wx")
 class DummyWx:
-    def __init__(self, *args, **kwargs): pass
-    def SetValue(self, *args): pass
-    def GetValue(self): return True
-    def Enable(self, *args): pass
+    def __init__(self, *args, **kwargs):
+        self.value = kwargs.get("value", "")
+        if not self.value and len(args) > 1 and isinstance(args[1], str):
+            self.value = args[1]
+        self.label = kwargs.get("label", "")
+        self.enabled = True
+    def SetValue(self, val): self.value = val
+    def GetValue(self): return self.value
+    def Enable(self, state=True): self.enabled = state
     def Bind(self, *args): pass
     def Add(self, *args, **kwargs): pass
+    def CentreOnParent(self): pass
+    def Fit(self): pass
+    def SetMinSize(self, *args): pass
+    def GetSize(self): return (400, 300)
+    def SetFocus(self): pass
+    def EndModal(self, code): return code
+    def ShowModal(self): return 1001
+    def Destroy(self): pass
+    def SetSizer(self, sizer): pass
 
 mock_wx.Panel = DummyWx
+mock_wx.Dialog = DummyWx
+mock_wx.Button = DummyWx
 mock_wx.CheckBox = DummyWx
 mock_wx.TextCtrl = DummyWx
 mock_wx.StaticText = DummyWx
@@ -158,6 +190,30 @@ mock_wx.BoxSizer = DummyWx
 mock_wx.HORIZONTAL = 0
 mock_wx.VERTICAL = 1
 mock_wx.ALIGN_CENTER_VERTICAL = 0
+mock_wx.ALIGN_RIGHT = 0
 mock_wx.RIGHT = 0
+mock_wx.ALL = 0
+mock_wx.EXPAND = 0
+mock_wx.DEFAULT_DIALOG_STYLE = 0
+mock_wx.RESIZE_BORDER = 0
+mock_wx.TE_MULTILINE = 0
+mock_wx.TE_READONLY = 0
+mock_wx.ID_CLOSE = 1001
+mock_wx.ID_CANCEL = 1002
 mock_wx.EVT_CHECKBOX = 0
+mock_wx.EVT_BUTTON = 1
+
+mock_wx.CallAfter = lambda fn, *args, **kwargs: fn(*args, **kwargs)
+
+class DummyClipboard:
+    def __init__(self):
+        self.data = None
+    def Open(self): return True
+    def Close(self): pass
+    def SetData(self, data):
+        self.data = data
+
+mock_wx.TheClipboard = DummyClipboard()
+mock_wx.TextDataObject = lambda txt: txt
+
 sys.modules["wx"] = mock_wx

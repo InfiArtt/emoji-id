@@ -23,3 +23,9 @@ Semua perubahan penting pada add-on ini didokumentasikan dalam berkas ini. Forma
 - Opsi pembersihan simbol dan tanda hubung ("kupu-kupu" menjadi "kupu kupu", menghilangkan tanda kurung) agar TTS tidak mengeja "dash" atau "left paren" dengan tetap menjaga intonasi alami.
 - Dukungan rangkaian emoji yang dipisahkan oleh spasi atau tanda baca pemisah (koma, titik koma) pada opsi awalan sekali per deret emoji.
 - Dokumentasi bilingual (Indonesia dan Inggris) dan pemberitahuan lisensi Unicode v3.
+- Dialog selamat datang dan ajakan donasi saat proses penginstalan (`installTasks.onInstall`).
+- Dialog informasi donasi GoPay (085128011831 a.n. Rexya Muhamad Rizki) dengan tombol salin nomor otomatis ke papan klip.
+- Tombol akses donasi cepat dan opsi pengingat donasi berkala pada panel pengaturan NVDA.
+- Pengingat donasi berkala otomatis dengan interval acak yang ramah pengguna (20–45 menit awal, 90–180 menit pengulangan).
+- Penetapan pengembang resmi kepada Rexya Muhamad <rexya2017@gmail.com> dan hak cipta tahun 2026.
+

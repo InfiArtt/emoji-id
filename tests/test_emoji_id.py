@@ -21,13 +21,25 @@ Tests:
 import os
 import sys
 
+# Ensure UTF-8 stdout on Windows console
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
+import re
+
 # Ensure paths
 repo_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+addon_root = os.path.join(repo_root, "addon")
 addon_path = os.path.join(repo_root, "addon", "globalPlugins")
 tests_path = os.path.join(repo_root, "tests")
 
 if repo_root not in sys.path:
     sys.path.insert(0, repo_root)
+if addon_root not in sys.path:
+    sys.path.insert(0, addon_root)
 if tests_path not in sys.path:
     sys.path.insert(0, tests_path)
 if addon_path not in sys.path:
@@ -243,6 +255,84 @@ def run_tests():
         lambda: [
             plugin.terminate(),
             assert_eq(characterProcessing.processSpeechSymbol("en", "😀"), "grinning face"),
+        ],
+    )
+
+    from emojiID.donation import (
+        GOPAY_NAME,
+        GOPAY_NUMBER,
+        DonationDetailsDialog,
+        InstallWelcomeDialog,
+        ReminderDialog,
+        copy_to_clipboard,
+    )
+    from emojiID.settings import EmojiIDSettingsPanel
+
+    test(
+        "GoPay donation details and clipboard copy",
+        lambda: [
+            assert_eq(GOPAY_NUMBER, "085128011831"),
+            assert_eq(GOPAY_NAME, "Rexya Muhamad Rizki"),
+            assert_true(copy_to_clipboard("085128011831")),
+            assert_eq(nvda_mocks.mock_wx.TheClipboard.data, "085128011831"),
+        ],
+    )
+
+    test(
+        "Donation dialogs initialization and absence of forbidden word 'anda'",
+        lambda: [
+            # Check details dialog
+            (details_dlg := DonationDetailsDialog()),
+            assert_in("085128011831", details_dlg.text_ctrl.value),
+            assert_in("Rexya Muhamad Rizki", details_dlg.text_ctrl.value),
+            assert_true(
+                not bool(re.search(r"\banda\b", details_dlg.text_ctrl.value, re.IGNORECASE)),
+                "Kata 'anda' ditemukan di dialog detail donasi",
+            ),
+            # Check welcome dialog
+            (welcome_dlg := InstallWelcomeDialog()),
+            assert_in("Selamat datang di Emoji ID", welcome_dlg.text_ctrl.value),
+            assert_true(
+                not bool(re.search(r"\banda\b", welcome_dlg.text_ctrl.value, re.IGNORECASE)),
+                "Kata 'anda' ditemukan di dialog instalasi",
+            ),
+            # Check reminder dialog
+            (reminder_dlg := ReminderDialog()),
+            assert_in("Hai!", reminder_dlg.text_ctrl.value),
+            assert_true(
+                not bool(re.search(r"\banda\b", reminder_dlg.text_ctrl.value, re.IGNORECASE)),
+                "Kata 'anda' ditemukan di dialog pengingat",
+            ),
+        ],
+    )
+
+    test(
+        "installTasks onInstall executes without error",
+        lambda: [
+            (it := __import__("installTasks")),
+            it.onInstall(),
+        ],
+    )
+
+    test(
+        "Periodic donation timer lifecycle in GlobalPlugin",
+        lambda: [
+            (p2 := GlobalPlugin()),
+            assert_true(p2._donationTimer is not None, "Donation timer should be scheduled"),
+            p2.terminate(),
+            assert_true(p2._donationTimer is None, "Donation timer should be canceled"),
+        ],
+    )
+
+    test(
+        "Settings panel donation controls and save",
+        lambda: [
+            (panel := EmojiIDSettingsPanel()),
+            panel.makeSettings(nvda_mocks.mock_wx.BoxSizer()),
+            assert_true(hasattr(panel, "donateButton"), "Missing donate button"),
+            assert_true(hasattr(panel, "periodicReminderCheckbox"), "Missing reminder checkbox"),
+            panel.onSave(),
+            assert_true(config.conf["emojiID"]["periodicDonationReminder"]),
         ],
     )
 

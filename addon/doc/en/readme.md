@@ -27,6 +27,8 @@ Open NVDA Menu -> Preferences -> Settings (NVDA+Control+G), then select the **Em
 6. **Include skin tone details**: If checked, skin tone variations are announced. If unchecked, only base names are announced.
 7. **Clean hyphens and parentheses in emoji names**: If checked (default: enabled), hyphens in reduplicated words (e.g. kupu-kupu becomes kupu kupu) and parentheses are sanitized for speech so synthesizers like Eloquence do not speak "dash" or "left paren". Punctuation in document text outside emojis is completely untouched.
 8. **Respect NVDA symbol level**: If checked, emoji are subject to NVDA's symbol level setting. If unchecked (default), emoji are always announced.
+9. **Show periodic donation reminder**: If checked (default: enabled), NVDA periodically displays a friendly reminder at randomized intervals inviting you to support the developer.
+10. **Support Developer (GoPay Donation)**: Opens a dialog displaying GoPay donation details with a quick copy button.
 
 Settings are saved automatically per NVDA configuration profile.
 
@@ -42,6 +44,17 @@ This add-on provides an unassigned command to toggle the feature on and off:
 
 When pressed, NVDA announces the new status: "Emoji ID aktif" or "Emoji ID nonaktif".
 
+## Developer Support and Donations
+
+Emoji ID is maintained voluntarily to give visually impaired NVDA users in Indonesia an accurate, comfortable, and natural emoji-reading experience across all synthesizers.
+
+If you find this add-on helpful and would like to support ongoing development and maintenance, voluntary donations via GoPay are warmly welcomed:
+- **Method**: GoPay
+- **Account Number / Mobile**: 085128011831
+- **Account Name**: Rexya Muhamad Rizki
+
+Any amount of support is greatly appreciated. Thank you!
+
 ## System Requirements
 
 - NVDA 2026.1 or later.
@@ -50,8 +63,9 @@ When pressed, NVDA announces the new status: "Emoji ID aktif" or "Emoji ID nonak
 
 ## License and Copyright
 
+- Author: Rexya Muhamad <rexya2017@gmail.com>
 - Add-on License: GNU General Public License version 2 or later (GPL-2.0-or-later).
-- Code Copyright: (c) 2024-2026 Emoji ID Contributors.
+- Code Copyright: (c) 2026 Rexya Muhamad <rexya2017@gmail.com>.
 
 ### Unicode CLDR License Notice (Unicode License v3)
 

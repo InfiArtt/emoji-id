@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # Emoji ID - Indonesian Emoji Reader for NVDA
-# Copyright (C) 2024 Emoji ID Contributors
+# Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 
@@ -19,6 +19,8 @@ Works by:
 from __future__ import annotations
 
 import logging
+import random
+import threading
 from typing import Any
 
 try:
@@ -53,6 +55,14 @@ log = logging.getLogger(__name__)
 _original_processSpeechSymbol = None
 
 
+def _is_reminder_enabled() -> bool:
+    """Check if periodic donation reminder is enabled."""
+    try:
+        return bool(config.conf["emojiID"]["periodicDonationReminder"])
+    except KeyError:
+        return True
+
+
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
     """NVDA global plugin that reads emoji in Indonesian."""
 
@@ -61,6 +71,9 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
+
+        self._terminated = False
+        self._donationTimer: threading.Timer | None = None
 
         # Register configuration
         register_config()
@@ -83,10 +96,25 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         from gui.settingsDialogs import NVDASettingsDialog
 
         NVDASettingsDialog.categoryClasses.append(EmojiIDSettingsPanel)
+
+        # Schedule initial donation reminder (randomized between 20 and 45 minutes)
+        if _is_reminder_enabled():
+            self._scheduleDonationReminder(min_seconds=1200, max_seconds=2700)
+
         log.info("Emoji ID: plugin initialized successfully")
 
     def terminate(self) -> None:
         """Clean up on plugin termination."""
+        self._terminated = True
+
+        # Cancel donation timer
+        if self._donationTimer is not None:
+            try:
+                self._donationTimer.cancel()
+            except Exception:
+                pass
+            self._donationTimer = None
+
         # Unregister speech filter
         try:
             speech.extensions.filter_speechSequence.unregister(self._filterSpeechSequence)
@@ -256,3 +284,44 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
             message = _("Emoji ID nonaktif")
 
         ui.message(message)
+
+    # ------------------------------------------------------------------ #
+    # Periodic donation reminder
+    # ------------------------------------------------------------------ #
+
+    def _scheduleDonationReminder(self, min_seconds: int = 1200, max_seconds: int = 2700) -> None:
+        """Schedule a background timer for the donation reminder."""
+        if self._terminated or not _is_reminder_enabled():
+            return
+
+        delay = random.randint(min_seconds, max_seconds)
+        self._donationTimer = threading.Timer(delay, self._onDonationTimerFired)
+        self._donationTimer.daemon = True
+        self._donationTimer.start()
+        log.debug(f"Emoji ID: jadwal pengingat donasi diatur dalam {delay} detik")
+
+    def _onDonationTimerFired(self) -> None:
+        """Callback from timer thread when reminder interval elapses."""
+        try:
+            import wx
+
+            wx.CallAfter(self._showDonationReminderGui)
+        except Exception:
+            log.warning("Emoji ID: gagal menjadwalkan dialog pengingat ke antrean GUI", exc_info=True)
+
+    def _showDonationReminderGui(self) -> None:
+        """Display the donation reminder dialog on wx GUI thread."""
+        if self._terminated or not _is_reminder_enabled():
+            return
+
+        try:
+            from .donation import show_reminder_dialog
+
+            show_reminder_dialog()
+        except Exception:
+            log.warning("Emoji ID: gagal menampilkan dialog pengingat donasi", exc_info=True)
+        finally:
+            # Reschedule subsequent reminder between 90 and 180 minutes (5400 to 10800 seconds)
+            if not self._terminated and _is_reminder_enabled():
+                self._scheduleDonationReminder(min_seconds=5400, max_seconds=10800)
+

@@ -27,6 +27,8 @@ Buka menu NVDA -> Pengaturan -> Pengaturan (NVDA+Control+G), lalu pilih kategori
 6. **Sertakan detail warna kulit**: Jika dicentang, variasi warna kulit diucapkan lengkap. Jika tidak, hanya nama dasar emoji yang dibacakan.
 7. **Bersihkan tanda hubung dan tanda kurung pada nama emoji**: Jika dicentang (bawaan: aktif), tanda hubung pada kata ulang (seperti kupu-kupu menjadi kupu kupu) dan tanda kurung dihilangkan saat dikirim ke TTS sehingga synthesizer seperti Eloquence tidak mengeja kata "dash" atau "left paren". Tanda baca pada teks dokumen di luar emoji tidak akan terpengaruh sama sekali.
 8. **Ikuti tingkat simbol NVDA**: Jika dicentang, emoji hanya dibaca jika tingkat pengucapan simbol NVDA mencakupnya. Jika tidak dicentang (bawaan), emoji selalu dibacakan.
+9. **Tampilkan pengingat donasi berkala**: Jika dicentang (bawaan: aktif), NVDA secara berkala pada jeda waktu acak yang bersahabat akan menampilkan pengingat santai untuk mendukung pengembangan add-on ini.
+10. **Dukung Pengembang (Donasi GoPay)**: Membuka dialog informasi donasi GoPay yang dilengkapi tombol salin nomor rekening/HP secara cepat.
 
 Pengaturan ini tersimpan otomatis per profil konfigurasi NVDA.
 
@@ -42,6 +44,17 @@ Add-on ini menyediakan perintah tanpa pintasan bawaan (unassigned) untuk beralih
 
 Saat ditekan, NVDA akan mengumumkan status baru: "Emoji ID aktif" atau "Emoji ID nonaktif".
 
+## Dukungan dan Donasi
+
+Pengembangan add-on Emoji ID dilakukan secara sukarela agar teman-teman tunanetra pengguna NVDA dapat membaca simbol emoji dalam bahasa Indonesia secara nyaman dan konsisten di segala synthesizer.
+
+Kalau kamu merasa add-on ini bermanfaat dan ingin mendukung pengembangannya agar terus terawat, yuk berikan apresiasi melalui GoPay:
+- **Metode**: GoPay
+- **Nomor HP / Rekening**: 085128011831
+- **Atas Nama**: Rexya Muhamad Rizki
+
+Dukungan sekecil apa pun sangat berarti. Terima kasih banyak!
+
 ## Persyaratan Sistem
 
 - NVDA 2026.1 atau yang lebih baru.
@@ -50,8 +63,9 @@ Saat ditekan, NVDA akan mengumumkan status baru: "Emoji ID aktif" atau "Emoji ID
 
 ## Lisensi dan Hak Cipta
 
+- Pengembang: Rexya Muhamad <rexya2017@gmail.com>
 - Lisensi Add-on: GNU General Public License versi 2 atau yang lebih baru (GPL-2.0-or-later).
-- Hak Cipta Kode: (c) 2024-2026 Para Kontributor Emoji ID.
+- Hak Cipta Kode: (c) 2026 Rexya Muhamad <rexya2017@gmail.com>.
 
 ### Pemberitahuan Lisensi Unicode CLDR (Unicode License v3)
 
