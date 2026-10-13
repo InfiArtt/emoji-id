@@ -20,4 +20,6 @@ Semua perubahan penting pada add-on ini didokumentasikan dalam berkas ini. Forma
 - Skrip build-time pipeline data (`tools/build_emoji_data.py`) dari Unicode CLDR 48.2.0.
 - Berkas penimpa (*overrides*) manual (`tools/overrides.tsv`) untuk kosakata bahasa Indonesia yang lebih alami.
 - Suite pengujian unit mandiri mencakup semua kasus emoji dan siklus hidup plugin.
+- Opsi pembersihan simbol dan tanda hubung ("kupu-kupu" menjadi "kupu kupu", menghilangkan tanda kurung) agar TTS tidak mengeja "dash" atau "left paren" dengan tetap menjaga intonasi alami.
+- Dukungan rangkaian emoji yang dipisahkan oleh spasi atau tanda baca pemisah (koma, titik koma) pada opsi awalan sekali per deret emoji.
 - Dokumentasi bilingual (Indonesia dan Inggris) dan pemberitahuan lisensi Unicode v3.

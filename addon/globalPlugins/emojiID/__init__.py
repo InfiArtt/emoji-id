@@ -141,6 +141,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
         prefix_once = conf["prefixOnce"]
         collapse_repeated = conf["collapseRepeated"]
         skin_tone_detail = conf["skinToneDetail"]
+        clean_symbols = conf.get("cleanSymbols", True)
 
         new_sequence: SpeechSequence = []
         for item in speechSequence:
@@ -152,6 +153,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
                     prefix_once=prefix_once,
                     collapse_repeated=collapse_repeated,
                     skin_tone_detail=skin_tone_detail,
+                    clean_symbols=clean_symbols,
                 )
                 if replaced:
                     new_sequence.append(replaced)
@@ -188,9 +190,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
             def wrappedProcessSpeechSymbol(locale: str, symbol: str) -> str:
                 """Wrapper that returns Indonesian emoji names for single emoji."""
                 if is_enabled() and self._matcher.loaded:
-                    name = self._matcher.lookup_single_char(symbol)
+                    conf = config.conf["emojiID"]
+                    clean_symbols = conf.get("cleanSymbols", True)
+                    name = self._matcher.lookup_single_char(symbol, clean_symbols=clean_symbols)
                     if name is not None:
-                        conf = config.conf["emojiID"]
                         if not conf["skinToneDetail"]:
                             name = self._matcher._strip_skin_tone(name)
                         if conf["prefix"] and conf["prefixText"]:

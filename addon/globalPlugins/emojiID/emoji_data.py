@@ -202,12 +202,33 @@ class EmojiMatcher:
 
         return name
 
-    def lookup_single_char(self, char: str) -> str | None:
+    @staticmethod
+    def clean_name_symbols(name: str) -> str:
+        """Sanitize symbols (hyphens, parentheses, etc.) in emoji names for speech.
+
+        - Converts word-connecting hyphens to spaces (e.g. 'kupu-kupu' -> 'kupu kupu')
+        - Removes parentheses cleanly (e.g. 'menunjuk ke atas (dibalik)' -> 'menunjuk ke atas dibalik')
+        - Removes double quotes (e.g. 'tombol "rahasia"' -> 'tombol rahasia')
+        - Replaces '&' with 'dan' (e.g. '& Kep.' -> 'dan Kep.')
+        - Collapses consecutive whitespace
+        """
+        if not name:
+            return name
+
+        s = re.sub(r"(\w+)-(\w+)", r"\1 \2", name)
+        s = s.replace("-", " ")
+        s = s.replace("(", " ").replace(")", " ")
+        s = s.replace('"', "")
+        s = s.replace("&", " dan ")
+        return re.sub(r"\s+", " ", s).strip()
+
+    def lookup_single_char(self, char: str, clean_symbols: bool = True) -> str | None:
         """Look up a single character, optimized for the character navigation path.
 
         Args:
             char: A single character (may be a surrogate pair in terms of
                   Python string, but len() == 1).
+            clean_symbols: If True, remove hyphens and parentheses for clean speech.
 
         Returns:
             The Indonesian name, or None if not found.
@@ -216,7 +237,10 @@ class EmojiMatcher:
             return None
 
         normalized = _VS_PATTERN.sub("", char)
-        return self._data.get(normalized)
+        name = self._data.get(normalized)
+        if name and clean_symbols:
+            name = self.clean_name_symbols(name)
+        return name
 
     def replace_in_text(
         self,
@@ -226,6 +250,7 @@ class EmojiMatcher:
         prefix_once: bool = False,
         collapse_repeated: bool = False,
         skin_tone_detail: bool = True,
+        clean_symbols: bool = True,
     ) -> str:
         """Replace all emoji in text with their Indonesian names.
 
@@ -237,6 +262,8 @@ class EmojiMatcher:
             collapse_repeated: If True, collapse consecutive identical emoji
                               into "N kali <name>".
             skin_tone_detail: If True, include skin tone descriptions.
+            clean_symbols: If True, remove hyphens and parentheses from emoji
+                          names for smooth speech.
 
         Returns:
             Text with emoji replaced by Indonesian names.
@@ -304,6 +331,9 @@ class EmojiMatcher:
 
             if not skin_tone_detail:
                 name = self._strip_skin_tone(name)
+
+            if clean_symbols:
+                name = self.clean_name_symbols(name)
 
             between_text = text[last_end:start] if start > last_end else ""
             has_words = bool(re.search(r"\w", between_text)) if between_text else False

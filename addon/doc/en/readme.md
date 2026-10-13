@@ -25,7 +25,8 @@ Open NVDA Menu -> Preferences -> Settings (NVDA+Control+G), then select the **Em
 4. **Prefix word only once for consecutive emojis**: If checked, the prefix is spoken only before the first emoji in a run of consecutive emojis.
 5. **Collapse repeated identical emojis**: If checked, identical consecutive emojis are collapsed into "N kali [emoji name]".
 6. **Include skin tone details**: If checked, skin tone variations are announced. If unchecked, only base names are announced.
-7. **Respect NVDA symbol level**: If checked, emoji are subject to NVDA's symbol level setting. If unchecked (default), emoji are always announced.
+7. **Clean hyphens and parentheses in emoji names**: If checked (default: enabled), hyphens in reduplicated words (e.g. kupu-kupu becomes kupu kupu) and parentheses are sanitized for speech so synthesizers like Eloquence do not speak "dash" or "left paren". Punctuation in document text outside emojis is completely untouched.
+8. **Respect NVDA symbol level**: If checked, emoji are subject to NVDA's symbol level setting. If unchecked (default), emoji are always announced.
 
 Settings are saved automatically per NVDA configuration profile.
 

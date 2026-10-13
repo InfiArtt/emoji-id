@@ -25,7 +25,8 @@ Buka menu NVDA -> Pengaturan -> Pengaturan (NVDA+Control+G), lalu pilih kategori
 4. **Kata awalan hanya sekali untuk emoji berturut-turut**: Jika dicentang, kata awalan hanya diucapkan di depan emoji pertama pada kelompok emoji berturut-turut.
 5. **Gabungkan emoji berulang yang sama**: Jika dicentang, emoji identik yang berurutan digabungkan menjadi "N kali [nama emoji]".
 6. **Sertakan detail warna kulit**: Jika dicentang, variasi warna kulit diucapkan lengkap. Jika tidak, hanya nama dasar emoji yang dibacakan.
-7. **Ikuti tingkat simbol NVDA**: Jika dicentang, emoji hanya dibaca jika tingkat pengucapan simbol NVDA mencakupnya. Jika tidak dicentang (bawaan), emoji selalu dibacakan.
+7. **Bersihkan tanda hubung dan tanda kurung pada nama emoji**: Jika dicentang (bawaan: aktif), tanda hubung pada kata ulang (seperti kupu-kupu menjadi kupu kupu) dan tanda kurung dihilangkan saat dikirim ke TTS sehingga synthesizer seperti Eloquence tidak mengeja kata "dash" atau "left paren". Tanda baca pada teks dokumen di luar emoji tidak akan terpengaruh sama sekali.
+8. **Ikuti tingkat simbol NVDA**: Jika dicentang, emoji hanya dibaca jika tingkat pengucapan simbol NVDA mencakupnya. Jika tidak dicentang (bawaan), emoji selalu dibacakan.
 
 Pengaturan ini tersimpan otomatis per profil konfigurasi NVDA.
 

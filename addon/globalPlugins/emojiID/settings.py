@@ -38,6 +38,7 @@ CONFSPEC = {
     "prefixOnce": "boolean(default=False)",
     "collapseRepeated": "boolean(default=True)",
     "skinToneDetail": "boolean(default=True)",
+    "cleanSymbols": "boolean(default=True)",
     "respectSymbolLevel": "boolean(default=False)",
 }
 
@@ -131,6 +132,15 @@ class EmojiIDSettingsPanel(SettingsPanel):
         )
         self.skinToneDetailCheckbox.SetValue(conf["skinToneDetail"])
 
+        # Clean symbols in emoji names (hyphens, parentheses)
+        self.cleanSymbolsCheckbox = sHelper.addItem(
+            wx.CheckBox(
+                self,
+                label=_("Bersihkan tanda hubung dan tanda kurung pada nama emoji"),
+            )
+        )
+        self.cleanSymbolsCheckbox.SetValue(conf.get("cleanSymbols", True))
+
         # Respect symbol level
         self.respectSymbolLevelCheckbox = sHelper.addItem(
             wx.CheckBox(
@@ -156,6 +166,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
         self.prefixOnceCheckbox.Enable(enabled)
         self.collapseRepeatedCheckbox.Enable(enabled)
         self.skinToneDetailCheckbox.Enable(enabled)
+        self.cleanSymbolsCheckbox.Enable(enabled)
         self.respectSymbolLevelCheckbox.Enable(enabled)
 
     def isValid(self) -> bool:
@@ -176,4 +187,5 @@ class EmojiIDSettingsPanel(SettingsPanel):
         conf["prefixOnce"] = self.prefixOnceCheckbox.GetValue()
         conf["collapseRepeated"] = self.collapseRepeatedCheckbox.GetValue()
         conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
+        conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
         conf["respectSymbolLevel"] = self.respectSymbolLevelCheckbox.GetValue()

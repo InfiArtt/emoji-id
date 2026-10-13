@@ -176,6 +176,20 @@ def run_tests():
         ],
     )
 
+    test(
+        "Clean symbols (hyphens and parentheses in emoji names vs text outside)",
+        lambda: [
+            assert_eq(matcher.replace_in_text("🦋", clean_symbols=True), "kupu kupu"),
+            assert_eq(matcher.replace_in_text("🦋", clean_symbols=False), "kupu-kupu"),
+            assert_eq(matcher.replace_in_text("👆", clean_symbols=True), "menunjuk ke atas dibalik"),
+            assert_eq(matcher.replace_in_text("👆", clean_symbols=False), "menunjuk ke atas (dibalik)"),
+            assert_eq(
+                matcher.replace_in_text("Pasal 1-2 (a) 🦋 hal 3-4", clean_symbols=True),
+                "Pasal 1-2 (a) kupu kupu hal 3-4",
+            ),
+        ],
+    )
+
     # 2. GlobalPlugin Integration tests
     config.conf["emojiID"]["enabled"] = True
     config.conf["emojiID"]["prefix"] = True
