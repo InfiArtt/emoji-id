@@ -1,0 +1,31 @@
+[project]
+name = "emojiID"
+version = "1.0.0"
+requires-python = ">=3.13"
+
+[dependency-groups]
+build = [
+    "scons>=4.10.1",
+    "markdown",
+]
+lint = [
+    "ruff",
+    "pyright",
+]
+test = [
+    "pytest",
+]
+data = [
+    "requests",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+
+[tool.pyright]
+pythonVersion = "3.13"
+typeCheckingMode = "basic"

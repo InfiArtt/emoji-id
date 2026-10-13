@@ -1,0 +1,12 @@
+*.pyc
+__pycache__/
+*.nvda-addon
+*.egg-info/
+dist/
+build/
+.eggs/
+*.mo
+addon/manifest.ini
+addon/doc/*/readme.html
+.venv/
+.ruff_cache/
