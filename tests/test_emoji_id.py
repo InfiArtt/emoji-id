@@ -291,16 +291,16 @@ def run_tests():
             ),
             # Check welcome dialog
             (welcome_dlg := InstallWelcomeDialog()),
-            assert_in("Selamat datang di Emoji ID", welcome_dlg.text_ctrl.value),
+            assert_in("Selamat datang di Emoji ID", welcome_dlg.message_text.label),
             assert_true(
-                not bool(re.search(r"\banda\b", welcome_dlg.text_ctrl.value, re.IGNORECASE)),
+                not bool(re.search(r"\banda\b", welcome_dlg.message_text.label, re.IGNORECASE)),
                 "Kata 'anda' ditemukan di dialog instalasi",
             ),
             # Check reminder dialog
             (reminder_dlg := ReminderDialog()),
-            assert_in("Hai!", reminder_dlg.text_ctrl.value),
+            assert_in("Hai!", reminder_dlg.message_text.label),
             assert_true(
-                not bool(re.search(r"\banda\b", reminder_dlg.text_ctrl.value, re.IGNORECASE)),
+                not bool(re.search(r"\banda\b", reminder_dlg.message_text.label, re.IGNORECASE)),
                 "Kata 'anda' ditemukan di dialog pengingat",
             ),
         ],

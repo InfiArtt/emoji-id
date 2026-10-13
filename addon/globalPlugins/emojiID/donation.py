@@ -115,7 +115,8 @@ class DonationDetailsDialog(wx.Dialog):
         self.SetSizer(sizer)
         self.Fit()
         self.SetMinSize(self.GetSize())
-        self.copy_btn.SetFocus()
+        self.text_ctrl.SetFocus()
+        self.text_ctrl.SetInsertionPoint(0)
 
     def _on_copy(self, evt: wx.CommandEvent) -> None:
         if copy_to_clipboard(GOPAY_NUMBER):
@@ -158,30 +159,24 @@ class WelcomeDialog(wx.Dialog):
             "langsung menikmati add-on."
         )
 
-        self.text_ctrl = wx.TextCtrl(
-            self,
-            value=welcome_text,
-            style=wx.TE_MULTILINE | wx.TE_READONLY,
-            size=(500, 210),
-        )
-        sizer.Add(self.text_ctrl, proportion=1, flag=wx.EXPAND | wx.ALL, border=10)
+        self.message_text = wx.StaticText(self, label=welcome_text)
+        self.message_text.Wrap(500)
+        sizer.Add(self.message_text, 0, wx.ALL | wx.EXPAND, 15)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.donate_btn = wx.Button(self, label=_("Donasi"))
         self.donate_btn.Bind(wx.EVT_BUTTON, self._on_donate)
-        btn_sizer.Add(self.donate_btn, flag=wx.RIGHT, border=10)
+        btn_sizer.Add(self.donate_btn, 0, wx.RIGHT, 10)
 
         self.not_now_btn = wx.Button(self, wx.ID_CANCEL, label=_("Tidak Sekarang"))
         self.not_now_btn.Bind(wx.EVT_BUTTON, self._on_not_now)
+        self.not_now_btn.SetDefault()
         btn_sizer.Add(self.not_now_btn)
 
-        sizer.Add(btn_sizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=10)
+        sizer.Add(btn_sizer, 0, wx.ALIGN_RIGHT | wx.ALL, 15)
 
-        self.SetSizer(sizer)
-        self.Fit()
-        self.SetMinSize(self.GetSize())
-        self.donate_btn.SetFocus()
+        self.SetSizerAndFit(sizer)
 
     def _on_donate(self, evt: wx.CommandEvent) -> None:
         show_donation_details_dialog(self)
@@ -217,30 +212,24 @@ class ReminderDialog(wx.Dialog):
             "melanjutkan aktivitas."
         )
 
-        self.text_ctrl = wx.TextCtrl(
-            self,
-            value=reminder_text,
-            style=wx.TE_MULTILINE | wx.TE_READONLY,
-            size=(480, 190),
-        )
-        sizer.Add(self.text_ctrl, proportion=1, flag=wx.EXPAND | wx.ALL, border=10)
+        self.message_text = wx.StaticText(self, label=reminder_text)
+        self.message_text.Wrap(480)
+        sizer.Add(self.message_text, 0, wx.ALL | wx.EXPAND, 15)
 
         btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         self.donate_btn = wx.Button(self, label=_("Donasi"))
         self.donate_btn.Bind(wx.EVT_BUTTON, self._on_donate)
-        btn_sizer.Add(self.donate_btn, flag=wx.RIGHT, border=10)
+        btn_sizer.Add(self.donate_btn, 0, wx.RIGHT, 10)
 
         self.not_now_btn = wx.Button(self, wx.ID_CANCEL, label=_("Tidak Sekarang"))
         self.not_now_btn.Bind(wx.EVT_BUTTON, self._on_not_now)
+        self.not_now_btn.SetDefault()
         btn_sizer.Add(self.not_now_btn)
 
-        sizer.Add(btn_sizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=10)
+        sizer.Add(btn_sizer, 0, wx.ALIGN_RIGHT | wx.ALL, 15)
 
-        self.SetSizer(sizer)
-        self.Fit()
-        self.SetMinSize(self.GetSize())
-        self.donate_btn.SetFocus()
+        self.SetSizerAndFit(sizer)
 
     def _on_donate(self, evt: wx.CommandEvent) -> None:
         show_donation_details_dialog(self)

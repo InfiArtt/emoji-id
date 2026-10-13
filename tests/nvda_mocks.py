@@ -184,6 +184,10 @@ class DummyWx:
     def ShowModal(self): return 1001
     def Destroy(self): pass
     def SetSizer(self, sizer): pass
+    def SetSizerAndFit(self, sizer): pass
+    def Wrap(self, width): pass
+    def SetInsertionPoint(self, pos): pass
+    def SetDefault(self): pass
 
 mock_wx.Panel = DummyWx
 mock_wx.Dialog = DummyWx
