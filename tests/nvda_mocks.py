@@ -3,9 +3,13 @@
 
 from __future__ import annotations
 
+import builtins
 import sys
 from types import ModuleType
 from typing import Any, Callable
+
+if not hasattr(builtins, "_"):
+    builtins._ = lambda x: x
 
 # 1. Mock logging if not present
 if "logging" not in sys.modules:
@@ -219,3 +223,18 @@ mock_wx.TheClipboard = DummyClipboard()
 mock_wx.TextDataObject = lambda txt: txt
 
 sys.modules["wx"] = mock_wx
+
+# 10. Mock logHandler
+mock_logHandler = ModuleType("logHandler")
+mock_logHandler.log = DummyLogger()
+sys.modules["logHandler"] = mock_logHandler
+
+# 11. Mock addonHandler
+mock_addonHandler = ModuleType("addonHandler")
+class DummyAddon:
+    manifest = {"name": "emojiID", "summary": "Emoji ID", "version": "1.0.0"}
+mock_addonHandler.getCodeAddon = lambda: DummyAddon()
+mock_addonHandler.initTranslation = lambda: None
+mock_addonHandler._addonImportTrackers = {}
+sys.modules["addonHandler"] = mock_addonHandler
+
