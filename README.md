@@ -24,7 +24,21 @@ Butuh Python 3.13, SCons, Markdown, dan gettext (`msgfmt`, `xgettext`).
 scons
 ```
 
-Hasilnya `emojiID-<versi>.nvda-addon` di folder utama. Untuk membuat berkas terjemahan `.pot`, jalankan `scons pot`.
+Hasilnya `emojiID-<versi>.nvda-addon` di folder utama.
+
+## Terjemahan
+
+Teks sumber antarmuka berbahasa Indonesia. Terjemahan bahasa Inggris ada di `addon/locale/en/LC_MESSAGES/nvda.po`. Nama emoji tidak diterjemahkan, karena berasal dari data CLDR, bukan dari berkas terjemahan.
+
+Setelah mengubah teks antarmuka, perbarui berkas terjemahan:
+
+```bash
+scons pot
+```
+
+```bash
+msgmerge --update --no-location addon/locale/en/LC_MESSAGES/nvda.po emojiID.pot
+```
 
 ## Tes dan pemeriksaan kode
 

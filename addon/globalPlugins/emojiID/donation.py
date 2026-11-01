@@ -36,8 +36,8 @@ class DonationDetailsDialog(wx.Dialog):
 		super().__init__(parent, title=_("Informasi Donasi GoPay - Emoji ID"))
 		sizer = wx.BoxSizer(wx.VERTICAL)
 
-		# Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
 		detailsText = _(
+			# Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
 			"Dukungan Pengembang Emoji ID\n\n"
 			"Metode: GoPay\n"
 			"Nomor HP: {number}\n"
@@ -125,8 +125,8 @@ def showWelcomeDialog() -> None:
 	_showInviteDialog(
 		# Translators: Title of the welcome dialog shown the first time NVDA starts with Emoji ID.
 		_("Selamat Datang di Emoji ID"),
-		# Translators: Message of the welcome dialog shown the first time NVDA starts with Emoji ID.
 		_(
+			# Translators: Message of the welcome dialog shown the first time NVDA starts with Emoji ID.
 			"Selamat datang di Emoji ID!\n\n"
 			"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n\n"
 			"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela "
@@ -140,8 +140,8 @@ def showReminderDialog() -> None:
 	_showInviteDialog(
 		# Translators: Title of the periodic donation reminder.
 		_("Dukungan Pengembang - Emoji ID"),
-		# Translators: Message of the periodic donation reminder.
 		_(
+			# Translators: Message of the periodic donation reminder.
 			"Semoga Emoji ID membantu aktivitasmu sehari-hari.\n\n"
 			"Kalau kamu ingin add-on ini terus diperbarui, kamu bisa mendukung pengembangnya "
 			"lewat donasi sukarela melalui GoPay. Pengingat ini bisa dimatikan di pengaturan Emoji ID."

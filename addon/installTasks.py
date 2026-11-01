@@ -31,8 +31,8 @@ def _showWelcome() -> None:
 	gui.mainFrame.prePopup()
 	try:
 		answer = MessageDialog.confirm(
-			# Translators: Message of the welcome dialog shown while Emoji ID is being installed.
 			_(
+				# Translators: Message of the welcome dialog shown while Emoji ID is being installed.
 				"Selamat datang di Emoji ID!\n\n"
 				"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n\n"
 				"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela "
@@ -49,8 +49,8 @@ def _showWelcome() -> None:
 		if answer != ReturnCode.OK:
 			return
 		isCopied = api.copyToClip(GOPAY_NUMBER)
-		# Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
 		details = _(
+			# Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
 			"Metode: GoPay\nNomor HP: {number}\nAtas nama: {name}\n\n"
 			"Donasi berapa pun membantu add-on ini terus diperbarui. Terima kasih!"
 		).format(number=GOPAY_NUMBER, name=GOPAY_NAME)

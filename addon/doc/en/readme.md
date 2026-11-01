@@ -4,6 +4,8 @@ Emoji ID reads emoji in Indonesian, whatever language your speech synthesizer us
 
 Emoji are read in Indonesian during normal reading, Say All, character navigation, the review cursor, and typed character echo.
 
+The add-on interface (settings, dialogs, and messages) follows the NVDA language: it is in English when NVDA is set to English, and in Indonesian otherwise. Emoji names are always Indonesian.
+
 ## How this differs from NVDA's built-in emoji names
 
 NVDA already includes Indonesian emoji names from Unicode CLDR. It uses them only when the language used for symbols is Indonesian. With an English voice, NVDA reads emoji names in English. Emoji ID fills that gap.
@@ -30,9 +32,9 @@ Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The
 4. Prefix only once for consecutive emoji. When checked, the prefix is spoken only before the first emoji in a run.
 5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 kali wajah gembira".
 6. Include skin tone details. When unchecked, only the base emoji name is read.
-7. Clean hyphens and parentheses in emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
+7. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
 8. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
-9. Support Developer button. Opens the GoPay donation details with a button that copies the number.
+9. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
 
 Settings are saved per NVDA configuration profile.
 
@@ -42,15 +44,15 @@ Emoji ID has a command that turns Indonesian emoji reading on or off. It has no 
 
 1. Open the NVDA menu, Preferences, Input Gestures.
 2. Expand the Emoji ID category.
-3. Select "Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia".
+3. Select "Turns Indonesian emoji reading on or off".
 4. Press Add, then press the gesture you want, for example NVDA+Shift+E.
 5. Press Enter to save.
 
-When you use the command, NVDA says "Emoji ID aktif" or "Emoji ID nonaktif".
+When you use the command, NVDA says "Emoji ID on" or "Emoji ID off".
 
 ## Donations
 
-Emoji ID is developed on a volunteer basis. During installation, Emoji ID shows a welcome message with a donation invitation. If you choose Donasi, the GoPay number is copied to the clipboard. Donations can be sent through GoPay:
+Emoji ID is developed on a volunteer basis. During installation, Emoji ID shows a welcome message with a donation invitation. If you choose Donate, the GoPay number is copied to the clipboard. Donations can be sent through GoPay:
 
 - Phone number: 085128011831
 - Account name: Rexya Muhamad Rizki

@@ -11,6 +11,7 @@ Format mengikuti Keep a Changelog.
 - Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay ke papan klip. Jika dialog gagal tampil, sambutan muncul sekali setelah NVDA dimulai ulang.
 - Kata awalan hanya sekali sekarang ikut dinonaktifkan di pengaturan saat kata awalan dimatikan.
 - Panduan pengguna menjelaskan beda Emoji ID dengan nama emoji bawaan NVDA.
+- Antarmuka add-on (pengaturan, dialog, dan pesan) sekarang tersedia dalam bahasa Inggris dan mengikuti bahasa NVDA. Nama emoji tetap berbahasa Indonesia.
 
 ### Diperbaiki
 

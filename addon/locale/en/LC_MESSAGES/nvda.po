@@ -1,0 +1,212 @@
+# English translation of the Emoji ID NVDA add-on.
+# This file is covered by the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: emojiID\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Translators: Title of the dialog that shows the GoPay donation details.
+msgid "Informasi Donasi GoPay - Emoji ID"
+msgstr "GoPay Donation Details - Emoji ID"
+
+#. Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
+#, python-brace-format
+msgid ""
+"Dukungan Pengembang Emoji ID\n"
+"\n"
+"Metode: GoPay\n"
+"Nomor HP: {number}\n"
+"Atas nama: {name}\n"
+"\n"
+"Donasi berapa pun membantu add-on ini terus diperbarui. Terima kasih!"
+msgstr ""
+"Support the Emoji ID developer\n"
+"\n"
+"Method: GoPay\n"
+"Phone number: {number}\n"
+"Account name: {name}\n"
+"\n"
+"Any amount helps keep this add-on updated. Thank you!"
+
+#. Translators: Button that copies the GoPay number to the clipboard.
+msgid "&Salin Nomor"
+msgstr "&Copy Number"
+
+#. Translators: Button that closes the donation details dialog.
+msgid "&Tutup"
+msgstr "&Close"
+
+#. Translators: Announced after the GoPay number is copied. {number} is the number.
+#, python-brace-format
+msgid "Nomor GoPay {number} disalin ke papan klip."
+msgstr "GoPay number {number} copied to the clipboard."
+
+#. Translators: Announced when the GoPay number could not be copied.
+msgid "Gagal menyalin nomor ke papan klip."
+msgstr "Could not copy the number to the clipboard."
+
+#. Translators: Button that opens the donation details.
+#. Translators: Button in the installation welcome dialog that shows the donation details.
+msgid "&Donasi"
+msgstr "&Donate"
+
+#. Translators: Button that closes the donation invitation.
+#. Translators: Button in the installation welcome dialog that continues the installation.
+msgid "&Tidak Sekarang"
+msgstr "&Not Now"
+
+#. Translators: Title of the welcome dialog shown the first time NVDA starts with Emoji ID.
+#. Translators: Title of the welcome dialog shown while Emoji ID is being installed.
+msgid "Selamat Datang di Emoji ID"
+msgstr "Welcome to Emoji ID"
+
+#. Translators: Message of the welcome dialog shown the first time NVDA starts with Emoji ID.
+msgid ""
+"Selamat datang di Emoji ID!\n"
+"\n"
+"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n"
+"\n"
+"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak Sekarang untuk menutup pesan ini."
+msgstr ""
+"Welcome to Emoji ID!\n"
+"\n"
+"This add-on reads emoji in Indonesian, whatever TTS voice you use.\n"
+"\n"
+"If you find it useful, you can support the developer with a voluntary donation through GoPay. Choose Donate to see the number, or Not Now to close this message."
+
+#. Translators: Title of the periodic donation reminder.
+msgid "Dukungan Pengembang - Emoji ID"
+msgstr "Support the Developer - Emoji ID"
+
+#. Translators: Message of the periodic donation reminder.
+msgid ""
+"Semoga Emoji ID membantu aktivitasmu sehari-hari.\n"
+"\n"
+"Kalau kamu ingin add-on ini terus diperbarui, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pengingat ini bisa dimatikan di pengaturan Emoji ID."
+msgstr ""
+"We hope Emoji ID helps you every day.\n"
+"\n"
+"If you would like this add-on to keep being updated, you can support the developer with a voluntary donation through GoPay. You can turn off this reminder in the Emoji ID settings."
+
+#. Translators: Title of the Emoji ID category in the NVDA settings dialog.
+#. Translators: Category of Emoji ID commands in the Input Gestures dialog.
+msgid "Emoji ID"
+msgstr "Emoji ID"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "&Aktifkan pembacaan emoji dalam bahasa Indonesia"
+msgstr "&Enable Indonesian emoji reading"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "Tambahkan &kata awalan sebelum nama emoji"
+msgstr "Add a &prefix word before emoji names"
+
+#. Translators: Label of the edit field for the prefix word in the Emoji ID settings panel.
+msgid "Kata a&walan:"
+msgstr "P&refix word:"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "Kata awalan hanya &sekali untuk emoji berturut-turut"
+msgstr "Prefix only &once for consecutive emoji"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "&Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
+msgstr "Co&llapse repeated identical emoji (for example '3 kali wajah gembira')"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "Sertakan detail &warna kulit"
+msgstr "Include &skin tone details"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "&Bersihkan tanda hubung dan tanda kurung pada nama emoji"
+msgstr "Remove &hyphens and parentheses from emoji names"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
+msgid "Tampilkan &pengingat donasi berkala"
+msgstr "Show periodic &donation reminder"
+
+#. Translators: Button in the Emoji ID settings panel that opens the donation details.
+msgid "&Dukung Pengembang (Donasi GoPay)..."
+msgstr "Support the De&veloper (GoPay Donation)..."
+
+#. Translators: Description of the command that turns Emoji ID on or off, shown in Input Gestures.
+msgid "Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia"
+msgstr "Turns Indonesian emoji reading on or off"
+
+#. Translators: Announced when Emoji ID is turned on.
+msgid "Emoji ID aktif"
+msgstr "Emoji ID on"
+
+#. Translators: Announced when Emoji ID is turned off.
+msgid "Emoji ID nonaktif"
+msgstr "Emoji ID off"
+
+#. Translators: Message of the welcome dialog shown while Emoji ID is being installed.
+msgid ""
+"Selamat datang di Emoji ID!\n"
+"\n"
+"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n"
+"\n"
+"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak Sekarang untuk melanjutkan instalasi."
+msgstr ""
+"Welcome to Emoji ID!\n"
+"\n"
+"This add-on reads emoji in Indonesian, whatever TTS voice you use.\n"
+"\n"
+"If you find it useful, you can support the developer with a voluntary donation through GoPay. Choose Donate to see the number, or Not Now to continue the installation."
+
+#. Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
+#, python-brace-format
+msgid ""
+"Metode: GoPay\n"
+"Nomor HP: {number}\n"
+"Atas nama: {name}\n"
+"\n"
+"Donasi berapa pun membantu add-on ini terus diperbarui. Terima kasih!"
+msgstr ""
+"Method: GoPay\n"
+"Phone number: {number}\n"
+"Account name: {name}\n"
+"\n"
+"Any amount helps keep this add-on updated. Thank you!"
+
+#. Translators: Added to the donation details after the GoPay number was copied.
+msgid "Nomor GoPay sudah disalin ke papan klip."
+msgstr "The GoPay number has been copied to the clipboard."
+
+#. Add-on summary/title, usually the user visible name of the add-on
+#. Translators: Summary/title for this add-on
+#. to be shown on installation and add-on information found in add-on store
+msgid "Emoji ID - Pembaca Emoji Bahasa Indonesia"
+msgstr "Emoji ID - Indonesian Emoji Reader"
+
+#. Translators: Long description to be shown for this add-on on add-on information from add-on store
+msgid "Membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara TTS yang dipakai. Mendukung emoji dasar, rangkaian ZWJ, bendera, keycap, dan warna kulit."
+msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Supports basic emoji, ZWJ sequences, flags, keycaps, and skin tones."
+
+#. Brief changelog for this version
+#. Translators: what's new content for the add-on version to be shown in the add-on store
+msgid ""
+"\n"
+"- Diperbarui untuk NVDA 2026.3 (CLDR 48.2).\n"
+"- Pengingat donasi berkala sekarang nonaktif secara bawaan dan bisa diaktifkan di pengaturan.\n"
+"- Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay.\n"
+"- Pengaturan \"Ikuti tingkat simbol NVDA\" dihapus karena belum pernah berfungsi.\n"
+"- Terjemahan add-on sekarang dimuat dengan benar.\n"
+"- Navigasi per karakter pada bendera tidak lagi membisu: setiap huruf regional dibacakan.\n"
+"- Antarmuka add-on sekarang tersedia dalam bahasa Inggris.\n"
+"\t"
+msgstr ""
+"\n"
+"- Updated for NVDA 2026.3 (CLDR 48.2).\n"
+"- The periodic donation reminder is now off by default and can be turned on in the settings.\n"
+"- The installation welcome dialog now uses NVDA's built-in message dialog. Choosing Donate copies the GoPay number right away.\n"
+"- Removed the \"Ikuti tingkat simbol NVDA\" setting, which never worked.\n"
+"- Add-on translations now load correctly.\n"
+"- Character navigation on flags is no longer silent: each regional indicator letter is read.\n"
+"- The add-on interface is now available in English.\n"
+"\t"

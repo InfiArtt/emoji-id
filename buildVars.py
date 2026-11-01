@@ -19,8 +19,8 @@ addon_info = AddonInfo(
 	# to be shown on installation and add-on information found in add-on store
 	addon_summary=_("Emoji ID - Pembaca Emoji Bahasa Indonesia"),
 	# Add-on description
-	# Translators: Long description to be shown for this add-on on add-on information from add-on store
 	addon_description=_(
+		# Translators: Long description to be shown for this add-on on add-on information from add-on store
 		"Membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara TTS yang dipakai. "
 		"Mendukung emoji dasar, rangkaian ZWJ, bendera, keycap, dan warna kulit."
 	),
@@ -35,6 +35,7 @@ addon_info = AddonInfo(
 - Pengaturan "Ikuti tingkat simbol NVDA" dihapus karena belum pernah berfungsi.
 - Terjemahan add-on sekarang dimuat dengan benar.
 - Navigasi per karakter pada bendera tidak lagi membisu: setiap huruf regional dibacakan.
+- Antarmuka add-on sekarang tersedia dalam bahasa Inggris.
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",
