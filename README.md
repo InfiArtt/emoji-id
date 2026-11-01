@@ -52,6 +52,17 @@ python -m ruff check .
 
 Kode mengikuti standar penulisan kode NVDA: indentasi tab, nama lowerCamelCase, dan komentar `Translators:` untuk setiap string yang diterjemahkan.
 
+## GitHub Actions dan rilis
+
+Setiap push dan pull request ke `main` menjalankan Ruff, tes, pemeriksaan versi, build, dan pemeriksaan terjemahan. Paket hasil build bisa diunduh dari halaman Actions.
+
+Rilis dibuat otomatis saat push ke `main`, jika:
+
+- versi di `buildVars.py` belum punya tag rilis, dan
+- `CHANGELOG.md` punya bagian versi itu dengan tanggal, misalnya `## [1.1.0] - 2026-11-15`.
+
+Bagian yang masih bertulisan "belum dirilis" hanya dibangun, tidak dirilis. Rilis berisi paket `.nvda-addon`, berkas `.pot`, catatan dari `CHANGELOG.md`, dan checksum SHA256 untuk Add-on Store.
+
 ## Membangun ulang data emoji
 
 ```bash
