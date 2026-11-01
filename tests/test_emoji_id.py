@@ -238,3 +238,34 @@ def test_settingsPanelSave() -> None:
 	panel.onSave()
 	assert config.conf["emojiID"]["prefix"] is False
 	assert config.conf["emojiID"]["periodicDonationReminder"] is True
+
+
+@pytest.fixture
+def installTasks() -> Iterator[object]:
+	import installTasks as module
+
+	config.conf["emojiID"] = dict(nvda_mocks.DEFAULT_CONFIG, firstRun=True)
+	nvda_mocks.FakeMessageDialog.shown.clear()
+	yield module
+	nvda_mocks.FakeMessageDialog.confirmAnswer = nvda_mocks.ReturnCode.CANCEL
+
+
+def test_installWelcomeNotNow(installTasks: object) -> None:
+	installTasks.onInstall()
+	assert len(nvda_mocks.FakeMessageDialog.shown) == 1
+	assert "Selamat datang di Emoji ID" in nvda_mocks.FakeMessageDialog.shown[0]
+	assert config.conf["emojiID"]["firstRun"] is False
+	assert nvda_mocks.sys.modules["gui"].mainFrame.popupCount == 0
+
+
+def test_installWelcomeDonate(installTasks: object) -> None:
+	from emojiID.donation import GOPAY_NAME, GOPAY_NUMBER
+
+	nvda_mocks.FakeMessageDialog.confirmAnswer = nvda_mocks.ReturnCode.OK
+	installTasks.onInstall()
+	details = nvda_mocks.FakeMessageDialog.shown[-1]
+	assert GOPAY_NUMBER in details and GOPAY_NAME in details
+	assert nvda_mocks.clipboard[-1] == GOPAY_NUMBER
+	assert not _FORBIDDEN_WORD.search(details)
+	# installTasks keeps its own copy of the donation details.
+	assert (installTasks.GOPAY_NUMBER, installTasks.GOPAY_NAME) == (GOPAY_NUMBER, GOPAY_NAME)

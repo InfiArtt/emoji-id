@@ -31,7 +31,7 @@ addon_info = AddonInfo(
 	addon_changelog=_("""
 - Diperbarui untuk NVDA 2026.3 (CLDR 48.2).
 - Pengingat donasi berkala sekarang nonaktif secara bawaan dan bisa diaktifkan di pengaturan.
-- Dialog sambutan muncul sekali saat NVDA pertama kali dijalankan setelah instalasi, tidak lagi menahan proses instalasi.
+- Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay.
 - Pengaturan "Ikuti tingkat simbol NVDA" dihapus karena belum pernah berfungsi.
 - Terjemahan add-on sekarang dimuat dengan benar.
 	"""),

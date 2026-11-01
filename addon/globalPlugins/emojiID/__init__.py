@@ -129,7 +129,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			ui.message(_("Emoji ID nonaktif"))
 
 	def _onNvdaStartupComplete(self) -> None:
-		"""Show the welcome dialog once after installation and start the donation reminder."""
+		"""Show the welcome dialog if installTasks could not, and start the donation reminder."""
 		conf = getConfig()
 		if conf["firstRun"]:
 			conf["firstRun"] = False

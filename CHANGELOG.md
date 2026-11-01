@@ -8,7 +8,7 @@ Format mengikuti Keep a Changelog.
 
 - Diperbarui untuk NVDA 2026.3. Data emoji tetap Unicode CLDR 48.2, sama dengan versi di NVDA 2026.3.
 - Pengingat donasi berkala sekarang nonaktif secara bawaan. Pengingat bisa diaktifkan di pengaturan Emoji ID.
-- Dialog sambutan tidak lagi muncul di tengah proses instalasi. Dialog itu sekarang muncul satu kali saat NVDA pertama kali dijalankan setelah instalasi.
+- Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay ke papan klip. Jika dialog gagal tampil, sambutan muncul sekali setelah NVDA dimulai ulang.
 - Kata awalan hanya sekali sekarang ikut dinonaktifkan di pengaturan saat kata awalan dimatikan.
 - Panduan pengguna menjelaskan beda Emoji ID dengan nama emoji bawaan NVDA.
 

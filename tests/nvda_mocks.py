@@ -218,10 +218,42 @@ class _MainFrame:
 		self.popupCount -= 1
 
 
-guiHelper = _module("gui.guiHelper", BoxSizerHelper=_BoxSizerHelper)
+class ReturnCode:
+	OK = 1
+	CANCEL = 2
+
+
+class FakeMessageDialog:
+	"""Answers ``confirm`` with ``confirmAnswer`` and records every message shown."""
+
+	confirmAnswer = ReturnCode.CANCEL
+	shown: list[str] = []
+
+	@classmethod
+	def confirm(cls, message: str, caption: str, **kwargs: Any) -> int:
+		cls.shown.append(message)
+		return cls.confirmAnswer
+
+	@classmethod
+	def alert(cls, message: str, caption: str, **kwargs: Any) -> None:
+		cls.shown.append(message)
+
+
+guiHelper = _module(
+	"gui.guiHelper",
+	BoxSizerHelper=_BoxSizerHelper,
+	wxCallOnMain=lambda function: function(),
+)
+guiMessage = _module("gui.message", MessageDialog=FakeMessageDialog, ReturnCode=ReturnCode)
 settingsDialogs = _module(
 	"gui.settingsDialogs",
 	SettingsPanel=_SettingsPanel,
 	NVDASettingsDialog=_NVDASettingsDialog,
 )
-_module("gui", mainFrame=_MainFrame(), guiHelper=guiHelper, settingsDialogs=settingsDialogs)
+_module(
+	"gui",
+	mainFrame=_MainFrame(),
+	guiHelper=guiHelper,
+	settingsDialogs=settingsDialogs,
+	message=guiMessage,
+)

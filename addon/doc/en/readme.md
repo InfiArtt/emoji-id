@@ -50,7 +50,7 @@ When you use the command, NVDA says "Emoji ID aktif" or "Emoji ID nonaktif".
 
 ## Donations
 
-Emoji ID is developed on a volunteer basis. The first time NVDA starts after installation, Emoji ID shows a welcome message once, with a donation invitation. Donations can be sent through GoPay:
+Emoji ID is developed on a volunteer basis. During installation, Emoji ID shows a welcome message with a donation invitation. If you choose Donasi, the GoPay number is copied to the clipboard. Donations can be sent through GoPay:
 
 - Phone number: 085128011831
 - Account name: Rexya Muhamad Rizki

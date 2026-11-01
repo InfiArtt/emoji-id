@@ -50,7 +50,7 @@ Saat perintah dijalankan, NVDA mengucapkan "Emoji ID aktif" atau "Emoji ID nonak
 
 ## Donasi
 
-Emoji ID dikembangkan secara sukarela. Saat NVDA pertama kali dijalankan setelah instalasi, Emoji ID menampilkan sambutan satu kali beserta ajakan donasi. Kalau kamu ingin mendukung pengembangannya, donasi bisa dikirim lewat GoPay:
+Emoji ID dikembangkan secara sukarela. Saat instalasi, Emoji ID menampilkan sambutan beserta ajakan donasi. Jika kamu memilih Donasi, nomor GoPay langsung disalin ke papan klip. Kalau kamu ingin mendukung pengembangannya, donasi bisa dikirim lewat GoPay:
 
 - Nomor HP: 085128011831
 - Atas nama: Rexya Muhamad Rizki
