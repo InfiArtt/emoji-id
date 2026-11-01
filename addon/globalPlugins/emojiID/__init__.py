@@ -30,7 +30,7 @@ from logHandler import log
 from scriptHandler import script
 from speech.types import SpeechSequence
 
-from .emojiData import EmojiMatcher
+from .emojiData import EmojiMatcher, isRegionalIndicator
 from .settings import EmojiIDSettingsPanel, getConfig, isEnabled, registerConfig
 
 addonHandler.initTranslation()
@@ -109,7 +109,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			conf = getConfig()
 			name = self._matcher.lookupSingleChar(symbol, shouldCleanSymbols=conf["cleanSymbols"])
 			if name is not None:
-				if conf["prefix"] and conf["prefixText"]:
+				if conf["prefix"] and conf["prefixText"] and not isRegionalIndicator(symbol):
 					return f"{conf['prefixText']} {name}"
 				return name
 		return self._originalProcessSpeechSymbol(locale, symbol)

@@ -34,6 +34,7 @@ addon_info = AddonInfo(
 - Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay.
 - Pengaturan "Ikuti tingkat simbol NVDA" dihapus karena belum pernah berfungsi.
 - Terjemahan add-on sekarang dimuat dengan benar.
+- Navigasi per karakter pada bendera tidak lagi membisu: setiap huruf regional dibacakan.
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",

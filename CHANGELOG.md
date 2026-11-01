@@ -17,6 +17,7 @@ Format mengikuti Keep a Changelog.
 - Terjemahan add-on sekarang dimuat. Sebelumnya teks antarmuka tidak bisa diterjemahkan.
 - Angka, tanda pagar, dan tanda bintang biasa tidak lagi diperiksa dengan pencarian emoji yang berat, sehingga teks berisi angka dibaca lebih cepat.
 - Saat add-on dimatikan, Emoji ID tidak lagi memutus add-on lain yang juga membungkus pembacaan simbol NVDA.
+- Navigasi per karakter pada bendera tidak lagi membisu. NVDA memecah bendera menjadi dua huruf regional, dan setiap huruf sekarang dibacakan, misalnya "huruf regional I" lalu "huruf regional D" untuk bendera Indonesia. Potongan bendera yang tersisa saat navigasi per kata juga dibacakan dengan cara yang sama.
 
 ### Dihapus
 

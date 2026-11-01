@@ -269,3 +269,34 @@ def test_installWelcomeDonate(installTasks: object) -> None:
 	assert not _FORBIDDEN_WORD.search(details)
 	# installTasks keeps its own copy of the donation details.
 	assert (installTasks.GOPAY_NUMBER, installTasks.GOPAY_NAME) == (GOPAY_NUMBER, GOPAY_NAME)
+
+
+_FLAG_I = chr(0x1F1EE)
+_FLAG_D = chr(0x1F1E9)
+_FLAG_J = chr(0x1F1EF)
+_FLAG_P = chr(0x1F1F5)
+
+
+def test_wholeFlagsInText(matcher: EmojiMatcher) -> None:
+	text = f"Bendera {_FLAG_I}{_FLAG_D} dan {_FLAG_J}{_FLAG_P}"
+	assert matcher.replaceInText(text) == "Bendera bendera Indonesia dan bendera Jepang"
+
+
+@pytest.mark.parametrize(
+	("text", "expected"),
+	[
+		# Half a flag left over when an application cuts a word in the middle of a flag.
+		(f"Bendera {_FLAG_I}", "Bendera huruf regional I"),
+		(f"{_FLAG_D} dan", "huruf regional D dan"),
+		(f"dan{_FLAG_J}", "dan huruf regional J"),
+		(_FLAG_P, "huruf regional P"),
+	],
+)
+def test_loneRegionalIndicatorInText(matcher: EmojiMatcher, text: str, expected: str) -> None:
+	assert matcher.replaceInText(text, prefix="emoji") == expected
+
+
+def test_loneRegionalIndicatorCharacter(plugin: GlobalPlugin) -> None:
+	# Character navigation moves through a flag one regional indicator at a time.
+	assert characterProcessing.processSpeechSymbol("en", _FLAG_I) == "huruf regional I"
+	assert characterProcessing.processSpeechSymbol("en", _FLAG_D) == "huruf regional D"

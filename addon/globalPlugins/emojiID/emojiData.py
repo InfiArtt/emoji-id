@@ -17,40 +17,69 @@ import re
 from logHandler import log
 
 #: Variation selectors are ignored when looking up emoji.
-_VS_PATTERN = re.compile("[︎️]")
-_OPTIONAL_VS = "[︎️]?"
+_VARIATION_SELECTORS = f"[{chr(0xFE0E)}{chr(0xFE0F)}]"
+_VS_PATTERN = re.compile(_VARIATION_SELECTORS)
+_OPTIONAL_VS = _VARIATION_SELECTORS + "?"
 
-ZWJ = "‍"
-KEYCAP = "⃣"
+ZWJ = chr(0x200D)
+KEYCAP = chr(0x20E3)
+
+#: Regional indicators are the letters that flags are made of: I plus D is the flag of Indonesia.
+REGIONAL_INDICATOR_A = 0x1F1E6
+REGIONAL_INDICATOR_Z = 0x1F1FF
 
 #: Skin tone modifier codepoints (Fitzpatrick scale) and their Indonesian names.
 SKIN_TONE_MODIFIERS: dict[str, str] = {
-	"\U0001f3fb": "kulit putih",
-	"\U0001f3fc": "kulit putih-sawo matang",
-	"\U0001f3fd": "kulit sawo matang",
-	"\U0001f3fe": "kulit cokelat",
-	"\U0001f3ff": "kulit gelap",
+	chr(0x1F3FB): "kulit putih",
+	chr(0x1F3FC): "kulit putih-sawo matang",
+	chr(0x1F3FD): "kulit sawo matang",
+	chr(0x1F3FE): "kulit cokelat",
+	chr(0x1F3FF): "kulit gelap",
 }
 
 #: Name suffixes that describe a skin tone, removed when skin tone detail is off.
 _SKIN_TONE_SEPARATORS = (": warna kulit ", " warna kulit ", ": kulit ", " kulit ")
 
+#: Codepoint ranges that can start or belong to an emoji.
+#: Keycap sequences always contain U+20E3, so plain digits, "#" and "*" are not listed.
+_EMOJI_RANGES: tuple[tuple[int, int], ...] = (
+	(0x1F000, 0x1FAFF),  # Emoji and pictograph blocks, regional indicators, skin tones
+	(0x2190, 0x21FF),  # Arrows
+	(0x2300, 0x23FF),  # Misc Technical
+	(0x2460, 0x24FF),  # Enclosed Alphanumerics
+	(0x25A0, 0x27BF),  # Geometric shapes, misc symbols, dingbats
+	(0x2900, 0x297F),  # Supplemental Arrows-B
+	(0x2B00, 0x2BFF),  # Misc Symbols and Arrows
+)
+_EMOJI_SINGLES: tuple[int, ...] = (
+	0x3030, 0x303D, 0x3297, 0x3299,  # Wavy dash, part alternation mark, circled ideographs
+	0x00A9, 0x00AE, 0x203C, 0x2049, 0x2122, 0x2139,  # Copyright, registered, exclamation marks, TM, info
+	0x200D, 0x20E3, 0xFE0F,  # ZWJ, keycap, emoji presentation selector
+)  # fmt: skip
+
 #: Cheap pre-check so that text without any emoji-like character skips the large regex.
-#: Keycap sequences such as 1️⃣ always contain U+20E3, so plain digits, "#" and "*" are not listed.
 _EMOJI_QUICK_CHECK = re.compile(
 	"["
-	"\U0001f000-\U0001faff"  # Emoji and pictograph blocks, regional indicators, skin tones
-	"←-⇿"  # Arrows
-	"⌀-⏿"  # Misc Technical
-	"①-⓿"  # Enclosed Alphanumerics
-	"■-➿"  # Geometric shapes, misc symbols, dingbats
-	"⤀-⥿"  # Supplemental Arrows-B
-	"⬀-⯿"  # Misc Symbols and Arrows
-	"〰〽㊗㊙"  # Wavy dash, part alternation mark, circled ideographs
-	"©®‼⁉™ℹ"  # Copyright, registered, exclamation marks, TM, info
-	"‍⃣️"  # ZWJ, keycap, emoji presentation selector
-	"]"
+	+ "".join(f"{re.escape(chr(first))}-{re.escape(chr(last))}" for first, last in _EMOJI_RANGES)
+	+ "".join(re.escape(chr(codepoint)) for codepoint in _EMOJI_SINGLES)
+	+ "]"
 )
+
+
+def isRegionalIndicator(char: str) -> bool:
+	"""Whether the character is a single regional indicator letter."""
+	return len(char) == 1 and REGIONAL_INDICATOR_A <= ord(char) <= REGIONAL_INDICATOR_Z
+
+
+def getRegionalIndicatorName(char: str) -> str:
+	"""Name a single regional indicator by its letter, for example "huruf regional I".
+
+	Character navigation splits a flag into its two regional indicators.
+	Neither NVDA nor CLDR has a name for a lone regional indicator, so without this
+	the synthesizer receives a character it cannot speak and stays silent.
+	"""
+	letter = chr(ord("A") + ord(char) - REGIONAL_INDICATOR_A)
+	return f"huruf regional {letter}"
 
 
 def _joinWithSpace(match: re.Match[str]) -> str:
@@ -138,7 +167,9 @@ class EmojiMatcher:
 		so an optional selector is allowed after every character.
 		"""
 		sortedKeys = sorted(emojiMap, key=lambda k: (-len(k), k))
-		alternatives = (_OPTIONAL_VS.join(re.escape(ch) for ch in key) + _OPTIONAL_VS for key in sortedKeys)
+		alternatives = [_OPTIONAL_VS.join(re.escape(ch) for ch in key) + _OPTIONAL_VS for key in sortedKeys]
+		# Lone regional indicators come last, so that complete flags always match first.
+		alternatives.append(f"[{chr(REGIONAL_INDICATOR_A)}-{chr(REGIONAL_INDICATOR_Z)}]")
 		return re.compile("|".join(alternatives))
 
 	def lookup(self, emoji: str) -> str | None:
@@ -161,6 +192,8 @@ class EmojiMatcher:
 		"""
 		if not self._data or not char:
 			return None
+		if isRegionalIndicator(char):
+			return getRegionalIndicatorName(char)
 		name = self._data.get(_VS_PATTERN.sub("", char))
 		if name and shouldCleanSymbols:
 			name = cleanNameSymbols(name)
@@ -220,11 +253,20 @@ class EmojiMatcher:
 				name = self._buildFallbackName(normalized, hasSkinToneDetail)
 
 			if name is None:
-				# Unknown emoji: keep it as is and end the current run.
+				# Unknown emoji, or half of a flag that was cut off by word or character navigation.
+				# A lone regional indicator is spoken as its letter, without the emoji prefix.
 				flushEmoji()
 				currentName = None
 				currentCount = 0
-				resultParts.append(text[lastEnd:start] + matched)
+				before = text[lastEnd:start]
+				if isRegionalIndicator(normalized):
+					matched = getRegionalIndicatorName(normalized)
+					previous = before or (resultParts[-1] if resultParts else "")
+					if previous and not previous[-1].isspace():
+						matched = " " + matched
+					if end < len(text) and not text[end].isspace():
+						matched += " "
+				resultParts.append(before + matched)
 				isInEmojiRun = False
 				lastEnd = end
 				continue
