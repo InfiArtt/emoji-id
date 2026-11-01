@@ -56,28 +56,28 @@ class EmojiIDSettingsPanel(SettingsPanel):
 
 		self.enabledCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("&Aktifkan pembacaan emoji dalam bahasa Indonesia")),
+			wx.CheckBox(self, label=_("Aktifkan pembacaan emoji dalam bahasa Indonesia")),
 		)
 		self.enabledCheckbox.SetValue(conf["enabled"])
 		self.enabledCheckbox.Bind(wx.EVT_CHECKBOX, self._onDependencyToggle)
 
 		self.prefixCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("Tambahkan &kata awalan sebelum nama emoji")),
+			wx.CheckBox(self, label=_("Tambahkan kata awalan sebelum nama emoji")),
 		)
 		self.prefixCheckbox.SetValue(conf["prefix"])
 		self.prefixCheckbox.Bind(wx.EVT_CHECKBOX, self._onDependencyToggle)
 
 		self.prefixTextCtrl = sHelper.addLabeledControl(
 			# Translators: Label of the edit field for the prefix word in the Emoji ID settings panel.
-			_("Kata a&walan:"),
+			_("Kata awalan:"),
 			wx.TextCtrl,
 		)
 		self.prefixTextCtrl.SetValue(conf["prefixText"])
 
 		self.prefixOnceCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("Kata awalan hanya &sekali untuk emoji berturut-turut")),
+			wx.CheckBox(self, label=_("Kata awalan hanya sekali untuk emoji berturut-turut")),
 		)
 		self.prefixOnceCheckbox.SetValue(conf["prefixOnce"])
 
@@ -85,32 +85,32 @@ class EmojiIDSettingsPanel(SettingsPanel):
 			wx.CheckBox(
 				self,
 				# Translators: Checkbox in the Emoji ID settings panel.
-				label=_("&Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"),
+				label=_("Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"),
 			),
 		)
 		self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])
 
 		self.skinToneDetailCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("Sertakan detail &warna kulit")),
+			wx.CheckBox(self, label=_("Sertakan detail warna kulit")),
 		)
 		self.skinToneDetailCheckbox.SetValue(conf["skinToneDetail"])
 
 		self.cleanSymbolsCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("&Bersihkan tanda hubung dan tanda kurung pada nama emoji")),
+			wx.CheckBox(self, label=_("Bersihkan tanda hubung dan tanda kurung pada nama emoji")),
 		)
 		self.cleanSymbolsCheckbox.SetValue(conf["cleanSymbols"])
 
 		self.periodicReminderCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
-			wx.CheckBox(self, label=_("Tampilkan &pengingat donasi berkala")),
+			wx.CheckBox(self, label=_("Tampilkan pengingat donasi berkala")),
 		)
 		self.periodicReminderCheckbox.SetValue(conf["periodicDonationReminder"])
 
 		self.donateButton = sHelper.addItem(
 			# Translators: Button in the Emoji ID settings panel that opens the donation details.
-			wx.Button(self, label=_("&Dukung Pengembang (Donasi GoPay)...")),
+			wx.Button(self, label=_("Dukung Pengembang (Donasi GoPay)...")),
 		)
 		self.donateButton.Bind(wx.EVT_BUTTON, self._onDonateClicked)
 

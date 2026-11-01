@@ -2,6 +2,7 @@
 
 import re
 from collections.abc import Iterator
+from pathlib import Path
 
 import characterProcessing
 import config
@@ -12,6 +13,7 @@ import speech.extensions
 from emojiID import GlobalPlugin
 from emojiID.emojiData import EmojiMatcher
 
+_ROOT = Path(__file__).resolve().parent.parent
 _FORBIDDEN_WORD = re.compile(r"\banda\b", re.IGNORECASE)
 
 
@@ -300,3 +302,16 @@ def test_loneRegionalIndicatorCharacter(plugin: GlobalPlugin) -> None:
 	# Character navigation moves through a flag one regional indicator at a time.
 	assert characterProcessing.processSpeechSymbol("en", _FLAG_I) == "huruf regional I"
 	assert characterProcessing.processSpeechSymbol("en", _FLAG_D) == "huruf regional D"
+
+
+def test_noAcceleratorKeys() -> None:
+	# Accelerator letters were removed on purpose: several labels shared the same letter.
+	sources = [
+		_ROOT / "addon" / "globalPlugins" / "emojiID" / "settings.py",
+		_ROOT / "addon" / "globalPlugins" / "emojiID" / "donation.py",
+		_ROOT / "addon" / "installTasks.py",
+	]
+	for source in sources:
+		labels = re.findall(r'_\("([^"]*)"\)', source.read_text(encoding="utf-8"))
+		assert labels
+		assert not [label for label in labels if "&" in label], source.name

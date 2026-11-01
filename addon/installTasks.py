@@ -42,9 +42,9 @@ def _showWelcome() -> None:
 			# Translators: Title of the welcome dialog shown while Emoji ID is being installed.
 			_("Selamat Datang di Emoji ID"),
 			# Translators: Button in the installation welcome dialog that shows the donation details.
-			okLabel=_("&Donasi"),
+			okLabel=_("Donasi"),
 			# Translators: Button in the installation welcome dialog that continues the installation.
-			cancelLabel=_("&Tidak Sekarang"),
+			cancelLabel=_("Tidak Sekarang"),
 		)
 		if answer != ReturnCode.OK:
 			return

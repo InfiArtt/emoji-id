@@ -54,11 +54,11 @@ class DonationDetailsDialog(wx.Dialog):
 
 		buttonSizer = wx.BoxSizer(wx.HORIZONTAL)
 		# Translators: Button that copies the GoPay number to the clipboard.
-		copyButton = wx.Button(self, label=_("&Salin Nomor"))
+		copyButton = wx.Button(self, label=_("Salin Nomor"))
 		copyButton.Bind(wx.EVT_BUTTON, self._onCopy)
 		buttonSizer.Add(copyButton, flag=wx.RIGHT, border=10)
 		# Translators: Button that closes the donation details dialog.
-		closeButton = wx.Button(self, wx.ID_CANCEL, label=_("&Tutup"))
+		closeButton = wx.Button(self, wx.ID_CANCEL, label=_("Tutup"))
 		buttonSizer.Add(closeButton)
 		sizer.Add(buttonSizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=10)
 
@@ -89,11 +89,11 @@ class DonationInviteDialog(wx.Dialog):
 
 		buttonSizer = wx.BoxSizer(wx.HORIZONTAL)
 		# Translators: Button that opens the donation details.
-		donateButton = wx.Button(self, label=_("&Donasi"))
+		donateButton = wx.Button(self, label=_("Donasi"))
 		donateButton.Bind(wx.EVT_BUTTON, self._onDonate)
 		buttonSizer.Add(donateButton, flag=wx.RIGHT, border=10)
 		# Translators: Button that closes the donation invitation.
-		notNowButton = wx.Button(self, wx.ID_CANCEL, label=_("&Tidak Sekarang"))
+		notNowButton = wx.Button(self, wx.ID_CANCEL, label=_("Tidak Sekarang"))
 		notNowButton.SetDefault()
 		buttonSizer.Add(notNowButton)
 		sizer.Add(buttonSizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=15)

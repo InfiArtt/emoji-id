@@ -33,12 +33,12 @@ msgstr ""
 "Any amount helps keep this add-on updated. Thank you!"
 
 #. Translators: Button that copies the GoPay number to the clipboard.
-msgid "&Salin Nomor"
-msgstr "&Copy Number"
+msgid "Salin Nomor"
+msgstr "Copy Number"
 
 #. Translators: Button that closes the donation details dialog.
-msgid "&Tutup"
-msgstr "&Close"
+msgid "Tutup"
+msgstr "Close"
 
 #. Translators: Announced after the GoPay number is copied. {number} is the number.
 #, python-brace-format
@@ -51,13 +51,13 @@ msgstr "Could not copy the number to the clipboard."
 
 #. Translators: Button that opens the donation details.
 #. Translators: Button in the installation welcome dialog that shows the donation details.
-msgid "&Donasi"
-msgstr "&Donate"
+msgid "Donasi"
+msgstr "Donate"
 
 #. Translators: Button that closes the donation invitation.
 #. Translators: Button in the installation welcome dialog that continues the installation.
-msgid "&Tidak Sekarang"
-msgstr "&Not Now"
+msgid "Tidak Sekarang"
+msgstr "Not Now"
 
 #. Translators: Title of the welcome dialog shown the first time NVDA starts with Emoji ID.
 #. Translators: Title of the welcome dialog shown while Emoji ID is being installed.
@@ -98,40 +98,40 @@ msgid "Emoji ID"
 msgstr "Emoji ID"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "&Aktifkan pembacaan emoji dalam bahasa Indonesia"
-msgstr "&Enable Indonesian emoji reading"
+msgid "Aktifkan pembacaan emoji dalam bahasa Indonesia"
+msgstr "Enable Indonesian emoji reading"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "Tambahkan &kata awalan sebelum nama emoji"
-msgstr "Add a &prefix word before emoji names"
+msgid "Tambahkan kata awalan sebelum nama emoji"
+msgstr "Add a prefix word before emoji names"
 
 #. Translators: Label of the edit field for the prefix word in the Emoji ID settings panel.
-msgid "Kata a&walan:"
-msgstr "P&refix word:"
+msgid "Kata awalan:"
+msgstr "Prefix word:"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "Kata awalan hanya &sekali untuk emoji berturut-turut"
-msgstr "Prefix only &once for consecutive emoji"
+msgid "Kata awalan hanya sekali untuk emoji berturut-turut"
+msgstr "Prefix only once for consecutive emoji"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "&Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
-msgstr "Co&llapse repeated identical emoji (for example '3 kali wajah gembira')"
+msgid "Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
+msgstr "Collapse repeated identical emoji (for example '3 kali wajah gembira')"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "Sertakan detail &warna kulit"
-msgstr "Include &skin tone details"
+msgid "Sertakan detail warna kulit"
+msgstr "Include skin tone details"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "&Bersihkan tanda hubung dan tanda kurung pada nama emoji"
-msgstr "Remove &hyphens and parentheses from emoji names"
+msgid "Bersihkan tanda hubung dan tanda kurung pada nama emoji"
+msgstr "Remove hyphens and parentheses from emoji names"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "Tampilkan &pengingat donasi berkala"
-msgstr "Show periodic &donation reminder"
+msgid "Tampilkan pengingat donasi berkala"
+msgstr "Show periodic donation reminder"
 
 #. Translators: Button in the Emoji ID settings panel that opens the donation details.
-msgid "&Dukung Pengembang (Donasi GoPay)..."
-msgstr "Support the De&veloper (GoPay Donation)..."
+msgid "Dukung Pengembang (Donasi GoPay)..."
+msgstr "Support the Developer (GoPay Donation)..."
 
 #. Translators: Description of the command that turns Emoji ID on or off, shown in Input Gestures.
 msgid "Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia"
