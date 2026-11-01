@@ -74,3 +74,12 @@ Panduan ini ditujukan bagi pengguna tunanetra untuk memverifikasi fungsionalitas
 - Hasil yang Diharapkan:
   - Tidak ada satupun pesan galat (*ERROR* atau *EXCEPTION*) dari plugin `emojiID`.
   - Terdapat pesan info: `Emoji ID: loaded 3917 emoji entries` dan `Emoji ID: plugin initialized successfully`.
+
+## Kasus uji khusus NVDA 2026.3
+
+Jalankan kasus berikut sebelum mengubah `lastTestedNVDAVersion` atau merilis versi baru.
+
+- Bendera dengan normalisasi Unicode. Aktifkan normalisasi Unicode di pengaturan Ucapan NVDA, lalu baca baris `Bendera 🇮🇩 dan 🇯🇵`. Hasil yang diharapkan: kedua bendera dibacakan dengan nama Indonesia, bukan huruf I D atau J P. NVDA 2026.2 mulai menormalisasi regional indicator menjadi huruf biasa saat opsi ini aktif.
+- Navigasi per kata. Pada baris `Halo 👨‍👩‍👧 apa kabar`, tekan Control+Panah Kanan berulang kali. Hasil yang diharapkan: emoji keluarga dibacakan sebagai satu nama, tidak terpecah. NVDA 2026.3 memakai ICU Windows untuk memisahkan kata.
+- Sambutan satu kali. Pasang add-on di NVDA yang belum pernah memakai Emoji ID, lalu mulai ulang NVDA. Hasil yang diharapkan: dialog sambutan muncul sekali setelah NVDA siap, dan tidak muncul lagi setelah NVDA dimulai ulang.
+- Pembaruan dari 1.0.0. Pasang versi baru di atas versi 1.0.0, mulai ulang NVDA, lalu buka pengaturan Emoji ID. Hasil yang diharapkan: tidak ada galat di log NVDA, dan pilihan "Ikuti tingkat simbol NVDA" sudah tidak ada.

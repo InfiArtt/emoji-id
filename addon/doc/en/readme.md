@@ -1,71 +1,73 @@
 # Emoji ID - Indonesian Emoji Reader for NVDA
 
-Emoji ID is an NVDA add-on that reads all emoji symbols in Indonesian, regardless of the active speech synthesizer or TTS voice in use (such as an English Eloquence voice, OneCore, or Vocalizer).
+Emoji ID reads emoji in Indonesian, whatever language your speech synthesizer uses. With an English Eloquence voice, for example, 😀 is read as "wajah gembira" instead of "grinning face".
 
-This add-on is designed for blind and visually impaired users who want consistent Indonesian emoji announcements when reading documents, browsing the web, reading chat messages, or navigating character by character.
+Emoji are read in Indonesian during normal reading, Say All, character navigation, the review cursor, and typed character echo.
 
-## Key Features
+## How this differs from NVDA's built-in emoji names
 
-- **Indonesian Emoji Announcements**: Replaces thousands of emoji with natural Indonesian descriptions based on official Unicode CLDR data.
-- **Comprehensive Emoji Support**: Supports standard emoji (faces, gestures, animals, objects), ZWJ sequences (families, professions), national flags (such as the Indonesian flag), digit keycaps, and skin tone modifiers (Fitzpatrick scale).
-- **Single-Character Trap Solved**: Emoji are announced in Indonesian during continuous reading, Say All, arrow key navigation (by character), review cursor review, and typed character echo.
-- **Repeated Emoji Collapsing**: Option to collapse consecutive identical emoji, e.g. three grinning faces are announced as "3 kali wajah gembira".
-- **Customizable Prefix Word**: Option to announce a prefix such as "emoji" before the emoji description, either before every emoji or only once before consecutive runs.
-- **Skin Tone Detail Toggle**: Users can choose whether to include skin tone descriptions or announce only the base emoji description.
-- **Quick Toggle Command**: An unassigned NVDA script allows toggling the add-on on or off instantly without opening settings dialogs.
-- **High Performance**: Compiled regex engine sorted longest-match first ensures zero noticeable latency on long text (benchmarked on 50,000 characters).
+NVDA already includes Indonesian emoji names from Unicode CLDR. It uses them only when the language used for symbols is Indonesian. With an English voice, NVDA reads emoji names in English. Emoji ID fills that gap.
 
-## Settings Panel
+If you already use an Indonesian voice and NVDA's "Include Unicode Consortium data" option is on, you may not need this add-on.
 
-Open NVDA Menu -> Preferences -> Settings (NVDA+Control+G), then select the **Emoji ID** category:
+## Supported emoji
 
-1. **Enable Indonesian emoji reading**: Check to enable the add-on. When unchecked, NVDA reverts to default behavior.
-2. **Add prefix word before emoji name**: Check to prepend a prefix word (default: enabled).
-3. **Prefix word**: The prefix text spoken before emoji names (default: "emoji").
-4. **Prefix word only once for consecutive emojis**: If checked, the prefix is spoken only before the first emoji in a run of consecutive emojis.
-5. **Collapse repeated identical emojis**: If checked, identical consecutive emojis are collapsed into "N kali [emoji name]".
-6. **Include skin tone details**: If checked, skin tone variations are announced. If unchecked, only base names are announced.
-7. **Clean hyphens and parentheses in emoji names**: If checked (default: enabled), hyphens in reduplicated words (e.g. kupu-kupu becomes kupu kupu) and parentheses are sanitized for speech so synthesizers like Eloquence do not speak "dash" or "left paren". Punctuation in document text outside emojis is completely untouched.
-8. **Respect NVDA symbol level**: If checked, emoji are subject to NVDA's symbol level setting. If unchecked (default), emoji are always announced.
-9. **Show periodic donation reminder**: If checked (default: enabled), NVDA periodically displays a friendly reminder at randomized intervals inviting you to support the developer.
-10. **Support Developer (GoPay Donation)**: Opens a dialog displaying GoPay donation details with a quick copy button.
+- Basic emoji such as faces, gestures, animals, and objects.
+- ZWJ sequences, such as families and professions.
+- Country flags, such as the Indonesian flag.
+- Number keycaps, such as 1️⃣.
+- Skin tones.
 
-Settings are saved automatically per NVDA configuration profile.
+Names come from Unicode CLDR 48.2, the same version NVDA 2026.3 uses. A few names are replaced with more common words. For example, 💩 is read as "kotoran".
 
-## Assigning a Shortcut Key
+## Settings
 
-This add-on provides an unassigned command to toggle the feature on and off:
+Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The options are:
 
-1. Open NVDA Menu -> Preferences -> Input Gestures.
-2. Expand the **Emoji ID** category.
-3. Select **Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia**.
-4. Press **Add** and press your desired shortcut key (for example NVDA+Shift+E).
+1. Enable Indonesian emoji reading. When unchecked, NVDA behaves as it does without the add-on.
+2. Add a prefix word before emoji names. On by default.
+3. Prefix word. The word spoken before each emoji name. "emoji" by default.
+4. Prefix only once for consecutive emoji. When checked, the prefix is spoken only before the first emoji in a run.
+5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 kali wajah gembira".
+6. Include skin tone details. When unchecked, only the base emoji name is read.
+7. Clean hyphens and parentheses in emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
+8. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
+9. Support Developer button. Opens the GoPay donation details with a button that copies the number.
+
+Settings are saved per NVDA configuration profile.
+
+## Toggle command
+
+Emoji ID has a command that turns Indonesian emoji reading on or off. It has no default gesture. To assign one:
+
+1. Open the NVDA menu, Preferences, Input Gestures.
+2. Expand the Emoji ID category.
+3. Select "Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia".
+4. Press Add, then press the gesture you want, for example NVDA+Shift+E.
 5. Press Enter to save.
 
-When pressed, NVDA announces the new status: "Emoji ID aktif" or "Emoji ID nonaktif".
+When you use the command, NVDA says "Emoji ID aktif" or "Emoji ID nonaktif".
 
-## Developer Support and Donations
+## Donations
 
-Emoji ID is maintained voluntarily to give visually impaired NVDA users in Indonesia an accurate, comfortable, and natural emoji-reading experience across all synthesizers.
+Emoji ID is developed on a volunteer basis. The first time NVDA starts after installation, Emoji ID shows a welcome message once, with a donation invitation. Donations can be sent through GoPay:
 
-If you find this add-on helpful and would like to support ongoing development and maintenance, voluntary donations via GoPay are warmly welcomed:
-- **Method**: GoPay
-- **Account Number / Mobile**: 085128011831
-- **Account Name**: Rexya Muhamad Rizki
+- Phone number: 085128011831
+- Account name: Rexya Muhamad Rizki
 
-Any amount of support is greatly appreciated. Thank you!
+Thank you.
 
-## System Requirements
+## Requirements
 
-- NVDA 2026.1 or later.
-- Architecture: 64-bit (NVDA Python 3.13 runtime).
-- Works with any speech synthesizer (Eloquence, Windows OneCore, eSpeak NG, Vocalizer Expressive, SAPI5).
+- NVDA 2026.1 or later. Last tested with NVDA 2026.3.
+- Works with any synthesizer, including Eloquence, Windows OneCore, eSpeak NG, Vocalizer Expressive, and SAPI5.
 
-## License and Copyright
+## License and copyright
 
 - Author: Rexya Muhamad <rexya2017@gmail.com>
-- Add-on License: GNU General Public License version 2 or later (GPL-2.0-or-later).
-- Code Copyright: (c) 2026 Rexya Muhamad <rexya2017@gmail.com>.
+- Add-on license: GNU General Public License version 2 or later (GPL-2.0-or-later).
+- Code copyright: (c) 2026 Rexya Muhamad.
+- Source code: https://github.com/InfiArtt/emoji-id
 
 ### Unicode CLDR License Notice (Unicode License v3)
 

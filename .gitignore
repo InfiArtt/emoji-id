@@ -10,3 +10,8 @@ addon/manifest.ini
 addon/doc/*/readme.html
 .venv/
 .ruff_cache/
+addon/locale/*/manifest.ini
+addon/doc/style.css
+*.pot
+.sconsign.dblite
+.pytest_cache/

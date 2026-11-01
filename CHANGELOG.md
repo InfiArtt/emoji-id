@@ -1,31 +1,43 @@
-# Changelog - Emoji ID
+# Riwayat perubahan Emoji ID
 
-Semua perubahan penting pada add-on ini didokumentasikan dalam berkas ini. Format mengikuti panduan Keep a Changelog.
+Format mengikuti Keep a Changelog.
+
+## [1.1.0] - belum dirilis
+
+### Diubah
+
+- Diperbarui untuk NVDA 2026.3. Data emoji tetap Unicode CLDR 48.2, sama dengan versi di NVDA 2026.3.
+- Pengingat donasi berkala sekarang nonaktif secara bawaan. Pengingat bisa diaktifkan di pengaturan Emoji ID.
+- Dialog sambutan tidak lagi muncul di tengah proses instalasi. Dialog itu sekarang muncul satu kali saat NVDA pertama kali dijalankan setelah instalasi.
+- Kata awalan hanya sekali sekarang ikut dinonaktifkan di pengaturan saat kata awalan dimatikan.
+- Panduan pengguna menjelaskan beda Emoji ID dengan nama emoji bawaan NVDA.
+
+### Diperbaiki
+
+- Terjemahan add-on sekarang dimuat. Sebelumnya teks antarmuka tidak bisa diterjemahkan.
+- Angka, tanda pagar, dan tanda bintang biasa tidak lagi diperiksa dengan pencarian emoji yang berat, sehingga teks berisi angka dibaca lebih cepat.
+- Saat add-on dimatikan, Emoji ID tidak lagi memutus add-on lain yang juga membungkus pembacaan simbol NVDA.
+
+### Dihapus
+
+- Pengaturan "Ikuti tingkat simbol NVDA". Pengaturan ini belum pernah berfungsi.
+- Kode yang mengubah data internal NVDA saat instalasi.
+
+### Untuk pengembang
+
+- Build memakai SCons dan `site_scons` dari NVDA AddonTemplate. `buildVars.py` memakai `AddonInfo` dan menambahkan changelog, URL kode sumber, dan lisensi ke manifest.
+- Kode mengikuti standar NVDA: indentasi tab, nama lowerCamelCase, `logHandler.log`, dan komentar `Translators:`.
+- Tes ditulis ulang untuk pytest.
 
 ## [1.0.0] - 2026-10-14
 
-### Ditambahkan (Added)
-- Rilis perdana add-on Emoji ID untuk NVDA 2026.1+.
-- Intersepsi dan penerjemahan emoji ke bahasa Indonesia secara konsisten pada semua synthesizer (termasuk Eloquence bahasa Inggris).
-- Dukungan lengkap untuk emoji dasar, Zero-Width Joiner (ZWJ) sequence (keluarga, profesi), bendera negara, digit keycap, dan varian warna kulit (Fitzpatrick).
-- Integrasi ke speech sequence filter (`speech.extensions.filter_speechSequence`) yang mempertahankan semua SpeechCommand, IndexCommand, dan objek non-string lainnya tanpa modifikasi.
-- Penyelesaian perangkap satu karakter (*single-character trap*): pembungkusan `characterProcessing.processSpeechSymbol` dengan try/except yang aman dan pemulihan bersih saat terminasi plugin.
-- Panel pengaturan NVDA di dialog preferensi dengan dukungan profil konfigurasi NVDA (*profile-aware*).
-- Opsi awalan nama emoji ("emoji") dengan pengaturan awalan sekali per rangkaian emoji berurutan.
-- Opsi penggabungan emoji identik yang berurutan ("N kali [nama]").
-- Opsi pengaktifan/penonaktifan detail warna kulit.
-- Opsi kepatuhan tingkat simbol (*symbol level*).
-- Perintah gestur masukan unassigned dengan `@script` untuk beralih aktif/nonaktif seketika dengan pengumuman status.
-- Mesin pencocokan berbasis regex terkompilasi berurutan *longest-match first* dengan normalisasi U+FE0F/U+FE0E.
-- Skrip build-time pipeline data (`tools/build_emoji_data.py`) dari Unicode CLDR 48.2.0.
-- Berkas penimpa (*overrides*) manual (`tools/overrides.tsv`) untuk kosakata bahasa Indonesia yang lebih alami.
-- Suite pengujian unit mandiri mencakup semua kasus emoji dan siklus hidup plugin.
-- Opsi pembersihan simbol dan tanda hubung ("kupu-kupu" menjadi "kupu kupu", menghilangkan tanda kurung) agar TTS tidak mengeja "dash" atau "left paren" dengan tetap menjaga intonasi alami.
-- Dukungan rangkaian emoji yang dipisahkan oleh spasi atau tanda baca pemisah (koma, titik koma) pada opsi awalan sekali per deret emoji.
-- Dokumentasi bilingual (Indonesia dan Inggris) dan pemberitahuan lisensi Unicode v3.
-- Dialog selamat datang dan ajakan donasi saat proses penginstalan (`installTasks.onInstall`).
-- Dialog informasi donasi GoPay (085128011831 a.n. Rexya Muhamad Rizki) dengan tombol salin nomor otomatis ke papan klip.
-- Tombol akses donasi cepat dan opsi pengingat donasi berkala pada panel pengaturan NVDA.
-- Pengingat donasi berkala otomatis dengan interval acak yang ramah pengguna (20–45 menit awal, 90–180 menit pengulangan).
-- Penetapan pengembang resmi kepada Rexya Muhamad <rexya2017@gmail.com> dan hak cipta tahun 2026.
+Rilis pertama.
 
+- Membacakan emoji dalam bahasa Indonesia di semua synthesizer, termasuk Eloquence bahasa Inggris.
+- Mendukung emoji dasar, rangkaian ZWJ, bendera, keycap, dan warna kulit.
+- Emoji tetap dibacakan dalam bahasa Indonesia saat navigasi per karakter, kursor tinjauan, dan saat mengetik.
+- Pengaturan kata awalan, penggabungan emoji berulang, detail warna kulit, dan pembersihan tanda hubung serta tanda kurung pada nama emoji.
+- Perintah tanpa tombol pintasan bawaan untuk menyalakan dan mematikan Emoji ID.
+- Data dari Unicode CLDR 48.2, ditambah penggantian nama di `tools/overrides.tsv`.
+- Panduan dalam bahasa Indonesia dan Inggris.
+- Dialog sambutan, informasi donasi GoPay, dan pengingat donasi berkala.

@@ -1,281 +1,149 @@
-# -*- coding: UTF-8 -*-
 # Emoji ID - Indonesian Emoji Reader for NVDA
 # Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 
-"""Donation and welcome dialogs for Emoji ID add-on.
+"""Welcome, donation reminder and donation details dialogs."""
 
-Provides screen-reader friendly modal dialogs for:
-- Welcome message during installation with donation invitation
-- Donation details (GoPay) with quick clipboard copy
-- Friendly periodic donation reminders during runtime
-"""
-
-from __future__ import annotations
-
-import logging
-from typing import Any
-
+import addonHandler
+import api
+import gui
+import ui
 import wx
+from logHandler import log
 
-try:
-    _ = _  # type: ignore[name-defined]
-except NameError:
-    try:
-        import addonHandler
-
-        addonHandler.initTranslation()
-    except Exception:
-        _ = lambda x: x
-
-log = logging.getLogger(__name__)
+addonHandler.initTranslation()
 
 GOPAY_NUMBER = "085128011831"
 GOPAY_NAME = "Rexya Muhamad Rizki"
 
 
-def copy_to_clipboard(text: str) -> bool:
-    """Copy text to system clipboard via wx.TheClipboard."""
-    try:
-        if wx.TheClipboard.Open():
-            data = wx.TextDataObject(text)
-            wx.TheClipboard.SetData(data)
-            wx.TheClipboard.Close()
-            return True
-    except Exception:
-        log.warning("Emoji ID: gagal menyalin ke papan klip", exc_info=True)
-    return False
-
-
-def _safe_popup(dlg: wx.Dialog) -> int:
-    """Safely show a modal dialog respecting NVDA mainFrame focus hooks."""
-    try:
-        import gui
-
-        mainFrame = getattr(gui, "mainFrame", None)
-        prePopup = getattr(mainFrame, "prePopup", lambda: None)
-        postPopup = getattr(mainFrame, "postPopup", lambda: None)
-    except Exception:
-        prePopup = lambda: None
-        postPopup = lambda: None
-
-    prePopup()
-    try:
-        return dlg.ShowModal()
-    finally:
-        postPopup()
-        dlg.Destroy()
+def _showModal(dialog: wx.Dialog) -> int:
+	"""Show a modal dialog with NVDA's pre and post popup handling, then destroy it."""
+	gui.mainFrame.prePopup()
+	try:
+		return dialog.ShowModal()
+	finally:
+		dialog.Destroy()
+		gui.mainFrame.postPopup()
 
 
 class DonationDetailsDialog(wx.Dialog):
-    """Dialog displaying GoPay donation information and copy button."""
+	"""Shows the GoPay account details with a button to copy the number."""
 
-    def __init__(self, parent: wx.Window | None = None) -> None:
-        super().__init__(
-            parent,
-            title=_("Informasi Donasi GoPay - Emoji ID"),
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER,
-        )
-        self._init_ui()
-        self.CentreOnParent()
+	def __init__(self, parent: wx.Window | None) -> None:
+		# Translators: Title of the dialog that shows the GoPay donation details.
+		super().__init__(parent, title=_("Informasi Donasi GoPay - Emoji ID"))
+		sizer = wx.BoxSizer(wx.VERTICAL)
 
-    def _init_ui(self) -> None:
-        sizer = wx.BoxSizer(wx.VERTICAL)
+		# Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
+		detailsText = _(
+			"Dukungan Pengembang Emoji ID\n\n"
+			"Metode: GoPay\n"
+			"Nomor HP: {number}\n"
+			"Atas nama: {name}\n\n"
+			"Donasi berapa pun membantu add-on ini terus diperbarui. Terima kasih!"
+		).format(number=GOPAY_NUMBER, name=GOPAY_NAME)
+		self.detailsText = wx.TextCtrl(
+			self,
+			value=detailsText,
+			style=wx.TE_MULTILINE | wx.TE_READONLY,
+			size=(480, 200),
+		)
+		sizer.Add(self.detailsText, proportion=1, flag=wx.EXPAND | wx.ALL, border=10)
 
-        info_text = (
-            "Dukungan Pengembang Emoji ID\n\n"
-            "Metode: GoPay\n"
-            f"Nomor HP / Rekening: {GOPAY_NUMBER}\n"
-            f"Atas Nama: {GOPAY_NAME}\n\n"
-            "Dukungan sekecil apa pun dari kamu sangat berarti untuk kelanjutan pengembangan "
-            "dan pembaruan add-on ini. Terima kasih banyak atas apresiasi dan kebaikanmu!"
-        )
+		buttonSizer = wx.BoxSizer(wx.HORIZONTAL)
+		# Translators: Button that copies the GoPay number to the clipboard.
+		copyButton = wx.Button(self, label=_("&Salin Nomor"))
+		copyButton.Bind(wx.EVT_BUTTON, self._onCopy)
+		buttonSizer.Add(copyButton, flag=wx.RIGHT, border=10)
+		# Translators: Button that closes the donation details dialog.
+		closeButton = wx.Button(self, wx.ID_CANCEL, label=_("&Tutup"))
+		buttonSizer.Add(closeButton)
+		sizer.Add(buttonSizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=10)
 
-        self.text_ctrl = wx.TextCtrl(
-            self,
-            value=info_text,
-            style=wx.TE_MULTILINE | wx.TE_READONLY,
-            size=(480, 200),
-        )
-        sizer.Add(self.text_ctrl, proportion=1, flag=wx.EXPAND | wx.ALL, border=10)
+		self.SetSizerAndFit(sizer)
+		self.CentreOnScreen()
+		self.detailsText.SetFocus()
+		self.detailsText.SetInsertionPoint(0)
 
-        btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
-
-        self.copy_btn = wx.Button(self, label=_("Salin Nomor"))
-        self.copy_btn.Bind(wx.EVT_BUTTON, self._on_copy)
-        btn_sizer.Add(self.copy_btn, flag=wx.RIGHT, border=10)
-
-        self.close_btn = wx.Button(self, wx.ID_CLOSE, label=_("Tutup"))
-        self.close_btn.Bind(wx.EVT_BUTTON, self._on_close)
-        btn_sizer.Add(self.close_btn)
-
-        sizer.Add(btn_sizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=10)
-
-        self.SetSizer(sizer)
-        self.Fit()
-        self.SetMinSize(self.GetSize())
-        self.text_ctrl.SetFocus()
-        self.text_ctrl.SetInsertionPoint(0)
-
-    def _on_copy(self, evt: wx.CommandEvent) -> None:
-        if copy_to_clipboard(GOPAY_NUMBER):
-            msg = _("Nomor GoPay 085128011831 telah disalin ke papan klip.")
-        else:
-            msg = _("Gagal menyalin nomor ke papan klip.")
-        try:
-            import ui
-
-            ui.message(msg)
-        except Exception:
-            pass
-
-    def _on_close(self, evt: wx.CommandEvent) -> None:
-        self.EndModal(wx.ID_CLOSE)
+	def _onCopy(self, evt: wx.CommandEvent) -> None:
+		if api.copyToClip(GOPAY_NUMBER):
+			# Translators: Announced after the GoPay number is copied. {number} is the number.
+			ui.message(_("Nomor GoPay {number} disalin ke papan klip.").format(number=GOPAY_NUMBER))
+		else:
+			# Translators: Announced when the GoPay number could not be copied.
+			ui.message(_("Gagal menyalin nomor ke papan klip."))
 
 
-class WelcomeDialog(wx.Dialog):
-    """Welcome dialog displayed on first run after add-on installation."""
+class DonationInviteDialog(wx.Dialog):
+	"""Short message inviting the user to donate, with "Donasi" and "Tidak Sekarang" buttons."""
 
-    def __init__(self, parent: wx.Window | None = None) -> None:
-        super().__init__(
-            parent,
-            title=_("Selamat Datang di Emoji ID"),
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER,
-        )
-        self._init_ui()
-        self.CentreOnParent()
+	def __init__(self, parent: wx.Window | None, title: str, message: str) -> None:
+		super().__init__(parent, title=title)
+		sizer = wx.BoxSizer(wx.VERTICAL)
 
-    def _init_ui(self) -> None:
-        sizer = wx.BoxSizer(wx.VERTICAL)
+		self.messageText = wx.StaticText(self, label=message)
+		self.messageText.Wrap(500)
+		sizer.Add(self.messageText, flag=wx.ALL | wx.EXPAND, border=15)
 
-        welcome_text = (
-            "Selamat datang di Emoji ID!\n\n"
-            "Add-on ini membantu membacakan ribuan simbol emoji dalam bahasa Indonesia "
-            "di segala synthesizer dan suara TTS NVDA.\n\n"
-            "Kalau kamu merasa add-on ini bermanfaat dan ingin menyemangati pengembang "
-            "agar terus terawat dan berkembang, yuk dukung lewat donasi sukarela melalui GoPay.\n\n"
-            "Pilih 'Donasi' untuk melihat informasi GoPay, atau 'Tidak Sekarang' untuk "
-            "langsung menikmati add-on."
-        )
+		buttonSizer = wx.BoxSizer(wx.HORIZONTAL)
+		# Translators: Button that opens the donation details.
+		donateButton = wx.Button(self, label=_("&Donasi"))
+		donateButton.Bind(wx.EVT_BUTTON, self._onDonate)
+		buttonSizer.Add(donateButton, flag=wx.RIGHT, border=10)
+		# Translators: Button that closes the donation invitation.
+		notNowButton = wx.Button(self, wx.ID_CANCEL, label=_("&Tidak Sekarang"))
+		notNowButton.SetDefault()
+		buttonSizer.Add(notNowButton)
+		sizer.Add(buttonSizer, flag=wx.ALIGN_RIGHT | wx.ALL, border=15)
 
-        self.message_text = wx.StaticText(self, label=welcome_text)
-        self.message_text.Wrap(500)
-        sizer.Add(self.message_text, 0, wx.ALL | wx.EXPAND, 15)
+		self.SetSizerAndFit(sizer)
+		self.CentreOnScreen()
 
-        btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
-
-        self.donate_btn = wx.Button(self, label=_("Donasi"))
-        self.donate_btn.Bind(wx.EVT_BUTTON, self._on_donate)
-        btn_sizer.Add(self.donate_btn, 0, wx.RIGHT, 10)
-
-        self.not_now_btn = wx.Button(self, wx.ID_CANCEL, label=_("Tidak Sekarang"))
-        self.not_now_btn.Bind(wx.EVT_BUTTON, self._on_not_now)
-        self.not_now_btn.SetDefault()
-        btn_sizer.Add(self.not_now_btn)
-
-        sizer.Add(btn_sizer, 0, wx.ALIGN_RIGHT | wx.ALL, 15)
-
-        self.SetSizerAndFit(sizer)
-
-    def _on_donate(self, evt: wx.CommandEvent) -> None:
-        show_donation_details_dialog(self)
-
-    def _on_not_now(self, evt: wx.CommandEvent) -> None:
-        self.EndModal(wx.ID_CANCEL)
+	def _onDonate(self, evt: wx.CommandEvent) -> None:
+		showDonationDetailsDialog(self)
 
 
-# Alias for compatibility
-InstallWelcomeDialog = WelcomeDialog
+def showDonationDetailsDialog(parent: wx.Window | None = None) -> None:
+	"""Open the GoPay donation details dialog. Must be called on the GUI thread."""
+	try:
+		_showModal(DonationDetailsDialog(parent or gui.mainFrame))
+	except Exception:
+		log.error("Emoji ID: could not show the donation details dialog", exc_info=True)
 
 
-class ReminderDialog(wx.Dialog):
-    """Periodic reminder dialog to invite user donation."""
-
-    def __init__(self, parent: wx.Window | None = None) -> None:
-        super().__init__(
-            parent,
-            title=_("Dukungan Pengembang - Emoji ID"),
-            style=wx.DEFAULT_DIALOG_STYLE | wx.RESIZE_BORDER,
-        )
-        self._init_ui()
-        self.CentreOnParent()
-
-    def _init_ui(self) -> None:
-        sizer = wx.BoxSizer(wx.VERTICAL)
-
-        reminder_text = (
-            "Hai! Semoga Emoji ID membantu kelancaran aktivitasmu sehari-hari.\n\n"
-            "Jika kamu merasa terbantu dan ingin menyemangati pengembang agar add-on ini terus diperbarui, "
-            "yuk dukung lewat donasi sukarela via GoPay.\n\n"
-            "Pilih 'Donasi' untuk melihat informasi GoPay, atau 'Tidak Sekarang' untuk "
-            "melanjutkan aktivitas."
-        )
-
-        self.message_text = wx.StaticText(self, label=reminder_text)
-        self.message_text.Wrap(480)
-        sizer.Add(self.message_text, 0, wx.ALL | wx.EXPAND, 15)
-
-        btn_sizer = wx.BoxSizer(wx.HORIZONTAL)
-
-        self.donate_btn = wx.Button(self, label=_("Donasi"))
-        self.donate_btn.Bind(wx.EVT_BUTTON, self._on_donate)
-        btn_sizer.Add(self.donate_btn, 0, wx.RIGHT, 10)
-
-        self.not_now_btn = wx.Button(self, wx.ID_CANCEL, label=_("Tidak Sekarang"))
-        self.not_now_btn.Bind(wx.EVT_BUTTON, self._on_not_now)
-        self.not_now_btn.SetDefault()
-        btn_sizer.Add(self.not_now_btn)
-
-        sizer.Add(btn_sizer, 0, wx.ALIGN_RIGHT | wx.ALL, 15)
-
-        self.SetSizerAndFit(sizer)
-
-    def _on_donate(self, evt: wx.CommandEvent) -> None:
-        show_donation_details_dialog(self)
-
-    def _on_not_now(self, evt: wx.CommandEvent) -> None:
-        self.EndModal(wx.ID_CANCEL)
+def _showInviteDialog(title: str, message: str) -> None:
+	try:
+		_showModal(DonationInviteDialog(gui.mainFrame, title, message))
+	except Exception:
+		log.error("Emoji ID: could not show the donation invitation", exc_info=True)
 
 
-def show_donation_details_dialog(parent: wx.Window | None = None) -> None:
-    """Open the GoPay donation details dialog."""
-    try:
-        import gui
-
-        if parent is None:
-            parent = getattr(gui, "mainFrame", None)
-        dlg = DonationDetailsDialog(parent)
-        _safe_popup(dlg)
-    except Exception:
-        log.warning("Emoji ID: gagal menampilkan dialog detail donasi", exc_info=True)
-
-
-def show_welcome_dialog(parent: wx.Window | None = None) -> None:
-    """Open the welcome and donation dialog on first run."""
-    try:
-        import gui
-
-        if parent is None:
-            parent = getattr(gui, "mainFrame", None)
-        dlg = WelcomeDialog(parent)
-        _safe_popup(dlg)
-    except Exception:
-        log.warning("Emoji ID: gagal menampilkan dialog selamat datang", exc_info=True)
+def showWelcomeDialog() -> None:
+	"""Open the welcome dialog shown once after installation. Must be called on the GUI thread."""
+	_showInviteDialog(
+		# Translators: Title of the welcome dialog shown the first time NVDA starts with Emoji ID.
+		_("Selamat Datang di Emoji ID"),
+		# Translators: Message of the welcome dialog shown the first time NVDA starts with Emoji ID.
+		_(
+			"Selamat datang di Emoji ID!\n\n"
+			"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n\n"
+			"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela "
+			"melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak Sekarang untuk menutup pesan ini."
+		),
+	)
 
 
-# Alias for compatibility
-show_install_dialog = show_welcome_dialog
-
-
-def show_reminder_dialog(parent: wx.Window | None = None) -> None:
-    """Open the periodic donation reminder dialog."""
-    try:
-        import gui
-
-        if parent is None:
-            parent = getattr(gui, "mainFrame", None)
-        dlg = ReminderDialog(parent)
-        _safe_popup(dlg)
-    except Exception:
-        log.warning("Emoji ID: gagal menampilkan dialog pengingat donasi", exc_info=True)
+def showReminderDialog() -> None:
+	"""Open the periodic donation reminder. Must be called on the GUI thread."""
+	_showInviteDialog(
+		# Translators: Title of the periodic donation reminder.
+		_("Dukungan Pengembang - Emoji ID"),
+		# Translators: Message of the periodic donation reminder.
+		_(
+			"Semoga Emoji ID membantu aktivitasmu sehari-hari.\n\n"
+			"Kalau kamu ingin add-on ini terus diperbarui, kamu bisa mendukung pengembangnya "
+			"lewat donasi sukarela melalui GoPay. Pengingat ini bisa dimatikan di pengaturan Emoji ID."
+		),
+	)

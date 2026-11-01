@@ -1,216 +1,147 @@
-# -*- coding: UTF-8 -*-
 # Emoji ID - Indonesian Emoji Reader for NVDA
 # Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 
-"""Settings panel for Emoji ID add-on.
+"""Configuration and the NVDA settings panel for Emoji ID."""
 
-Provides an NVDA settings panel with controls for:
-- Feature on/off toggle
-- Emoji prefix configuration
-- Collapse repeated emoji
-- Skin tone detail
-- Symbol level respect
-- Periodic donation reminder and donation details
-"""
-
-from __future__ import annotations
-
-import logging
-from typing import TYPE_CHECKING
-
+import addonHandler
 import config
 import wx
 from gui import guiHelper
 from gui.settingsDialogs import SettingsPanel
 
-if TYPE_CHECKING:
-    pass
+addonHandler.initTranslation()
 
-log = logging.getLogger(__name__)
+CONFIG_SECTION = "emojiID"
 
-# Configuration specification for configobj validation.
-# These settings are profile-aware by default.
-CONFSPEC = {
-    "enabled": "boolean(default=True)",
-    "prefix": "boolean(default=True)",
-    "prefixText": 'string(default="emoji")',
-    "prefixOnce": "boolean(default=False)",
-    "collapseRepeated": "boolean(default=True)",
-    "skinToneDetail": "boolean(default=True)",
-    "cleanSymbols": "boolean(default=True)",
-    "respectSymbolLevel": "boolean(default=False)",
-    "periodicDonationReminder": "boolean(default=True)",
-    "firstRun": "boolean(default=True)",
+#: Configuration specification. All settings are profile-aware.
+CONF_SPEC: dict[str, str] = {
+	"enabled": "boolean(default=True)",
+	"prefix": "boolean(default=True)",
+	"prefixText": 'string(default="emoji")',
+	"prefixOnce": "boolean(default=False)",
+	"collapseRepeated": "boolean(default=True)",
+	"skinToneDetail": "boolean(default=True)",
+	"cleanSymbols": "boolean(default=True)",
+	"periodicDonationReminder": "boolean(default=False)",
+	"firstRun": "boolean(default=True)",
 }
 
-# Translatable strings
-# Using a function to allow gettext to extract them
-_ = lambda x: x
+
+def getConfig() -> config.AggregatedSection:
+	"""Return the Emoji ID configuration section."""
+	return config.conf[CONFIG_SECTION]
 
 
-def get_config() -> config.AggregatedSection:
-    """Get the Emoji ID configuration section."""
-    return config.conf["emojiID"]
+def isEnabled() -> bool:
+	"""Whether Emoji ID is enabled in the current configuration profile."""
+	return bool(getConfig()["enabled"])
 
 
-def is_enabled() -> bool:
-    """Check if Emoji ID is enabled in current profile."""
-    try:
-        return config.conf["emojiID"]["enabled"]
-    except KeyError:
-        return True
-
-
-def register_config() -> None:
-    """Register the Emoji ID config spec with NVDA."""
-    config.conf.spec["emojiID"] = CONFSPEC
-
-
-def unregister_config() -> None:
-    """Unregister the Emoji ID config spec."""
-    try:
-        del config.conf.spec["emojiID"]
-    except KeyError:
-        pass
+def registerConfig() -> None:
+	"""Register the Emoji ID configuration specification with NVDA."""
+	config.conf.spec[CONFIG_SECTION] = CONF_SPEC
 
 
 class EmojiIDSettingsPanel(SettingsPanel):
-    """NVDA settings panel for Emoji ID configuration."""
+	"""Settings panel shown in the NVDA settings dialog."""
 
-    # Panel title shown in NVDA settings categories
-    title = "Emoji ID"
+	# Translators: Title of the Emoji ID category in the NVDA settings dialog.
+	title = _("Emoji ID")
 
-    def makeSettings(self, settingsSizer: wx.BoxSizer) -> None:
-        """Build the settings panel UI controls."""
-        sHelper = guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
-        conf = get_config()
+	def makeSettings(self, settingsSizer: wx.BoxSizer) -> None:
+		sHelper = guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
+		conf = getConfig()
 
-        # Enable/disable checkbox
-        self.enabledCheckbox = sHelper.addItem(
-            wx.CheckBox(self, label=_("Aktifkan pembacaan emoji dalam bahasa Indonesia"))
-        )
-        self.enabledCheckbox.SetValue(conf["enabled"])
+		self.enabledCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("&Aktifkan pembacaan emoji dalam bahasa Indonesia")),
+		)
+		self.enabledCheckbox.SetValue(conf["enabled"])
+		self.enabledCheckbox.Bind(wx.EVT_CHECKBOX, self._onDependencyToggle)
 
-        # Prefix section
-        self.prefixCheckbox = sHelper.addItem(
-            wx.CheckBox(self, label=_("Tambahkan kata awalan sebelum nama emoji"))
-        )
-        self.prefixCheckbox.SetValue(conf["prefix"])
+		self.prefixCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Tambahkan &kata awalan sebelum nama emoji")),
+		)
+		self.prefixCheckbox.SetValue(conf["prefix"])
+		self.prefixCheckbox.Bind(wx.EVT_CHECKBOX, self._onDependencyToggle)
 
-        # Prefix text
-        prefixTextLabel = wx.StaticText(self, label=_("Kata awalan:"))
-        self.prefixTextCtrl = wx.TextCtrl(self)
-        self.prefixTextCtrl.SetValue(conf["prefixText"])
-        prefixSizer = wx.BoxSizer(wx.HORIZONTAL)
-        prefixSizer.Add(prefixTextLabel, flag=wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, border=5)
-        prefixSizer.Add(self.prefixTextCtrl, proportion=1)
-        sHelper.addItem(prefixSizer)
+		self.prefixTextCtrl = sHelper.addLabeledControl(
+			# Translators: Label of the edit field for the prefix word in the Emoji ID settings panel.
+			_("Kata a&walan:"),
+			wx.TextCtrl,
+		)
+		self.prefixTextCtrl.SetValue(conf["prefixText"])
 
-        # Prefix once per run
-        self.prefixOnceCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Kata awalan hanya sekali untuk emoji berturut-turut"),
-            )
-        )
-        self.prefixOnceCheckbox.SetValue(conf["prefixOnce"])
+		self.prefixOnceCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Kata awalan hanya &sekali untuk emoji berturut-turut")),
+		)
+		self.prefixOnceCheckbox.SetValue(conf["prefixOnce"])
 
-        # Collapse repeated emoji
-        self.collapseRepeatedCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Gabungkan emoji berulang yang sama (misalnya '3 kali wajah gembira')"),
-            )
-        )
-        self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])
+		self.collapseRepeatedCheckbox = sHelper.addItem(
+			wx.CheckBox(
+				self,
+				# Translators: Checkbox in the Emoji ID settings panel.
+				label=_("&Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"),
+			),
+		)
+		self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])
 
-        # Skin tone detail
-        self.skinToneDetailCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Sertakan detail warna kulit"),
-            )
-        )
-        self.skinToneDetailCheckbox.SetValue(conf["skinToneDetail"])
+		self.skinToneDetailCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Sertakan detail &warna kulit")),
+		)
+		self.skinToneDetailCheckbox.SetValue(conf["skinToneDetail"])
 
-        # Clean symbols in emoji names (hyphens, parentheses)
-        self.cleanSymbolsCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Bersihkan tanda hubung dan tanda kurung pada nama emoji"),
-            )
-        )
-        self.cleanSymbolsCheckbox.SetValue(conf.get("cleanSymbols", True))
+		self.cleanSymbolsCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("&Bersihkan tanda hubung dan tanda kurung pada nama emoji")),
+		)
+		self.cleanSymbolsCheckbox.SetValue(conf["cleanSymbols"])
 
-        # Respect symbol level
-        self.respectSymbolLevelCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Ikuti tingkat simbol NVDA (jika nonaktif, selalu bacakan emoji)"),
-            )
-        )
-        self.respectSymbolLevelCheckbox.SetValue(conf["respectSymbolLevel"])
+		self.periodicReminderCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Tampilkan &pengingat donasi berkala")),
+		)
+		self.periodicReminderCheckbox.SetValue(conf["periodicDonationReminder"])
 
-        # Periodic donation reminder checkbox
-        self.periodicReminderCheckbox = sHelper.addItem(
-            wx.CheckBox(
-                self,
-                label=_("Tampilkan pengingat donasi berkala"),
-            )
-        )
-        self.periodicReminderCheckbox.SetValue(conf.get("periodicDonationReminder", True))
+		self.donateButton = sHelper.addItem(
+			# Translators: Button in the Emoji ID settings panel that opens the donation details.
+			wx.Button(self, label=_("&Dukung Pengembang (Donasi GoPay)...")),
+		)
+		self.donateButton.Bind(wx.EVT_BUTTON, self._onDonateClicked)
 
-        # Support developer donation button
-        self.donateButton = sHelper.addItem(
-            wx.Button(self, label=_("Dukung Pengembang (Donasi GoPay)"))
-        )
-        self.donateButton.Bind(wx.EVT_BUTTON, self._onDonateClicked)
+		self._updateControlStates()
 
-        # Bind enable checkbox to update control states
-        self.enabledCheckbox.Bind(wx.EVT_CHECKBOX, self._onEnabledToggle)
-        self._updateControlStates()
+	def _onDonateClicked(self, evt: wx.CommandEvent) -> None:
+		from .donation import showDonationDetailsDialog
 
-    def _onDonateClicked(self, evt: wx.CommandEvent) -> None:
-        """Open the donation details dialog."""
-        from .donation import show_donation_details_dialog
+		showDonationDetailsDialog(self)
 
-        show_donation_details_dialog(self)
+	def _onDependencyToggle(self, evt: wx.CommandEvent) -> None:
+		self._updateControlStates()
 
-    def _onEnabledToggle(self, evt: wx.CommandEvent) -> None:
-        """Handle enable checkbox toggle to update dependent control states."""
-        self._updateControlStates()
+	def _updateControlStates(self) -> None:
+		"""Disable options that have no effect with the current choices."""
+		isOn = self.enabledCheckbox.GetValue()
+		hasPrefix = isOn and self.prefixCheckbox.GetValue()
+		self.prefixCheckbox.Enable(isOn)
+		self.prefixTextCtrl.Enable(hasPrefix)
+		self.prefixOnceCheckbox.Enable(hasPrefix)
+		self.collapseRepeatedCheckbox.Enable(isOn)
+		self.skinToneDetailCheckbox.Enable(isOn)
+		self.cleanSymbolsCheckbox.Enable(isOn)
 
-    def _updateControlStates(self) -> None:
-        """Enable or disable controls based on the enabled state."""
-        enabled = self.enabledCheckbox.GetValue()
-        self.prefixCheckbox.Enable(enabled)
-        self.prefixTextCtrl.Enable(enabled and self.prefixCheckbox.GetValue())
-        self.prefixOnceCheckbox.Enable(enabled)
-        self.collapseRepeatedCheckbox.Enable(enabled)
-        self.skinToneDetailCheckbox.Enable(enabled)
-        self.cleanSymbolsCheckbox.Enable(enabled)
-        self.respectSymbolLevelCheckbox.Enable(enabled)
-
-    def isValid(self) -> bool:
-        """Validate settings before saving."""
-        if self.prefixCheckbox.GetValue():
-            prefix_text = self.prefixTextCtrl.GetValue().strip()
-            if not prefix_text:
-                # Empty prefix text with prefix enabled - warn but allow
-                log.warning("Emoji ID: prefix is enabled but prefix text is empty")
-        return True
-
-    def onSave(self) -> None:
-        """Save settings to NVDA configuration."""
-        conf = get_config()
-        conf["enabled"] = self.enabledCheckbox.GetValue()
-        conf["prefix"] = self.prefixCheckbox.GetValue()
-        conf["prefixText"] = self.prefixTextCtrl.GetValue().strip()
-        conf["prefixOnce"] = self.prefixOnceCheckbox.GetValue()
-        conf["collapseRepeated"] = self.collapseRepeatedCheckbox.GetValue()
-        conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
-        conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
-        conf["respectSymbolLevel"] = self.respectSymbolLevelCheckbox.GetValue()
-        conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()
+	def onSave(self) -> None:
+		conf = getConfig()
+		conf["enabled"] = self.enabledCheckbox.GetValue()
+		conf["prefix"] = self.prefixCheckbox.GetValue()
+		conf["prefixText"] = self.prefixTextCtrl.GetValue().strip()
+		conf["prefixOnce"] = self.prefixOnceCheckbox.GetValue()
+		conf["collapseRepeated"] = self.collapseRepeatedCheckbox.GetValue()
+		conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
+		conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
+		conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()

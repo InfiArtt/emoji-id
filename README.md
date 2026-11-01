@@ -1,34 +1,50 @@
-# Emoji ID - Pembaca Emoji Bahasa Indonesia untuk NVDA
+# Emoji ID
 
-Add-on resmi NVDA untuk membacakan emoji dalam bahasa Indonesia di segala suara synthesizer (TTS).
+Add-on NVDA yang membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara TTS yang dipakai. Panduan pengguna ada di `addon/doc/id/readme.md` (bahasa Indonesia) dan `addon/doc/en/readme.md` (bahasa Inggris).
 
-## Target NVDA
-- Minimum NVDA Version: 2026.1
-- Last Tested NVDA Version: 2026.1
-- Arsitektur: Python 3.13, 64-bit
+## Versi NVDA
 
-## Struktur Berkas
-- `addon/`: Kode sumber add-on dan dokumentasi.
-  - `globalPlugins/emojiID/`: Plugin global utama dan data emoji.
-  - `doc/`: Dokumentasi bahasa Indonesia (`id/`) dan Inggris (`en/`).
-  - `manifest.ini`: Manifest add-on NVDA.
-- `tools/`: Skrip build data CLDR dan berkas overrides manual.
-- `tests/`: Suite pengujian unit mandiri.
-- `buildVars.py`: Konfigurasi build AddonTemplate.
-- `SConstruct`: Skrip packaging SCons.
-- `LICENSE`: Lisensi GPL v2+.
+- Versi minimum: NVDA 2026.1.
+- Terakhir diuji: NVDA 2026.3.
 
-## Menjalankan Pengujian
-Jalankan pengujian unit mandiri:
+## Struktur berkas
+
+- `addon/globalPlugins/emojiID/`: kode plugin dan data emoji (`data/emoji_id.json`).
+- `addon/doc/`: panduan pengguna dalam bahasa Indonesia dan Inggris.
+- `tools/build_emoji_data.py`: membangun ulang data emoji dari Unicode CLDR, ditambah penggantian nama dari `tools/overrides.tsv`.
+- `tests/`: tes unit yang berjalan tanpa NVDA.
+- `buildVars.py`: informasi add-on dan konfigurasi build, mengikuti NVDA AddonTemplate.
+- `sconstruct` dan `site_scons/`: skrip build SCons dari AddonTemplate.
+
+## Membangun add-on
+
+Butuh Python 3.13, SCons, Markdown, dan gettext (`msgfmt`, `xgettext`).
+
 ```bash
-python tests/test_emoji_id.py
+scons
 ```
 
-## Membangun Paket Add-on (.nvda-addon)
-Paket add-on dibangun dengan SCons atau dikemas langsung sebagai arsip zip berekstensi `.nvda-addon`.
+Hasilnya `emojiID-<versi>.nvda-addon` di folder utama. Untuk membuat berkas terjemahan `.pot`, jalankan `scons pot`.
 
-## Pengembang dan Hak Cipta
-- Pengembang: Rexya Muhamad <rexya2017@gmail.com>
-- Lisensi: GPL-2.0-or-later
-- Hak Cipta: (c) 2026 Rexya Muhamad <rexya2017@gmail.com>
-- Dukungan Donasi: GoPay 085128011831 (a.n. Rexya Muhamad Rizki)
+## Tes dan pemeriksaan kode
+
+```bash
+python -m pytest
+```
+
+```bash
+python -m ruff check .
+```
+
+Kode mengikuti standar penulisan kode NVDA: indentasi tab, nama lowerCamelCase, dan komentar `Translators:` untuk setiap string yang diterjemahkan.
+
+## Membangun ulang data emoji
+
+```bash
+python tools/build_emoji_data.py --cldr-version 48.2.0
+```
+
+## Lisensi
+
+- Kode: GPL-2.0-or-later, (c) 2026 Rexya Muhamad <rexya2017@gmail.com>.
+- Data nama emoji: Unicode CLDR, Unicode License v3.
