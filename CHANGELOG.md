@@ -2,7 +2,7 @@
 
 Format mengikuti Keep a Changelog.
 
-## [1.2.0] - belum dirilis
+## [1.2.0] - 2026-11-03
 
 ### Diubah
 
