@@ -119,7 +119,13 @@ def test_prefix(
 
 @pytest.mark.parametrize(
 	("emoji", "expected"),
-	[("🤥", "bohong"), ("💩", "kotoran"), ("🤧", "bersin"), ("💨", "berlari")],
+	[
+		("🤥", "wajah berbohong"),
+		("💩", "kotoran"),
+		("🤧", "wajah bersin"),
+		("🤑", "wajah mata duitan"),
+		("🙈", "monyet tutup mata"),
+	],
 )
 def test_overrides(matcher: EmojiMatcher, emoji: str, expected: str) -> None:
 	assert matcher.replaceInText(emoji) == expected

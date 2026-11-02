@@ -1,22 +1,72 @@
 # Emoji ID - Hand-maintained Indonesian name overrides
 # Format: emoji<TAB>spoken_name
 # These override CLDR tts names where the default is unclear or unnatural in Indonesian.
-# Status: SUGGESTION - pending user approval
+# Faces were reviewed and approved by the developer on 2026-11-03:
+# every face name starts with "wajah", and "memberikan ciuman" is shortened to "mencium".
 #
 # Emoji	Indonesian Name
-🤥	bohong
-🤧	bersin
-🤢	mual
-🤤	ngiler
-💩	kotoran
-😣	wajah tidak setuju
-💨	berlari
-🙄	wajah memutar mata
-🤫	wajah diam
-🫠	wajah meleleh
+#
+# Smiling and laughing faces
+😄	wajah tertawa dengan mata tersenyum
+😆	wajah tertawa memejamkan mata
+😁	wajah nyengir
+#
+# Affection and kisses
+🥰	wajah tersenyum dikelilingi hati
+😍	wajah tersenyum bermata hati
+🤩	wajah bermata bintang
+😘	wajah memberi cium jauh
+😗	wajah mencium
+😚	wajah mencium dengan mata terpejam
+😙	wajah mencium dengan mata tersenyum
+#
+# Faces with tongue or hand
+🤑	wajah mata duitan
+🫢	wajah kaget menutup mulut
+🤭	wajah tertawa menutup mulut
+🤫	wajah menyuruh diam
+#
+# Neutral and skeptical faces
+🤐	wajah tutup mulut
+🤨	wajah mengangkat alis
+🙄	wajah memutar bola mata
+🤥	wajah berbohong
 🫣	wajah mengintip
 🫤	wajah ragu
 🫥	wajah tak terlihat
+#
+# Sleepy and unwell faces
+🤤	wajah ngiler
+🤒	wajah demam
+🤕	wajah dengan kepala diperban
+🤢	wajah mual
+🤧	wajah bersin
+🥴	wajah linglung
+#
+# Concerned faces
+😯	wajah terkejut
+😲	wajah tercengang
+😦	wajah cemberut dengan mulut terbuka
+😰	wajah cemas berkeringat
+😣	wajah meringis
+😩	wajah frustrasi
+#
+# Negative faces
+😤	wajah mendengus
+🤬	wajah mengumpat
+😈	wajah setan tersenyum
+👿	wajah setan marah
+#
+# Cat and monkey faces
+😽	wajah kucing mencium
+🙈	monyet tutup mata
+🙉	monyet tutup telinga
+🙊	monyet tutup mulut
+#
+# Other emoji (not reviewed yet)
+💩	kotoran
+💨	berlari
+🫠	wajah meleleh
 #
 # Music signs are not emoji, so emoji-test.txt does not list them.
 # They are kept because Indonesian has its own names for them (CLDR names).

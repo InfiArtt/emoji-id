@@ -29,6 +29,7 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
+- Nama 38 emoji wajah ditulis ulang supaya lebih alami dan sesuai maknanya, misalnya wajah mata duitan, wajah mengumpat, dan monyet tutup mata.
 - 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya tombol OK, tombol SOS, joker, tombol huruf Jepang, dan empat panah diagonal.
 - Emoji wajah dengan tangan menutup mulut tidak lagi bernama sama dengan wajah tersipu.
 	"""),

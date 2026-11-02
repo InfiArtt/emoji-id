@@ -4,6 +4,10 @@ Format mengikuti Keep a Changelog.
 
 ## [Belum dirilis]
 
+### Diubah
+
+- Nama 38 emoji wajah ditulis ulang supaya lebih alami dan sesuai maknanya. Semua emoji wajah sekarang diawali kata "wajah", dan "memberikan ciuman" disingkat menjadi "mencium". Contohnya 🤑 "wajah mata duitan", 🤬 "wajah mengumpat", 🤥 "wajah berbohong", dan 🙈 "monyet tutup mata". Daftar lengkapnya ada di `tools/overrides.tsv`.
+
 ### Diperbaiki
 
 - 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya 🆗 "tombol OK", 🆘 "tombol SOS", 🀄 "naga merah mahyong", 🃏 "joker", tombol huruf Jepang, dan empat panah diagonal.
