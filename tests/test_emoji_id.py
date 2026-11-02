@@ -89,13 +89,13 @@ def test_collapseRepeated(matcher: EmojiMatcher) -> None:
 			"😂, 👋, 👨‍🦯",
 			True,
 			False,
-			"emoji wajah gembira berurai air mata, tangan melambai, pria dengan tongkat",
+			"emoji wajah gembira berurai air mata, tangan melambai, pria dengan tongkat putih",
 		),
 		(
 			"😂 👋 👨‍🦯",
 			True,
 			False,
-			"emoji wajah gembira berurai air mata tangan melambai pria dengan tongkat",
+			"emoji wajah gembira berurai air mata tangan melambai pria dengan tongkat putih",
 		),
 		("😂 😂 😂", True, True, "emoji 3 kali wajah gembira berurai air mata"),
 		("😂, 😂, 😂", True, True, "emoji 3 kali wajah gembira berurai air mata"),
@@ -134,8 +134,8 @@ def test_overrides(matcher: EmojiMatcher, emoji: str, expected: str) -> None:
 def test_cleanSymbols(matcher: EmojiMatcher) -> None:
 	assert matcher.replaceInText("🦋", shouldCleanSymbols=True) == "kupu kupu"
 	assert matcher.replaceInText("🦋", shouldCleanSymbols=False) == "kupu-kupu"
-	assert matcher.replaceInText("👆", shouldCleanSymbols=True) == "menunjuk ke atas dibalik"
-	assert matcher.replaceInText("👆", shouldCleanSymbols=False) == "menunjuk ke atas (dibalik)"
+	assert matcher.replaceInText("🅰", shouldCleanSymbols=True) == "tombol A golongan darah"
+	assert matcher.replaceInText("🅰", shouldCleanSymbols=False) == "tombol A (golongan darah)"
 	assert (
 		matcher.replaceInText("Pasal 1-2 (a) 🦋 hal 3-4", shouldCleanSymbols=True)
 		== "Pasal 1-2 (a) kupu kupu hal 3-4"
@@ -351,3 +351,20 @@ def test_ordinarySymbolsAreNotEmoji(matcher: EmojiMatcher) -> None:
 def test_musicSignsKeepIndonesianNames(matcher: EmojiMatcher, codepoint: int, expected: str) -> None:
 	# Not emoji, but Indonesian has names for them, so they stay in the data.
 	assert matcher.lookup(chr(codepoint)) == expected
+
+
+@pytest.mark.parametrize(
+	("emoji", "expected"),
+	[
+		# Folded hands means please or thank you; "melipat tangan" means crossing the arms.
+		("🙏", "kedua tangan dikatupkan"),
+		("🙏🏽", "kedua tangan dikatupkan warna kulit sedang"),
+		# The white cane is the cane blind people use, so its colour is part of the meaning.
+		("🧑🏽‍🦯", "orang dengan tongkat putih warna kulit sedang"),
+		("🧑🏻‍🦰", "orang berambut merah warna kulit cerah"),
+		("🐞", "kepik"),
+		("#\ufe0f\u20e3", "tombol pagar"),
+	],
+)
+def test_reviewedNames(matcher: EmojiMatcher, emoji: str, expected: str) -> None:
+	assert matcher.lookup(emoji) == expected

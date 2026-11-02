@@ -7,10 +7,20 @@ Format mengikuti Keep a Changelog.
 ### Diubah
 
 - Nama 38 emoji wajah ditulis ulang supaya lebih alami dan sesuai maknanya. Semua emoji wajah sekarang diawali kata "wajah", dan "memberikan ciuman" disingkat menjadi "mencium". Contohnya 🤑 "wajah mata duitan", 🤬 "wajah mengumpat", 🤥 "wajah berbohong", dan 🙈 "monyet tutup mata". Daftar lengkapnya ada di `tools/overrides.tsv`.
+- Nama sekitar 250 emoji lain juga ditinjau ulang supaya sesuai makna dan isinya, dan varian warna kulitnya ikut berubah. Contohnya:
+  - 🙏 "kedua tangan dikatupkan". Sebelumnya "melipat tangan", yang berarti bersedekap.
+  - 🐞 "kepik". Sebelumnya "kumbang betina".
+  - 🍗 "paha ayam". Sebelumnya "kaki ayam".
+  - 🧑‍🦯 "orang dengan tongkat putih". Sebelumnya hanya "orang dengan tongkat".
+  - 🙍 "orang cemberut". Sebelumnya "orang marah".
+  - Tombol angka dibacakan "tombol 1", bukan "keycap 1".
+  - Bendera 🇨🇮 dibacakan "bendera Pantai Gading".
+- Nama warna kulit cadangan di kode sekarang sama dengan CLDR, misalnya "warna kulit cerah" dan "warna kulit sedang".
 
 ### Diperbaiki
 
 - 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya 🆗 "tombol OK", 🆘 "tombol SOS", 🀄 "naga merah mahyong", 🃏 "joker", tombol huruf Jepang, dan empat panah diagonal.
+- Tombol pagar #️⃣, tombol bintang *️⃣, dan 🔟 sekarang dibacakan dalam bahasa Indonesia.
 - 🤭 sekarang dibacakan "wajah dengan tangan menutup mulut". Sebelumnya namanya sama dengan 😳 "wajah tersipu".
 
 ### Untuk pengembang

@@ -31,6 +31,8 @@ CLDR_DERIVED_URL = (
 EMOJI_TEST_URL = "https://www.unicode.org/Public/{version}/emoji/emoji-test.txt"
 
 VS_PATTERN = re.compile(r"[\uFE0E\uFE0F]")
+KEYCAP = chr(0x20E3)
+SKIN_TONES = frozenset(chr(codepoint) for codepoint in range(0x1F3FB, 0x1F400))
 
 UNICODE_LICENSE = (
 	"UNICODE LICENSE V3 - Copyright (c) 1991-2026 Unicode, Inc. "
@@ -83,7 +85,8 @@ def load_overrides(path: Path) -> dict[str, str]:
 	with open(path, encoding="utf-8") as f:
 		for line_num, line in enumerate(f, 1):
 			line = line.strip()
-			if not line or line.startswith("#"):
+			# "#" starts a comment, except in the keycap emoji "#" + U+20E3.
+			if not line or (line.startswith("#") and not line.startswith("#" + KEYCAP)):
 				continue
 			parts = line.split("\t")
 			if len(parts) < 2:
@@ -179,11 +182,31 @@ def build_data(
 
 	# Apply overrides
 	overrides = load_overrides(overrides_path)
+	cldr_names = dict(merged)
 	override_count = 0
 	for emoji, name in overrides.items():
 		merged[emoji] = name
 		override_count += 1
 	print(f"Applied {override_count} overrides.")
+
+	# Skin tone variants have their own CLDR names that start with the CLDR base name,
+	# for example "melipat tangan warna kulit sedang". Give them the overridden base name too.
+	renamed_variants = 0
+	for emoji, name in cldr_names.items():
+		if emoji in overrides or not any(tone in emoji for tone in SKIN_TONES):
+			continue
+		base = "".join(ch for ch in emoji if ch not in SKIN_TONES)
+		if base not in overrides:
+			continue
+		base_name = cldr_names.get(base)
+		if base_name and name.startswith(base_name):
+			merged[emoji] = overrides[base] + name[len(base_name) :]
+		else:
+			# Names such as "dewasa warna kulit cerah, rambut merah" put the tone in the middle.
+			tones = [cldr_names.get(ch, "") for ch in emoji if ch in SKIN_TONES]
+			merged[emoji] = " ".join([overrides[base], ", ".join(tones)])
+		renamed_variants += 1
+	print(f"Renamed {renamed_variants} skin tone variants after their overridden base.")
 
 	# Sort by key length descending, then by codepoint for determinism
 	sorted_data = dict(sorted(merged.items(), key=lambda x: (-len(x[0]), x[0])))

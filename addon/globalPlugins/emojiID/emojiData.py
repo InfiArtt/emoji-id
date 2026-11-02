@@ -28,13 +28,13 @@ KEYCAP = chr(0x20E3)
 REGIONAL_INDICATOR_A = 0x1F1E6
 REGIONAL_INDICATOR_Z = 0x1F1FF
 
-#: Skin tone modifier codepoints (Fitzpatrick scale) and their Indonesian names.
+#: Skin tone modifier codepoints (Fitzpatrick scale) and their Indonesian CLDR names.
 SKIN_TONE_MODIFIERS: dict[str, str] = {
-	chr(0x1F3FB): "kulit putih",
-	chr(0x1F3FC): "kulit putih-sawo matang",
-	chr(0x1F3FD): "kulit sawo matang",
-	chr(0x1F3FE): "kulit cokelat",
-	chr(0x1F3FF): "kulit gelap",
+	chr(0x1F3FB): "warna kulit cerah",
+	chr(0x1F3FC): "warna kulit cerah-sedang",
+	chr(0x1F3FD): "warna kulit sedang",
+	chr(0x1F3FE): "warna kulit gelap-sedang",
+	chr(0x1F3FF): "warna kulit gelap",
 }
 
 #: Name suffixes that describe a skin tone, removed when skin tone detail is off.
@@ -315,7 +315,7 @@ class EmojiMatcher:
 			if modifier in emoji:
 				baseName = self._data.get(emoji.replace(modifier, ""))
 				if baseName:
-					return f"{baseName}: {toneName}" if hasSkinToneDetail else baseName
+					return f"{baseName} {toneName}" if hasSkinToneDetail else baseName
 
 		if ZWJ in emoji:
 			partNames = [name for part in emoji.split(ZWJ) if (name := self._data.get(part))]
