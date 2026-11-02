@@ -2,7 +2,7 @@
 
 Format mengikuti Keep a Changelog.
 
-## [Belum dirilis]
+## [1.2.0] - belum dirilis
 
 ### Diubah
 
