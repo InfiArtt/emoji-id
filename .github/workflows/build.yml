@@ -157,7 +157,7 @@ jobs:
           ' CHANGELOG.md > notes.md
           {
             echo
-            echo "SHA256 checksum (needed for the NVDA Add-on Store):"
+            echo "SHA256 checksum:"
             echo
             echo '```'
             sha256sum ./*.nvda-addon
@@ -176,5 +176,5 @@ jobs:
             ./*.pot
           fail_on_unmatched_files: true
           prerelease: ${{ contains(needs.version-check.outputs.version, '-') }}
-          # Never replace a file on a published release: the Add-on Store pins its checksum.
+          # Never replace a file on a published release, so its checksum stays valid.
           overwrite_files: false

@@ -61,7 +61,7 @@ Rilis dibuat otomatis saat push ke `main`, jika:
 - versi di `buildVars.py` belum punya tag rilis, dan
 - `CHANGELOG.md` punya bagian versi itu dengan tanggal, misalnya `## [1.1.0] - 2026-11-15`.
 
-Bagian yang masih bertulisan "belum dirilis" hanya dibangun, tidak dirilis. Rilis berisi paket `.nvda-addon`, berkas `.pot`, catatan dari `CHANGELOG.md`, dan checksum SHA256 untuk Add-on Store.
+Bagian yang masih bertulisan "belum dirilis" hanya dibangun, tidak dirilis. Rilis berisi paket `.nvda-addon`, berkas `.pot`, catatan dari `CHANGELOG.md`, dan checksum SHA256 untuk memeriksa keaslian paket.
 
 ## Membangun ulang data emoji
 
