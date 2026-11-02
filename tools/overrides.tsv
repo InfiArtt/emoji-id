@@ -17,3 +17,9 @@
 🫣	wajah mengintip
 🫤	wajah ragu
 🫥	wajah tak terlihat
+#
+# Music signs are not emoji, so emoji-test.txt does not list them.
+# They are kept because Indonesian has its own names for them (CLDR names).
+♪	not seperdelapan
+♭	nada mol
+♯	nada kres

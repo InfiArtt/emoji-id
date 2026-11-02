@@ -334,5 +334,14 @@ def test_emojiBelowPictographBlocks(matcher: EmojiMatcher, codepoint: int) -> No
 
 
 def test_ordinarySymbolsAreNotEmoji(matcher: EmojiMatcher) -> None:
-	# Music signs are symbols, not emoji: NVDA names them itself.
-	assert matcher.lookup(chr(0x266A)) is None
+	# A plain arrow is a symbol, not an emoji: NVDA names it itself.
+	assert matcher.lookup(chr(0x2192)) is None
+
+
+@pytest.mark.parametrize(
+	("codepoint", "expected"),
+	[(0x266A, "not seperdelapan"), (0x266D, "nada mol"), (0x266F, "nada kres")],
+)
+def test_musicSignsKeepIndonesianNames(matcher: EmojiMatcher, codepoint: int, expected: str) -> None:
+	# Not emoji, but Indonesian has names for them, so they stay in the data.
+	assert matcher.lookup(chr(codepoint)) == expected

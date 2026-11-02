@@ -29,13 +29,8 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
-- Diperbarui untuk NVDA 2026.3 (CLDR 48.2).
-- Pengingat donasi berkala sekarang nonaktif secara bawaan dan bisa diaktifkan di pengaturan.
-- Dialog sambutan saat instalasi sekarang memakai dialog pesan bawaan NVDA. Memilih Donasi langsung menyalin nomor GoPay.
-- Pengaturan "Ikuti tingkat simbol NVDA" dihapus karena belum pernah berfungsi.
-- Terjemahan add-on sekarang dimuat dengan benar.
-- Navigasi per karakter pada bendera tidak lagi membisu: setiap huruf regional dibacakan.
-- Antarmuka add-on sekarang tersedia dalam bahasa Inggris.
+- 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya tombol OK, tombol SOS, joker, tombol huruf Jepang, dan empat panah diagonal.
+- Emoji wajah dengan tangan menutup mulut tidak lagi bernama sama dengan wajah tersipu.
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",
