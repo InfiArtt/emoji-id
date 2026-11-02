@@ -315,3 +315,24 @@ def test_noAcceleratorKeys() -> None:
 		labels = re.findall(r'_\("([^"]*)"\)', source.read_text(encoding="utf-8"))
 		assert labels
 		assert not [label for label in labels if "&" in label], source.name
+
+
+def test_noDuplicateNames(matcher: EmojiMatcher) -> None:
+	# Two emoji with the same name cannot be told apart by ear.
+	names = list(matcher._data.values())
+	duplicates = {name for name in names if names.count(name) > 1}
+	assert not duplicates
+
+
+@pytest.mark.parametrize(
+	"codepoint",
+	# Emoji below U+1F300 that an earlier data build left out.
+	[0x1F004, 0x1F0CF, 0x1F170, 0x1F197, 0x1F198, 0x1F201, 0x1F251, 0x2196],
+)
+def test_emojiBelowPictographBlocks(matcher: EmojiMatcher, codepoint: int) -> None:
+	assert matcher.lookup(chr(codepoint))
+
+
+def test_ordinarySymbolsAreNotEmoji(matcher: EmojiMatcher) -> None:
+	# Music signs are symbols, not emoji: NVDA names them itself.
+	assert matcher.lookup(chr(0x266A)) is None

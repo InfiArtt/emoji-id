@@ -66,7 +66,7 @@ Bagian yang masih bertulisan "belum dirilis" hanya dibangun, tidak dirilis. Rili
 ## Membangun ulang data emoji
 
 ```bash
-python tools/build_emoji_data.py --cldr-version 48.2.0
+python tools/build_emoji_data.py --cldr-version 48.2.0 --emoji-version 17.0.0
 ```
 
 ## Lisensi

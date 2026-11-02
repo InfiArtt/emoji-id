@@ -2,6 +2,18 @@
 
 Format mengikuti Keep a Changelog.
 
+## [Belum dirilis]
+
+### Diperbaiki
+
+- 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya 🆗 "tombol OK", 🆘 "tombol SOS", 🀄 "naga merah mahyong", 🃏 "joker", tombol huruf Jepang, dan empat panah diagonal.
+- 🤭 sekarang dibacakan "wajah dengan tangan menutup mulut". Sebelumnya namanya sama dengan 😳 "wajah tersipu".
+- Not musik ♪, ♭, dan ♯ tidak lagi dianggap emoji. Ketiganya bukan emoji, jadi sekarang dibacakan oleh NVDA sendiri.
+
+### Untuk pengembang
+
+- `tools/build_emoji_data.py` hanya menyimpan urutan yang tercantum di daftar emoji Unicode 17.0 (`emoji-test.txt`).
+
 ## [1.1.0] - 2026-11-02
 
 ### Diubah

@@ -5,9 +5,12 @@
 Downloads Unicode CLDR Indonesian emoji annotations (or extracts from NVDA's cldr.dic)
 and merges with hand-maintained overrides to produce a compact JSON lookup file.
 
+Only sequences listed in the Unicode emoji-test.txt file are kept, so that CLDR names for
+ordinary symbols such as arrows or currency signs do not end up in the emoji data.
+
 Usage:
     python tools/build_emoji_data.py
-    python tools/build_emoji_data.py --cldr-version 48.2.0 --emoji-version 16.0
+    python tools/build_emoji_data.py --cldr-version 48.2.0 --emoji-version 17.0.0
 """
 
 import argparse
@@ -25,7 +28,7 @@ CLDR_DERIVED_URL = (
 	"https://cdn.jsdelivr.net/npm/cldr-annotations-derived-full@{version}/"
 	"annotationsDerived/id/annotations.json"
 )
-EMOJI_TEST_URL = "https://unicode.org/Public/emoji/{version}/emoji-test.txt"
+EMOJI_TEST_URL = "https://www.unicode.org/Public/{version}/emoji/emoji-test.txt"
 
 VS_PATTERN = re.compile(r"[\uFE0E\uFE0F]")
 
@@ -45,6 +48,17 @@ def fetch_url(url: str) -> str:
 	req = urllib.request.Request(url, headers={"User-Agent": "Emoji-ID-BuildTool/1.0"})
 	with urllib.request.urlopen(req, timeout=30) as resp:
 		return resp.read().decode("utf-8")
+
+
+def parse_emoji_test(text: str) -> set[str]:
+	"""Return every emoji sequence listed in emoji-test.txt, without variation selectors."""
+	result = set()
+	for line in text.splitlines():
+		codepoints = line.split(";", 1)[0].strip()
+		if not codepoints or line.startswith("#"):
+			continue
+		result.add(normalize_emoji("".join(chr(int(cp, 16)) for cp in codepoints.split())))
+	return result
 
 
 def parse_annotations(data: dict) -> dict[str, str]:
@@ -95,7 +109,7 @@ def parse_cldr_dic(path: Path) -> dict[str, str]:
 			cp = ord(ch)
 			if (
 				0x1F1E6 <= cp <= 0x1F1FF
-				or 0x1F300 <= cp <= 0x1FAFF
+				or 0x1F000 <= cp <= 0x1FAFF
 				or 0x2600 <= cp <= 0x27BF
 				or cp in (0x00A9, 0x00AE, 0x203C, 0x2049, 0x2122, 0x2139, 0x231A, 0x231B, 0x2B50, 0x2B55)
 			):
@@ -126,6 +140,10 @@ def build_data(
 ) -> None:
 	"""Main build pipeline."""
 	merged = {}
+	emoji_test_url = EMOJI_TEST_URL.format(version=emoji_version)
+	print(f"Fetching emoji list from {emoji_test_url}...")
+	emoji_set = parse_emoji_test(fetch_url(emoji_test_url))
+	print(f"Loaded {len(emoji_set)} emoji sequences.")
 
 	# Try downloading CLDR annotations online
 	try:
@@ -136,8 +154,10 @@ def build_data(
 		print(f"Fetching derived annotations from {derived_url}...")
 		derived_data = json.loads(fetch_url(derived_url))
 
-		base_names = parse_annotations(base_data)
-		derived_names = parse_annotations(derived_data)
+		# Some names read "berciuman: pria, pria" or "keycap: 1". NVDA's cldr.dic drops that first colon,
+		# so do the same to keep the spoken names identical to NVDA's.
+		base_names = {k: v.replace(":", "", 1) for k, v in parse_annotations(base_data).items()}
+		derived_names = {k: v.replace(":", "", 1) for k, v in parse_annotations(derived_data).items()}
 		merged.update(base_names)
 		merged.update(derived_names)
 		print(f"Loaded {len(base_names)} base and {len(derived_names)} derived annotations from CDN.")
@@ -150,6 +170,12 @@ def build_data(
 		else:
 			print("Error: No data source available.")
 			sys.exit(1)
+
+	# Keep emoji only: CLDR also names ordinary symbols such as arrows and currency signs.
+	dropped = [key for key in merged if key not in emoji_set]
+	for key in dropped:
+		del merged[key]
+	print(f"Dropped {len(dropped)} non-emoji annotations.")
 
 	# Apply overrides
 	overrides = load_overrides(overrides_path)
@@ -183,7 +209,7 @@ def build_data(
 def main():
 	parser = argparse.ArgumentParser(description="Build emoji data for Emoji ID NVDA add-on")
 	parser.add_argument("--cldr-version", default="48.2.0", help="CLDR version tag")
-	parser.add_argument("--emoji-version", default="16.0", help="Unicode emoji version")
+	parser.add_argument("--emoji-version", default="17.0.0", help="Unicode version of emoji-test.txt")
 	parser.add_argument(
 		"--output",
 		type=Path,
