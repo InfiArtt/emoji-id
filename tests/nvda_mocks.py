@@ -64,12 +64,13 @@ DEFAULT_CONFIG: dict[str, Any] = {
 	"cleanSymbols": True,
 	"periodicDonationReminder": False,
 	"firstRun": False,
+	"symbolsEnabledOnce": False,
 }
 
 
 class _Conf(dict[str, Any]):
 	def __init__(self) -> None:
-		super().__init__(emojiID=dict(DEFAULT_CONFIG))
+		super().__init__(emojiID=dict(DEFAULT_CONFIG), speech={"symbolDictionaries": ["cldr"]})
 		self.spec: dict[str, Any] = {}
 		self.saveCount = 0
 
@@ -80,7 +81,21 @@ class _Conf(dict[str, Any]):
 _module("logHandler", log=_Log())
 _module("addonHandler", initTranslation=lambda: None)
 _module("config", conf=_Conf(), AggregatedSection=dict)
-_module("characterProcessing", processSpeechSymbol=originalProcessSpeechSymbol)
+symbolCalls: list[tuple[str, str]] = []
+symbolCacheClears: list[bool] = []
+
+
+def originalProcessSpeechSymbols(locale: str, text: str, level: int) -> str:
+	symbolCalls.append((locale, text))
+	return text
+
+
+_module(
+	"characterProcessing",
+	processSpeechSymbol=originalProcessSpeechSymbol,
+	processSpeechSymbols=originalProcessSpeechSymbols,
+	clearSpeechSymbols=lambda: symbolCacheClears.append(True),
+)
 speechTypes = _module("speech.types", SpeechSequence=list)
 speechExtensions = _module("speech.extensions", filter_speechSequence=HandlerRegistry())
 _module("speech", extensions=speechExtensions, types=speechTypes)

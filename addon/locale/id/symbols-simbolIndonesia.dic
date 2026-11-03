@@ -1,0 +1,814 @@
+# Emoji ID - Indonesian names for punctuation and symbols
+# Copyright (C) 2026 Rexya Muhamad <rexya2017@gmail.com>
+# This file is covered by the GNU General Public License v2 or later.
+# Names follow EYD Edisi V and KBBI where they define one, otherwise common Indonesian usage.
+# Some names come from Unicode CLDR, Unicode License v3.
+# Only the spoken name is given: symbol levels and preserve rules come from NVDA's own dictionary.
+
+symbols:
+. sentence ending	titik
+! sentence ending	tanda seru
+? sentence ending	tanda tanya
+; phrase ending	titik koma
+: phrase ending	titik dua
+multiple .	titik titik
+decimal point	titik
+in-word '	apostrof
+negative number	minus
+\0	kosong
+\t	tab
+\n	baris baru
+\f	pemisah halaman
+\r	kembali ke awal baris
+ 	spasi
+ 	spasi
+!	tanda seru
+！	tanda seru lebar penuh
+"	tanda petik
+\#	tanda pagar
+$	dolar
+£	pound
+€	euro
+¢	sen
+¥	yen
+₹	rupee India
+ƒ	florin
+¤	tanda mata uang
+%	persen
+‰	permil
+&	dan
+'	apostrof
+(	kurung buka
+)	kurung tutup
+*	bintang
+,	koma
+、	koma ideografis
+،	koma Arab
+-	tanda hubung
+.	titik
+．	titik lebar penuh
+/	garis miring
+:	titik dua
+：	titik dua lebar penuh
+;	titik koma
+؛	titik koma Arab
+；	titik koma lebar penuh
+?	tanda tanya
+؟	tanda tanya Arab
+？	tanda tanya lebar penuh
+@	et
+[	kurung siku buka
+]	kurung siku tutup
+\\	garis miring terbalik
+^	tanda pangkat
+_	garis bawah
+`	aksen gravis
+{	kurung kurawal buka
+}	kurung kurawal tutup
+|	garis tegak
+¦	garis tegak putus
+~	tilde
+¡	tanda seru terbalik
+¿	tanda tanya terbalik
+·	titik tengah
+‚	petik tunggal bawah
+„	petik ganda bawah
+′	aksen
+″	aksen ganda
+‴	aksen tiga
+‐	tanda hubung
+•	butir
+…	elipsis
+...	elipsis
+“	petik buka
+”	petik tutup
+‘	petik tunggal buka
+’	petik tunggal tutup
+–	tanda pisah pendek
+—	tanda pisah
+­	tanda hubung lunak
+⁃	butir tanda hubung
+●	lingkaran hitam
+○	lingkaran putih
+¨	trema
+¯	makron
+´	aksen akut
+¸	sedila
+‎	tanda arah kiri ke kanan
+‏	tanda arah kanan ke kiri
+¶	tanda paragraf
+■	persegi hitam
+▪	persegi kecil hitam
+◾	persegi agak kecil hitam
+□	persegi putih
+◦	butir putih
+⇨	panah putih ke kanan
+➔	panah ke kanan
+➢	mata panah ke kanan
+❖	belah ketupat silang
+♣	kartu keriting
+♦	kartu wajik
+◆	belah ketupat hitam
+§	tanda pasal
+°	derajat
+«	tanda kutip sudut kiri
+»	tanda kutip sudut kanan
+µ	mikro
+⁰	superskrip 0
+¹	superskrip 1
+²	superskrip 2
+³	superskrip 3
+⁴	superskrip 4
+⁵	superskrip 5
+⁶	superskrip 6
+⁷	superskrip 7
+⁸	superskrip 8
+⁹	superskrip 9
+⁺	superskrip plus
+⁼	superskrip sama dengan
+⁽	superskrip kurung buka
+⁾	superskrip kurung tutup
+ⁿ	superskrip n
+₀	subskrip 0
+₁	subskrip 1
+₂	subskrip 2
+₃	subskrip 3
+₄	subskrip 4
+₅	subskrip 5
+₆	subskrip 6
+₇	subskrip 7
+₈	subskrip 8
+₉	subskrip 9
+₊	subskrip plus
+₋	subskrip minus
+₌	subskrip sama dengan
+₍	subskrip kurung buka
+₎	subskrip kurung tutup
+®	terdaftar
+™	merek dagang
+©	hak cipta
+℠	merek jasa
+←	panah kiri
+↑	panah atas
+→	panah kanan
+↓	panah bawah
+✓	centang
+✔	centang tebal
+🡺	panah kanan
+†	tanda belati
+‡	tanda belati ganda
+‣	butir segitiga
+✗	tanda silang
+⊕	plus dalam lingkaran
+⊖	minus dalam lingkaran
+⇄	panah kanan di atas panah kiri
+⇒	panah ganda ke kanan
++	plus
+−	minus
+×	kali
+⋅	kali
+⨯	kali silang
+∕	bagi
+⁄	garis pecahan
+÷	bagi
+∓	minus atau plus
+±	plus minus
+∖	selisih himpunan
+⊍	gabungan himpunan
+𝒫	himpunan kuasa
+𝔓	himpunan kuasa
+℘	himpunan kuasa
+∁	komplemen himpunan
+∅	himpunan kosong
+⊂	himpunan bagian dari
+⊄	bukan himpunan bagian dari
+⊃	superhimpunan dari
+⊅	bukan superhimpunan dari
+⊆	himpunan bagian dari atau sama dengan
+⊈	bukan himpunan bagian dari dan tidak sama dengan
+⊇	superhimpunan dari atau sama dengan
+⊉	bukan superhimpunan dari dan tidak sama dengan
+⊌	multihimpunan
+=	sama dengan
+≃	sama secara asimtotis dengan
+≄	tidak sama secara asimtotis dengan
+≅	kurang lebih sama dengan
+≆	kurang lebih tetapi tidak benar benar sama dengan
+≈	hampir sama dengan
+≌	semuanya sama dengan
+≍	ekuivalen dengan
+≭	tidak ekuivalen dengan
+≎	ekuivalen secara geometris dengan
+≑	sama secara geometris dengan
+≚	bersudut sama dengan
+≬	di antara
+≠	tidak sama dengan
+≡	identik dengan
+≣	identik mutlak dengan
+≢	tidak identik dengan
+∼	mirip dengan
+≙	berpadanan dengan
+≟	dipertanyakan sama dengan
+<	kurang dari
+>	lebih dari
+≤	kurang dari atau sama dengan
+≦	kurang dari atau sama dengan
+≪	jauh lebih kecil dari
+≥	lebih dari atau sama dengan
+≧	lebih dari atau sama dengan
+≫	jauh lebih besar dari
+≶	kurang dari atau lebih dari
+≷	lebih dari atau kurang dari
+≮	tidak kurang dari
+≯	tidak lebih dari
+⁻	superskrip minus
+∘	komposisi
+∂	turunan parsial
+∇	nabla
+⃗	vektor
+△	segitiga
+▭	persegi panjang
+∟	sudut siku
+∠	sudut
+∥	sejajar dengan
+∦	tidak sejajar dengan
+⊥	tegak lurus dengan
+⟂	tegak lurus dengan
+‖	norma vektor
+̂	topi
+∿	gelombang sinus
+∡	sudut terukur
+∢	sudut bola
+∀	untuk semua
+∃	terdapat
+∄	tidak terdapat
+⇏	tidak berimplikasi
+⇐	diimplikasikan oleh
+∈	anggota dari
+∉	bukan anggota dari
+∊	anggota dari
+∋	memuat anggota
+∌	tidak memuat anggota
+∍	memuat anggota
+∎	akhir pembuktian
+∏	hasil kali berulang
+∐	koproduk
+∑	notasi sigma
+√	akar kuadrat
+∛	akar pangkat tiga
+∜	akar pangkat empat
+∝	sebanding dengan
+∞	tak hingga
+∧	dan
+∨	atau
+¬	negasi
+∩	irisan
+∪	gabungan
+∫	integral
+∬	integral ganda
+∭	integral lipat tiga
+∮	integral kontur
+∯	integral permukaan
+∰	integral volume
+∱	integral searah jarum jam
+∲	integral kontur searah jarum jam
+∳	integral kontur berlawanan arah jarum jam
+∴	jadi
+∵	karena
+∶	banding
+∷	proporsi
+∹	kelebihan
+∺	proporsi geometris
+≀	hasil kali karangan
+≏	selisih antara
+≐	mendekati limit
+∙	operator titik
+∣	membagi habis
+∤	tidak membagi habis
+≔	titik dua sama dengan
+≕	sama dengan titik dua
+≺	mendahului
+≻	mengikuti
+⊀	tidak mendahului
+⊁	tidak mengikuti
+¼	seperempat
+½	setengah
+¾	tiga perempat
+⅐	sepertujuh
+⅑	sepersembilan
+⅒	sepersepuluh
+⅓	sepertiga
+⅔	dua pertiga
+⅕	seperlima
+⅖	dua perlima
+⅗	tiga perlima
+⅘	empat perlima
+⅙	seperenam
+⅚	lima perenam
+⅛	seperdelapan
+⅜	tiga perdelapan
+⅝	lima perdelapan
+⅞	tujuh perdelapan
+𝔸	bilangan aljabar
+ℂ	bilangan kompleks
+ℑ	bagian imajiner
+ℍ	kuaternion
+ℕ	bilangan asli
+𝕁	bilangan cacah
+ℚ	bilangan rasional
+ℝ	bilangan real
+ℜ	bagian real
+ℤ	bilangan bulat
+ℵ	bilangan alef
+ℶ	bilangan bet
+⌘	tombol Command Mac
+⌥	tombol Option Mac
+⠀	spasi braille
+⠁	braille titik 1
+⠂	braille titik 2
+⠃	braille titik 1 2
+⠄	braille titik 3
+⠅	braille titik 1 3
+⠆	braille titik 2 3
+⠇	braille titik 1 2 3
+⠈	braille titik 4
+⠉	braille titik 1 4
+⠊	braille titik 2 4
+⠋	braille titik 1 2 4
+⠌	braille titik 3 4
+⠍	braille titik 1 3 4
+⠎	braille titik 2 3 4
+⠏	braille titik 1 2 3 4
+⠐	braille titik 5
+⠑	braille titik 1 5
+⠒	braille titik 2 5
+⠓	braille titik 1 2 5
+⠔	braille titik 3 5
+⠕	braille titik 1 3 5
+⠖	braille titik 2 3 5
+⠗	braille titik 1 2 3 5
+⠘	braille titik 4 5
+⠙	braille titik 1 4 5
+⠚	braille titik 2 4 5
+⠛	braille titik 1 2 4 5
+⠜	braille titik 3 4 5
+⠝	braille titik 1 3 4 5
+⠞	braille titik 2 3 4 5
+⠟	braille titik 1 2 3 4 5
+⠠	braille titik 6
+⠡	braille titik 1 6
+⠢	braille titik 2 6
+⠣	braille titik 1 2 6
+⠤	braille titik 3 6
+⠥	braille titik 1 3 6
+⠦	braille titik 2 3 6
+⠧	braille titik 1 2 3 6
+⠨	braille titik 4 6
+⠩	braille titik 1 4 6
+⠪	braille titik 2 4 6
+⠫	braille titik 1 2 4 6
+⠬	braille titik 3 4 6
+⠭	braille titik 1 3 4 6
+⠮	braille titik 2 3 4 6
+⠯	braille titik 1 2 3 4 6
+⠰	braille titik 5 6
+⠱	braille titik 1 5 6
+⠲	braille titik 2 5 6
+⠳	braille titik 1 2 5 6
+⠴	braille titik 3 5 6
+⠵	braille titik 1 3 5 6
+⠶	braille titik 2 3 5 6
+⠷	braille titik 1 2 3 5 6
+⠸	braille titik 4 5 6
+⠹	braille titik 1 4 5 6
+⠺	braille titik 2 4 5 6
+⠻	braille titik 1 2 4 5 6
+⠼	braille titik 3 4 5 6
+⠽	braille titik 1 3 4 5 6
+⠾	braille titik 2 3 4 5 6
+⠿	braille titik 1 2 3 4 5 6
+⡀	braille titik 7
+⡁	braille titik 1 7
+⡂	braille titik 2 7
+⡃	braille titik 1 2 7
+⡄	braille titik 3 7
+⡅	braille titik 1 3 7
+⡆	braille titik 2 3 7
+⡇	braille titik 1 2 3 7
+⡈	braille titik 4 7
+⡉	braille titik 1 4 7
+⡊	braille titik 2 4 7
+⡋	braille titik 1 2 4 7
+⡌	braille titik 3 4 7
+⡍	braille titik 1 3 4 7
+⡎	braille titik 2 3 4 7
+⡏	braille titik 1 2 3 4 7
+⡐	braille titik 5 7
+⡑	braille titik 1 5 7
+⡒	braille titik 2 5 7
+⡓	braille titik 1 2 5 7
+⡔	braille titik 3 5 7
+⡕	braille titik 1 3 5 7
+⡖	braille titik 2 3 5 7
+⡗	braille titik 1 2 3 5 7
+⡘	braille titik 4 5 7
+⡙	braille titik 1 4 5 7
+⡚	braille titik 2 4 5 7
+⡛	braille titik 1 2 4 5 7
+⡜	braille titik 3 4 5 7
+⡝	braille titik 1 3 4 5 7
+⡞	braille titik 2 3 4 5 7
+⡟	braille titik 1 2 3 4 5 7
+⡠	braille titik 6 7
+⡡	braille titik 1 6 7
+⡢	braille titik 2 6 7
+⡣	braille titik 1 2 6 7
+⡤	braille titik 3 6 7
+⡥	braille titik 1 3 6 7
+⡦	braille titik 2 3 6 7
+⡧	braille titik 1 2 3 6 7
+⡨	braille titik 4 6 7
+⡩	braille titik 1 4 6 7
+⡪	braille titik 2 4 6 7
+⡫	braille titik 1 2 4 6 7
+⡬	braille titik 3 4 6 7
+⡭	braille titik 1 3 4 6 7
+⡮	braille titik 2 3 4 6 7
+⡯	braille titik 1 2 3 4 6 7
+⡰	braille titik 5 6 7
+⡱	braille titik 1 5 6 7
+⡲	braille titik 2 5 6 7
+⡳	braille titik 1 2 5 6 7
+⡴	braille titik 3 5 6 7
+⡵	braille titik 1 3 5 6 7
+⡶	braille titik 2 3 5 6 7
+⡷	braille titik 1 2 3 5 6 7
+⡸	braille titik 4 5 6 7
+⡹	braille titik 1 4 5 6 7
+⡺	braille titik 2 4 5 6 7
+⡻	braille titik 1 2 4 5 6 7
+⡼	braille titik 3 4 5 6 7
+⡽	braille titik 1 3 4 5 6 7
+⡾	braille titik 2 3 4 5 6 7
+⡿	braille titik 1 2 3 4 5 6 7
+⢀	braille titik 8
+⢁	braille titik 1 8
+⢂	braille titik 2 8
+⢃	braille titik 1 2 8
+⢄	braille titik 3 8
+⢅	braille titik 1 3 8
+⢆	braille titik 2 3 8
+⢇	braille titik 1 2 3 8
+⢈	braille titik 4 8
+⢉	braille titik 1 4 8
+⢊	braille titik 2 4 8
+⢋	braille titik 1 2 4 8
+⢌	braille titik 3 4 8
+⢍	braille titik 1 3 4 8
+⢎	braille titik 2 3 4 8
+⢏	braille titik 1 2 3 4 8
+⢐	braille titik 5 8
+⢑	braille titik 1 5 8
+⢒	braille titik 2 5 8
+⢓	braille titik 1 2 5 8
+⢔	braille titik 3 5 8
+⢕	braille titik 1 3 5 8
+⢖	braille titik 2 3 5 8
+⢗	braille titik 1 2 3 5 8
+⢘	braille titik 4 5 8
+⢙	braille titik 1 4 5 8
+⢚	braille titik 2 4 5 8
+⢛	braille titik 1 2 4 5 8
+⢜	braille titik 3 4 5 8
+⢝	braille titik 1 3 4 5 8
+⢞	braille titik 2 3 4 5 8
+⢟	braille titik 1 2 3 4 5 8
+⢠	braille titik 6 8
+⢡	braille titik 1 6 8
+⢢	braille titik 2 6 8
+⢣	braille titik 1 2 6 8
+⢤	braille titik 3 6 8
+⢥	braille titik 1 3 6 8
+⢦	braille titik 2 3 6 8
+⢧	braille titik 1 2 3 6 8
+⢨	braille titik 4 6 8
+⢩	braille titik 1 4 6 8
+⢪	braille titik 2 4 6 8
+⢫	braille titik 1 2 4 6 8
+⢬	braille titik 3 4 6 8
+⢭	braille titik 1 3 4 6 8
+⢮	braille titik 2 3 4 6 8
+⢯	braille titik 1 2 3 4 6 8
+⢰	braille titik 5 6 8
+⢱	braille titik 1 5 6 8
+⢲	braille titik 2 5 6 8
+⢳	braille titik 1 2 5 6 8
+⢴	braille titik 3 5 6 8
+⢵	braille titik 1 3 5 6 8
+⢶	braille titik 2 3 5 6 8
+⢷	braille titik 1 2 3 5 6 8
+⢸	braille titik 4 5 6 8
+⢹	braille titik 1 4 5 6 8
+⢺	braille titik 2 4 5 6 8
+⢻	braille titik 1 2 4 5 6 8
+⢼	braille titik 3 4 5 6 8
+⢽	braille titik 1 3 4 5 6 8
+⢾	braille titik 2 3 4 5 6 8
+⢿	braille titik 1 2 3 4 5 6 8
+⣀	braille titik 7 8
+⣁	braille titik 1 7 8
+⣂	braille titik 2 7 8
+⣃	braille titik 1 2 7 8
+⣄	braille titik 3 7 8
+⣅	braille titik 1 3 7 8
+⣆	braille titik 2 3 7 8
+⣇	braille titik 1 2 3 7 8
+⣈	braille titik 4 7 8
+⣉	braille titik 1 4 7 8
+⣊	braille titik 2 4 7 8
+⣋	braille titik 1 2 4 7 8
+⣌	braille titik 3 4 7 8
+⣍	braille titik 1 3 4 7 8
+⣎	braille titik 2 3 4 7 8
+⣏	braille titik 1 2 3 4 7 8
+⣐	braille titik 5 7 8
+⣑	braille titik 1 5 7 8
+⣒	braille titik 2 5 7 8
+⣓	braille titik 1 2 5 7 8
+⣔	braille titik 3 5 7 8
+⣕	braille titik 1 3 5 7 8
+⣖	braille titik 2 3 5 7 8
+⣗	braille titik 1 2 3 5 7 8
+⣘	braille titik 4 5 7 8
+⣙	braille titik 1 4 5 7 8
+⣚	braille titik 2 4 5 7 8
+⣛	braille titik 1 2 4 5 7 8
+⣜	braille titik 3 4 5 7 8
+⣝	braille titik 1 3 4 5 7 8
+⣞	braille titik 2 3 4 5 7 8
+⣟	braille titik 1 2 3 4 5 7 8
+⣠	braille titik 6 7 8
+⣡	braille titik 1 6 7 8
+⣢	braille titik 2 6 7 8
+⣣	braille titik 1 2 6 7 8
+⣤	braille titik 3 6 7 8
+⣥	braille titik 1 3 6 7 8
+⣦	braille titik 2 3 6 7 8
+⣧	braille titik 1 2 3 6 7 8
+⣨	braille titik 4 6 7 8
+⣩	braille titik 1 4 6 7 8
+⣪	braille titik 2 4 6 7 8
+⣫	braille titik 1 2 4 6 7 8
+⣬	braille titik 3 4 6 7 8
+⣭	braille titik 1 3 4 6 7 8
+⣮	braille titik 2 3 4 6 7 8
+⣯	braille titik 1 2 3 4 6 7 8
+⣰	braille titik 5 6 7 8
+⣱	braille titik 1 5 6 7 8
+⣲	braille titik 2 5 6 7 8
+⣳	braille titik 1 2 5 6 7 8
+⣴	braille titik 3 5 6 7 8
+⣵	braille titik 1 3 5 6 7 8
+⣶	braille titik 2 3 5 6 7 8
+⣷	braille titik 1 2 3 5 6 7 8
+⣸	braille titik 4 5 6 7 8
+⣹	braille titik 1 4 5 6 7 8
+⣺	braille titik 2 4 5 6 7 8
+⣻	braille titik 1 2 4 5 6 7 8
+⣼	braille titik 3 4 5 6 7 8
+⣽	braille titik 1 3 4 5 6 7 8
+⣾	braille titik 2 3 4 5 6 7 8
+⣿	braille titik 1 2 3 4 5 6 7 8
+。	titik ideografis
+【	kurung lensa hitam buka
+】	kurung lensa hitam tutup
+〖	kurung lensa putih buka
+〗	kurung lensa putih tutup
+↚	panah kiri dicoret
+↛	panah kanan dicoret
+↞	panah dua mata arah kiri
+↟	panah dua mata arah naik
+↠	panah dua mata arah kanan
+↡	panah dua mata arah turun
+↢	panah berekor ke kiri
+↣	panah berekor ke kanan
+↨	panah atas bawah beralas
+↫	panah simpal ke kiri
+↬	panah simpal ke kanan
+↭	panah gelombang kiri kanan
+↰	panah naik mata ke kiri
+↱	panah naik mata ke kanan
+↲	panah turun mata ke kiri
+↳	panah turun mata ke kanan
+↴	panah kanan siku turun
+↵	panah turun siku ke kiri
+↶	panah lengkung atas ke kiri
+↷	panah lengkung atas ke kanan
+↸	panah barat laut bilah panjang
+↺	panah lingkar terbuka berlawanan arah jarum jam
+↻	panah lingkar terbuka searah jarum jam
+↼	panah seruit atas ke kiri
+↽	panah seruit bawah ke kiri
+↾	panah seruit kanan ke atas
+↿	panah seruit kiri ke atas
+⇀	panah seruit atas ke kanan
+⇁	panah seruit bawah ke kanan
+⇂	panah seruit kanan ke bawah
+⇃	panah seruit kiri ke bawah
+⇍	panah ganda ke kiri dicoret
+⇔	panah ganda kiri kanan
+⇎	panah ganda kiri kanan dicoret
+⇖	panah ganda barat laut
+⇗	panah ganda timur laut
+⇘	panah ganda tenggara
+⇙	panah ganda barat daya
+⇞	panah ke atas coret ganda
+⇟	panah ke bawah coret ganda
+⇤	panah ke kiri dengan batang
+⇥	panah ke kanan dengan batang
+⇵	panah ke bawah di sebelah kiri panah ke atas
+≳	lebih dari atau setara dengan
+⋭	tidak mencakup sebagai subgrup normal atau sama dengan
+⊶	orisinal
+⋰	elipsis diagonal naik ke kanan
+⋱	elipsis diagonal turun ke kanan
+▦	persegi isian garis silang ortogonal
+▧	persegi isian garis diagonal turun ke kanan
+▨	persegi isian garis diagonal turun ke kiri
+▩	persegi isian garis silang diagonal
+◐	lingkaran dengan setengah kiri hitam
+◑	lingkaran dengan setengah kanan hitam
+◒	lingkaran dengan setengah bawah hitam
+◓	lingkaran dengan setengah atas hitam
+◔	lingkaran dengan kuadran kanan atas hitam
+◕	lingkaran hitam kecuali kuadran kiri atas
+◜	busur lingkaran kuadran kiri atas
+◝	busur lingkaran kuadran kanan atas
+◞	busur lingkaran kuadran kanan bawah
+◟	busur lingkaran kuadran kiri bawah
+◢	segitiga kanan bawah hitam
+◣	segitiga kiri bawah hitam
+◤	segitiga kiri atas hitam
+◥	segitiga kanan atas hitam
+◳	persegi putih kuadran kanan atas
+◷	lingkaran putih dengan kuadran kanan atas
+◿	segitiga kanan bawah
+♪	not seperdelapan
+⨧	plus subskrip dua
+⩣	atau logika dengan dua garis bawah
+⩽	kurang dari atau sama dengan miring
+⪍	kurang dari di atas mirip atau sama dengan
+⪚	dua garis sama dengan di atas tanda lebih dari
+↮	panah kiri kanan dicoret
+₣	franc Prancis
+₰	penny Jerman
+₽	ruble
+‾	garis atas
+―	garis horizontal
+・	titik tengah katakana
+‽	interobang
+〈	kurung sudut buka
+〉	kurung sudut tutup
+《	kurung sudut ganda buka
+》	kurung sudut ganda tutup
+「	kurung tekuk buka
+」	kurung tekuk tutup
+『	kurung tekuk putih buka
+』	kurung tekuk putih tutup
+〔	kurung tempurung buka
+〕	kurung tempurung tutup
+‧	titik hubung
+‸	tanda sisipan
+※	tanda referensi
+⁂	asterisme
+℗	hak cipta rekaman suara
+↜	panah gelombang ke kiri
+↝	panah gelombang ke kanan
+↤	panah ke kiri dari batang
+↥	panah ke atas dari batang
+↦	panah ke kanan dari batang
+↧	panah ke bawah dari batang
+↯	panah zigzag turun
+↹	panah ke kiri dan ke kanan dengan batang
+⇅	panah atas dan panah bawah
+⇆	panah kiri di atas panah kanan
+⇇	sepasang panah ke kiri
+⇈	sepasang panah ke atas
+⇉	sepasang panah ke kanan
+⇊	sepasang panah ke bawah
+⇋	panah seruit ke kiri di atas panah seruit ke kanan
+⇌	panah seruit ke kanan di atas panah seruit ke kiri
+⇑	panah ganda ke atas
+⇓	panah ganda ke bawah
+⇚	panah tiga ke kiri
+⇛	panah tiga ke kanan
+⇜	panah keriting ke kiri
+⇝	panah keriting ke kanan
+⇠	panah putus putus ke kiri
+⇡	panah putus putus ke atas
+⇢	panah putus putus ke kanan
+⇣	panah putus putus ke bawah
+⇦	panah putih ke kiri
+⇧	panah putih ke atas
+⇩	panah putih ke bawah
+⇪	panah putih ke atas dari batang
+∆	delta
+∗	operator bintang
+∽	tilde terbalik
+∾	huruf s rebah terbalik
+≒	kurang lebih sama dengan bayangan
+≖	cincin di dalam tanda sama dengan
+⊗	kali dalam lingkaran
+⊘	garis miring dalam lingkaran
+⊙	titik dalam lingkaran
+⊚	cincin dalam lingkaran
+⊛	bintang dalam lingkaran
+⊞	plus dalam persegi
+⊟	minus dalam persegi
+⊮	tidak memaksa
+⊰	mendahului di bawah relasi
+⊱	mengikuti di bawah relasi
+⊹	matriks konjugasi hermitian
+⊿	segitiga siku
+⋁	atau berulang
+⋂	irisan berulang
+⋃	gabungan berulang
+⋆	operator bintang
+⋈	gabungan alami
+⋒	irisan ganda
+⋘	sangat jauh lebih kecil dari
+⋙	sangat jauh lebih besar dari
+⋮	elipsis vertikal
+⋯	elipsis horizontal garis tengah
+▢	persegi putih dengan sudut lengkung
+▣	persegi putih berisi persegi hitam
+▤	persegi dengan isian horizontal
+▥	persegi dengan isian vertikal
+▬	persegi panjang hitam
+▮	persegi panjang vertikal hitam
+▰	jajar genjang hitam
+▲	segitiga hitam menghadap atas
+▴	segitiga kecil hitam menghadap atas
+▵	segitiga kecil putih menghadap atas
+▷	segitiga putih menghadap kanan
+▸	segitiga kecil hitam menghadap kanan
+▹	segitiga kecil putih menghadap kanan
+►	penunjuk hitam menghadap kanan
+▻	penunjuk putih menghadap kanan
+▼	segitiga hitam menghadap bawah
+▽	segitiga putih menghadap bawah
+▾	segitiga kecil hitam menghadap bawah
+▿	segitiga kecil putih menghadap bawah
+◁	segitiga putih menghadap kiri
+◂	segitiga kecil hitam menghadap kiri
+◃	segitiga kecil putih menghadap kiri
+◄	penunjuk hitam menghadap kiri
+◅	penunjuk putih menghadap kiri
+◇	belah ketupat putih
+◈	belah ketupat putih berisi belah ketupat hitam
+◉	lingkaran putih berisi lingkaran hitam
+◊	belah ketupat
+◌	lingkaran putus putus
+◍	lingkaran dengan isian vertikal
+◎	lingkaran konsentris
+◖	setengah lingkaran kiri hitam
+◗	setengah lingkaran kanan hitam
+◘	butir terbalik
+◙	persegi hitam berisi lingkaran putih
+◠	setengah lingkaran atas
+◡	setengah lingkaran bawah
+◯	lingkaran putih besar
+⨼	hasil kali interior
+⪺	mengikuti di atas tanda tidak hampir sama
+♭	nada mol
+♯	nada kres
+₢	cruzeiro
+₤	lira
+₥	mill
+₩	won
+₱	peso
+₳	austral
+₶	livre tournois
+₷	spesmilo
+₿	bitcoin
+₨	rupee
+﷼	rial
+֏	Dram Armenia
+؋	Afgani Afganistan
+৳	Taka Bangladesh
+฿	Baht Thailand
+៛	Riel Kamboja
+₡	Colon Kosta Rika
+₦	Naira Nigeria
+₪	Shekel Baru Israel
+₫	Dong Vietnam
+₭	Kip Laos
+₮	Tugrik Mongolia
+₲	Guarani Paraguay
+₴	Hryvnia Ukraina
+₵	Cedi Ghana
+₸	Tenge Kazakhstan
+₺	Lira Turki
+₼	Manat Azerbaijan
+₾	Lari Georgia
+₧	Peseta Spanyol

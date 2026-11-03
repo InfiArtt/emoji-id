@@ -11,6 +11,8 @@ import wx
 from gui import guiHelper
 from gui.settingsDialogs import SettingsPanel
 
+from .symbols import isIndonesianSymbolsEnabled, setIndonesianSymbolsEnabled
+
 addonHandler.initTranslation()
 
 CONFIG_SECTION = "emojiID"
@@ -26,6 +28,7 @@ CONF_SPEC: dict[str, str] = {
 	"cleanSymbols": "boolean(default=True)",
 	"periodicDonationReminder": "boolean(default=False)",
 	"firstRun": "boolean(default=True)",
+	"symbolsEnabledOnce": "boolean(default=False)",
 }
 
 
@@ -102,6 +105,12 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		)
 		self.cleanSymbolsCheckbox.SetValue(conf["cleanSymbols"])
 
+		self.indonesianSymbolsCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Bacakan tanda baca dan simbol dalam bahasa Indonesia")),
+		)
+		self.indonesianSymbolsCheckbox.SetValue(isIndonesianSymbolsEnabled())
+
 		self.periodicReminderCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
 			wx.CheckBox(self, label=_("Tampilkan pengingat donasi berkala")),
@@ -145,3 +154,4 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
 		conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
 		conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()
+		setIndonesianSymbolsEnabled(self.indonesianSymbolsCheckbox.GetValue())

@@ -10,6 +10,17 @@ NVDA sendiri sudah punya nama emoji bahasa Indonesia dari data Unicode CLDR. Tap
 
 Kalau kamu sudah memakai suara bahasa Indonesia dan opsi "Sertakan data Unicode Consortium" di NVDA aktif, kamu mungkin tidak memerlukan add-on ini.
 
+## Tanda baca dan simbol
+
+NVDA 2026.3 tidak punya kamus tanda baca bahasa Indonesia, jadi tanda baca biasanya dibacakan dalam bahasa Inggris, bahkan dengan suara bahasa Indonesia. Emoji ID menambahkan kamus berisi 806 tanda baca dan simbol dalam bahasa Indonesia, termasuk simbol matematika, panah, mata uang, dan pola braille.
+
+- Nama mengikuti EYD Edisi V dan KBBI bila ada, misalnya titik, koma, titik koma, titik dua, tanda pisah, elipsis, tanda pagar, tilde, dan garis bawah.
+- Simbol yang tidak punya nama di EYD atau KBBI memakai nama yang lazim, misalnya garis miring terbalik untuk \ dan et untuk @.
+- Tanda baca tetap berbahasa Indonesia walaupun suara TTS berbahasa Inggris.
+- Tingkat simbol NVDA tetap berlaku. Pada tingkat "sebagian", misalnya, koma tetap tidak dibacakan.
+
+Fitur ini aktif secara bawaan. Fitur ini bisa dimatikan di pengaturan Emoji ID, di daftar kamus simbol pada pengaturan Ucapan NVDA, atau dengan perintahnya di Gestur Masukan. Ketiganya selalu menunjukkan keadaan yang sama.
+
 ## Yang didukung
 
 - Emoji dasar seperti wajah, gestur, hewan, dan benda.
@@ -31,8 +42,9 @@ Buka menu NVDA, Preferensi, Pengaturan, lalu pilih kategori Emoji ID. Pilihan ya
 5. Gabungkan emoji yang sama dan berulang. Jika dicentang, tiga 😀 berturut-turut dibacakan "3 kali wajah gembira".
 6. Sertakan detail warna kulit. Jika tidak dicentang, hanya nama dasar emoji yang dibacakan.
 7. Bersihkan tanda hubung dan tanda kurung pada nama emoji. Bawaannya aktif. "kupu-kupu" dikirim ke synthesizer sebagai "kupu kupu", dan tanda kurung dihapus, supaya synthesizer seperti Eloquence tidak mengucapkan "dash" atau "left paren". Tanda baca di luar nama emoji tidak diubah.
-8. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
-9. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
+8. Bacakan tanda baca dan simbol dalam bahasa Indonesia. Bawaannya aktif. Lihat bagian Tanda baca dan simbol.
+9. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
+10. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
 
 Pengaturan disimpan per profil konfigurasi NVDA.
 
@@ -47,6 +59,8 @@ Emoji ID punya perintah untuk menyalakan atau mematikan pembacaan emoji, tanpa t
 5. Tekan Enter untuk menyimpan.
 
 Saat perintah dijalankan, NVDA mengucapkan "Emoji ID aktif" atau "Emoji ID nonaktif".
+
+Dengan cara yang sama, Anda bisa memasang tombol pintasan untuk perintah "Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa Indonesia". NVDA lalu mengucapkan "Tanda baca bahasa Indonesia aktif" atau "Tanda baca bahasa Indonesia nonaktif".
 
 ## Donasi
 

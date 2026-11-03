@@ -26,13 +26,15 @@ def matcher() -> EmojiMatcher:
 
 @pytest.fixture
 def plugin() -> Iterator[GlobalPlugin]:
-	config.conf["emojiID"] = dict(nvda_mocks.DEFAULT_CONFIG)
+	config.conf["emojiID"] = dict(nvda_mocks.DEFAULT_CONFIG, symbolsEnabledOnce=True)
+	config.conf["speech"] = {"symbolDictionaries": ["cldr"]}
 	nvda_mocks.FakeCallLater.instances.clear()
 	nvda_mocks.calledAfter.clear()
 	instance = GlobalPlugin()
 	yield instance
 	instance.terminate()
 	characterProcessing.processSpeechSymbol = nvda_mocks.originalProcessSpeechSymbol
+	characterProcessing.processSpeechSymbols = nvda_mocks.originalProcessSpeechSymbols
 
 
 def test_dataLoaded(matcher: EmojiMatcher) -> None:
@@ -368,3 +370,103 @@ def test_musicSignsKeepIndonesianNames(matcher: EmojiMatcher, codepoint: int, ex
 )
 def test_reviewedNames(matcher: EmojiMatcher, emoji: str, expected: str) -> None:
 	assert matcher.lookup(emoji) == expected
+
+
+_SYMBOL_DICTIONARY = _ROOT / "addon" / "locale" / "id" / "symbols-simbolIndonesia.dic"
+_IDENTIFIER_ESCAPES = {"0": "\0", "t": "\t", "n": "\n", "r": "\r", "f": "\f", "v": "\v", "#": "#", "\\": "\\"}
+
+
+def _readSymbolDictionary() -> dict[str, str]:
+	"""Parse the dictionary the way NVDA does: escaped identifier, tab, replacement."""
+	symbols = {}
+	isInSymbols = False
+	for line in _SYMBOL_DICTIONARY.read_text(encoding="utf-8-sig").splitlines():
+		if not line.strip() or line.startswith("#"):
+			continue
+		if line == "symbols:":
+			isInSymbols = True
+			continue
+		assert isInSymbols, line
+		identifier, replacement = line.split("\t")
+		if identifier.startswith("\\") and len(identifier) >= 2:
+			identifier = _IDENTIFIER_ESCAPES.get(identifier[1], identifier[1]) + identifier[2:]
+		symbols[identifier] = replacement
+	return symbols
+
+
+def test_symbolDictionaryNames() -> None:
+	symbols = _readSymbolDictionary()
+	assert len(symbols) == 806
+	expected = {
+		".": "titik",
+		",": "koma",
+		";": "titik koma",
+		":": "titik dua",
+		"?": "tanda tanya",
+		"!": "tanda seru",
+		"-": "tanda hubung",
+		"—": "tanda pisah",
+		"…": "elipsis",
+		"(": "kurung buka",
+		"[": "kurung siku buka",
+		"{": "kurung kurawal buka",
+		"/": "garis miring",
+		"\\": "garis miring terbalik",
+		"#": "tanda pagar",
+		"*": "bintang",
+		"&": "dan",
+		"@": "et",
+		"%": "persen",
+		"~": "tilde",
+		"_": "garis bawah",
+		" ": "spasi",
+		"\t": "tab",
+		"\n": "baris baru",
+		"\0": "kosong",
+		". sentence ending": "titik",
+		"⠂": "braille titik 2",
+	}
+	assert {key: symbols.get(key) for key in expected} == expected
+	# Some synthesizers speak hyphens, so names never contain one.
+	assert not [name for name in symbols.values() if "-" in name]
+
+
+def test_symbolsUseIndonesianLocaleWhenOn(plugin: GlobalPlugin) -> None:
+	from emojiID.symbols import setIndonesianSymbolsEnabled
+
+	setIndonesianSymbolsEnabled(True)
+	characterProcessing.processSpeechSymbols("en", "a, b", 2)
+	assert nvda_mocks.symbolCalls[-1] == ("id", "a, b")
+	assert characterProcessing.processSpeechSymbol("en", "a") == "a"
+	setIndonesianSymbolsEnabled(False)
+	characterProcessing.processSpeechSymbols("en", "a, b", 2)
+	assert nvda_mocks.symbolCalls[-1] == ("en", "a, b")
+
+
+def test_symbolsSwitchUpdatesNvdaConfig(plugin: GlobalPlugin) -> None:
+	from emojiID.symbols import SYMBOL_DICTIONARY
+
+	nvda_mocks.symbolCacheClears.clear()
+	plugin.script_toggleIndonesianSymbols(None)
+	assert SYMBOL_DICTIONARY in config.conf["speech"]["symbolDictionaries"]
+	assert nvda_mocks.spokenMessages[-1] == "Tanda baca bahasa Indonesia aktif"
+	plugin.script_toggleIndonesianSymbols(None)
+	assert config.conf["speech"]["symbolDictionaries"] == ["cldr"]
+	assert len(nvda_mocks.symbolCacheClears) == 2
+
+
+def test_symbolsOnByDefaultOnlyOnce() -> None:
+	from emojiID.symbols import SYMBOL_DICTIONARY
+
+	config.conf["emojiID"] = dict(nvda_mocks.DEFAULT_CONFIG)
+	config.conf["speech"] = {"symbolDictionaries": ["cldr"]}
+	first = GlobalPlugin()
+	assert SYMBOL_DICTIONARY in config.conf["speech"]["symbolDictionaries"]
+	first.terminate()
+	# The user turns it off; the next start must not turn it back on.
+	config.conf["speech"]["symbolDictionaries"] = ["cldr"]
+	second = GlobalPlugin()
+	assert config.conf["speech"]["symbolDictionaries"] == ["cldr"]
+	second.terminate()
+	characterProcessing.processSpeechSymbol = nvda_mocks.originalProcessSpeechSymbol
+	characterProcessing.processSpeechSymbols = nvda_mocks.originalProcessSpeechSymbols

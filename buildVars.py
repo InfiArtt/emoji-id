@@ -29,11 +29,9 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
-- Nama 38 emoji wajah ditulis ulang supaya lebih alami dan sesuai maknanya, misalnya wajah mata duitan, wajah mengumpat, dan monyet tutup mata.
-- Nama sekitar 250 emoji lain ditinjau ulang supaya sesuai maknanya, misalnya kedua tangan dikatupkan, kepik, paha ayam, dan orang dengan tongkat putih. Tombol angka sekarang dibacakan "tombol 1", bukan "keycap 1".
-- Tombol pagar, tombol bintang, dan tombol 10 sekarang dibacakan dalam bahasa Indonesia.
-- 36 emoji yang sebelumnya tidak dikenali sekarang dibacakan dalam bahasa Indonesia, misalnya tombol OK, tombol SOS, joker, tombol huruf Jepang, dan empat panah diagonal.
-- Emoji wajah dengan tangan menutup mulut tidak lagi bernama sama dengan wajah tersipu.
+- Tanda baca dan simbol sekarang dibacakan dalam bahasa Indonesia, walaupun suara TTS berbahasa Inggris. Kamusnya mencakup 806 tanda baca dan simbol, mengikuti EYD Edisi V dan KBBI bila ada.
+- Tingkat simbol NVDA tetap berlaku.
+- Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, di pengaturan Ucapan NVDA, atau dengan perintah baru di Gestur Masukan.
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",
@@ -104,4 +102,10 @@ brailleTables: BrailleTables = {}
 # with keys inside recording the following attributes:
 # displayName (name of the speech dictionary shown to users and translatable),
 # mandatory (True when always enabled, False when not.
-symbolDictionaries: SymbolDictionaries = {}
+symbolDictionaries: SymbolDictionaries = {
+	"simbolIndonesia": {
+		# Translators: Name of the symbol dictionary shown in NVDA's speech settings.
+		"displayName": _("Tanda baca dan simbol bahasa Indonesia (Emoji ID)"),
+		"mandatory": False,
+	},
+}

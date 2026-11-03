@@ -12,6 +12,17 @@ NVDA already includes Indonesian emoji names from Unicode CLDR. It uses them onl
 
 If you already use an Indonesian voice and NVDA's "Include Unicode Consortium data" option is on, you may not need this add-on.
 
+## Punctuation and symbols
+
+NVDA 2026.3 has no Indonesian punctuation dictionary, so punctuation is normally read in English, even with an Indonesian voice. Emoji ID adds a dictionary of 806 punctuation marks and symbols in Indonesian, including mathematical symbols, arrows, currencies, and braille patterns.
+
+- Names follow EYD Edisi V and KBBI where they name the symbol, for example titik, koma, titik koma, titik dua, tanda pisah, elipsis, tanda pagar, tilde, and garis bawah.
+- Symbols that EYD and KBBI do not name use common Indonesian names, for example garis miring terbalik for \ and et for @.
+- Punctuation stays Indonesian even when the voice is English.
+- NVDA's symbol levels still apply. At the "some" level, for example, commas are still not read.
+
+The feature is on by default. You can turn it off in the Emoji ID settings, in the symbol dictionary list in NVDA's speech settings, or with its command in Input Gestures. All three always show the same state.
+
 ## Supported emoji
 
 - Basic emoji such as faces, gestures, animals, and objects.
@@ -33,8 +44,9 @@ Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The
 5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 kali wajah gembira".
 6. Include skin tone details. When unchecked, only the base emoji name is read.
 7. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
-8. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
-9. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
+8. Read punctuation and symbols in Indonesian. On by default. See the Punctuation and symbols section.
+9. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
+10. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
 
 Settings are saved per NVDA configuration profile.
 
@@ -49,6 +61,8 @@ Emoji ID has a command that turns Indonesian emoji reading on or off. It has no 
 5. Press Enter to save.
 
 When you use the command, NVDA says "Emoji ID on" or "Emoji ID off".
+
+In the same way, you can assign a gesture to "Turns Indonesian punctuation and symbol reading on or off". NVDA then says "Indonesian punctuation on" or "Indonesian punctuation off".
 
 ## Donations
 

@@ -2,6 +2,20 @@
 
 Format mengikuti Keep a Changelog.
 
+## [Belum dirilis]
+
+### Ditambahkan
+
+- Tanda baca dan simbol sekarang dibacakan dalam bahasa Indonesia, walaupun suara TTS berbahasa Inggris. NVDA 2026.3 tidak punya kamus tanda baca bahasa Indonesia, sehingga sebelumnya titik, koma, dan simbol lain selalu dibacakan dalam bahasa Inggris.
+- Kamus ini mencakup 806 tanda baca dan simbol yang dikenal NVDA, termasuk simbol matematika, panah, mata uang, dan pola braille. Nama mengikuti EYD Edisi V dan KBBI bila ada, misalnya "titik koma", "tanda pisah", "elipsis", "tilde", dan "tanda pagar". Simbol lain memakai nama yang lazim, misalnya "garis miring terbalik" dan "et".
+- Tingkat simbol NVDA tetap berlaku. Misalnya, pada tingkat "sebagian", koma tetap tidak dibacakan.
+- Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, di daftar kamus simbol pada pengaturan Ucapan NVDA, atau dengan perintah baru tanpa tombol pintas di Gestur Masukan.
+
+### Untuk pengembang
+
+- Kamus ada di `addon/locale/id/symbols-simbolIndonesia.dic` dan didaftarkan lewat `symbolDictionaries` di `buildVars.py`.
+- `sconstruct` melewati folder bahasa yang tidak punya berkas terjemahan, misalnya `locale/id` yang hanya berisi kamus simbol.
+
 ## [1.2.0] - 2026-11-03
 
 ### Diubah

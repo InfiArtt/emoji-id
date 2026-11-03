@@ -85,3 +85,11 @@ Jalankan kasus berikut sebelum mengubah `lastTestedNVDAVersion` atau merilis ver
 - Pembanding tanpa Emoji ID. Jika navigasi per kata terdengar janggal, matikan Emoji ID dengan perintah pengalihnya, lalu ulangi langkah yang sama. Jika pola kata yang dibacakan tetap sama (hanya nama emojinya yang berbeda), penyebabnya ada pada cara aplikasi memotong kata, bukan pada Emoji ID.
 - Sambutan saat instalasi. Pasang add-on. Hasil yang diharapkan: dialog Selamat Datang di Emoji ID muncul dan teksnya langsung dibacakan. Pilih Donasi, lalu pastikan informasi GoPay dibacakan dan nomor sudah ada di papan klip. Setelah NVDA dimulai ulang, dialog sambutan tidak muncul lagi.
 - Pembaruan dari 1.0.0. Pasang versi baru di atas versi 1.0.0, mulai ulang NVDA, lalu buka pengaturan Emoji ID. Hasil yang diharapkan: tidak ada galat di log NVDA, dan pilihan "Ikuti tingkat simbol NVDA" sudah tidak ada.
+
+## Kasus uji tanda baca dan simbol
+
+- Tanda baca dalam kalimat. Pakai suara bahasa Inggris, misalnya Eloquence, dan atur tingkat simbol NVDA ke "semua". Baca baris `Halo, apa kabar? (baik) 50% #NVDA`. Hasil yang diharapkan: koma, tanda tanya, kurung buka, kurung tutup, persen, dan tanda pagar dibacakan dalam bahasa Indonesia.
+- Tingkat simbol. Ubah tingkat simbol ke "sebagian", lalu baca baris yang sama. Hasil yang diharapkan: koma dan tanda tanya tidak dibacakan, sama seperti perilaku NVDA biasa.
+- Navigasi per karakter. Gerakkan kursor per karakter pada `a.b,c`. Hasil yang diharapkan: "titik" dan "koma".
+- Saklar di pengaturan. Hapus centang "Bacakan tanda baca dan simbol dalam bahasa Indonesia", lalu tekan OK. Hasil yang diharapkan: tanda baca kembali dibacakan dalam bahasa Inggris. Di pengaturan Ucapan NVDA, kamus "Tanda baca dan simbol bahasa Indonesia (Emoji ID)" juga ikut tidak tercentang.
+- Mulai ulang NVDA setelah fitur dimatikan. Hasil yang diharapkan: fitur tetap mati.

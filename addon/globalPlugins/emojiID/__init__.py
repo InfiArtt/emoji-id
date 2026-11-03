@@ -3,7 +3,7 @@
 # This file is covered by the GNU General Public License v2 or later.
 # See the file LICENSE for more details.
 
-"""Reads emoji in Indonesian regardless of the active synthesizer language.
+"""Reads emoji, punctuation and symbols in Indonesian regardless of the active synthesizer language.
 
 Two hooks are used:
 
@@ -32,6 +32,7 @@ from speech.types import SpeechSequence
 
 from .emojiData import EmojiMatcher, isRegionalIndicator
 from .settings import EmojiIDSettingsPanel, getConfig, isEnabled, registerConfig
+from .symbols import getSymbolLocale, isIndonesianSymbolsEnabled, setIndonesianSymbolsEnabled
 
 addonHandler.initTranslation()
 
@@ -54,6 +55,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		self._reminderTimer: wx.CallLater | None = None
 
 		registerConfig()
+		conf = getConfig()
+		if not conf["symbolsEnabledOnce"]:
+			# Indonesian punctuation is on by default; after this the user's choice is kept.
+			setIndonesianSymbolsEnabled(True)
+			conf["symbolsEnabledOnce"] = True
 		self._matcher = EmojiMatcher()
 		if not self._matcher.load():
 			log.error("Emoji ID: emoji data could not be loaded, emoji will not be replaced")
@@ -61,6 +67,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		speech.extensions.filter_speechSequence.register(self._filterSpeechSequence)
 		self._originalProcessSpeechSymbol: Callable[[str, str], str] = characterProcessing.processSpeechSymbol
 		characterProcessing.processSpeechSymbol = self._processSpeechSymbol
+		self._originalProcessSpeechSymbols: Callable[[str, str, int], str] = (
+			characterProcessing.processSpeechSymbols
+		)
+		characterProcessing.processSpeechSymbols = self._processSpeechSymbols
 
 		NVDASettingsDialog.categoryClasses.append(EmojiIDSettingsPanel)
 		core.postNvdaStartup.register(self._onNvdaStartupComplete)
@@ -74,6 +84,8 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		# Otherwise the wrapper stays in the chain and passes everything through.
 		if characterProcessing.processSpeechSymbol == self._processSpeechSymbol:
 			characterProcessing.processSpeechSymbol = self._originalProcessSpeechSymbol
+		if characterProcessing.processSpeechSymbols == self._processSpeechSymbols:
+			characterProcessing.processSpeechSymbols = self._originalProcessSpeechSymbols
 		try:
 			NVDASettingsDialog.categoryClasses.remove(EmojiIDSettingsPanel)
 		except ValueError:
@@ -103,6 +115,13 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			newSequence.append(item)
 		return newSequence
 
+	def _getSymbolLocale(self, locale: str) -> str:
+		return locale if self._isTerminated else getSymbolLocale(locale)
+
+	def _processSpeechSymbols(self, locale: str, text: str, level: int) -> str:
+		"""Let NVDA process punctuation in text, with Indonesian names while they are on."""
+		return self._originalProcessSpeechSymbols(self._getSymbolLocale(locale), text, level)
+
 	def _processSpeechSymbol(self, locale: str, symbol: str) -> str:
 		"""Return the Indonesian name of a single emoji, otherwise defer to NVDA."""
 		if not self._isTerminated and isEnabled():
@@ -112,7 +131,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 				if conf["prefix"] and conf["prefixText"] and not isRegionalIndicator(symbol):
 					return f"{conf['prefixText']} {name}"
 				return name
-		return self._originalProcessSpeechSymbol(locale, symbol)
+		return self._originalProcessSpeechSymbol(self._getSymbolLocale(locale), symbol)
 
 	@script(
 		# Translators: Description of the command that turns Emoji ID on or off, shown in Input Gestures.
@@ -127,6 +146,20 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		else:
 			# Translators: Announced when Emoji ID is turned off.
 			ui.message(_("Emoji ID nonaktif"))
+
+	@script(
+		# Translators: Description of the command that turns Indonesian punctuation and symbols on or off.
+		description=_("Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa Indonesia"),
+	)
+	def script_toggleIndonesianSymbols(self, gesture: inputCore.InputGesture) -> None:
+		isOn = not isIndonesianSymbolsEnabled()
+		setIndonesianSymbolsEnabled(isOn)
+		if isOn:
+			# Translators: Announced when Indonesian punctuation and symbols are turned on.
+			ui.message(_("Tanda baca bahasa Indonesia aktif"))
+		else:
+			# Translators: Announced when Indonesian punctuation and symbols are turned off.
+			ui.message(_("Tanda baca bahasa Indonesia nonaktif"))
 
 	def _onNvdaStartupComplete(self) -> None:
 		"""Show the welcome dialog if installTasks could not, and start the donation reminder."""

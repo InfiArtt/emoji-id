@@ -89,6 +89,9 @@ langDirs: list[FS.Dir] = [env.Dir(d) for d in env.Glob(localeDir / "*/") if d.is
 moByLang: dict[str, FS.File] = {}
 for dir in langDirs:
 	poFile = dir.File(os.path.join("LC_MESSAGES", "nvda.po"))
+	# A locale folder may hold only data such as a symbol dictionary, without translations.
+	if not poFile.exists():
+		continue
 	moTarget = env.gettextMoFile(poFile)
 	moFile = env.File(moTarget[0])
 	moByLang[dir.name] = moFile
