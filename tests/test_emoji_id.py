@@ -418,6 +418,7 @@ def test_symbolDictionaryNames() -> None:
 		"@": "et",
 		"%": "persen",
 		"~": "tilde",
+		"`": "petik terbalik",
 		"_": "garis bawah",
 		" ": "spasi",
 		"\t": "tab",

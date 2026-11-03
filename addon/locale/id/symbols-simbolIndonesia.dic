@@ -62,7 +62,7 @@ $	dolar
 \\	garis miring terbalik
 ^	tanda pangkat
 _	garis bawah
-`	aksen gravis
+`	petik terbalik
 {	kurung kurawal buka
 }	kurung kurawal tutup
 |	garis tegak
@@ -688,7 +688,7 @@ _	garis bawah
 ↥	panah ke atas dari batang
 ↦	panah ke kanan dari batang
 ↧	panah ke bawah dari batang
-↯	panah zigzag turun
+↯	panah berliku turun
 ↹	panah ke kiri dan ke kanan dengan batang
 ⇅	panah atas dan panah bawah
 ⇆	panah kiri di atas panah kanan
