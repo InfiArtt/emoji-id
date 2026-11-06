@@ -29,6 +29,7 @@ CONF_SPEC: dict[str, str] = {
 	"periodicDonationReminder": "boolean(default=False)",
 	"firstRun": "boolean(default=True)",
 	"symbolsEnabledOnce": "boolean(default=False)",
+	"checkUpdateAtStartup": "boolean(default=True)",
 }
 
 
@@ -111,6 +112,18 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		)
 		self.indonesianSymbolsCheckbox.SetValue(isIndonesianSymbolsEnabled())
 
+		self.checkUpdateAtStartupCheckbox = sHelper.addItem(
+			# Translators: Checkbox in the Emoji ID settings panel.
+			wx.CheckBox(self, label=_("Periksa pembaruan saat NVDA dijalankan")),
+		)
+		self.checkUpdateAtStartupCheckbox.SetValue(conf["checkUpdateAtStartup"])
+
+		self.checkUpdateButton = sHelper.addItem(
+			# Translators: Button in the Emoji ID settings panel that checks GitHub for a newer version.
+			wx.Button(self, label=_("Periksa Pembaruan Sekarang")),
+		)
+		self.checkUpdateButton.Bind(wx.EVT_BUTTON, self._onCheckUpdateClicked)
+
 		self.periodicReminderCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
 			wx.CheckBox(self, label=_("Tampilkan pengingat donasi berkala")),
@@ -124,6 +137,11 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		self.donateButton.Bind(wx.EVT_BUTTON, self._onDonateClicked)
 
 		self._updateControlStates()
+
+	def _onCheckUpdateClicked(self, evt: wx.CommandEvent) -> None:
+		from .updateCheck import checkForUpdate
+
+		checkForUpdate(isManual=True)
 
 	def _onDonateClicked(self, evt: wx.CommandEvent) -> None:
 		from .donation import showDonationDetailsDialog
@@ -154,4 +172,5 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
 		conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
 		conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()
+		conf["checkUpdateAtStartup"] = self.checkUpdateAtStartupCheckbox.GetValue()
 		setIndonesianSymbolsEnabled(self.indonesianSymbolsCheckbox.GetValue())

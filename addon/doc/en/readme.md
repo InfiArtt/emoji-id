@@ -45,8 +45,10 @@ Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The
 6. Include skin tone details. When unchecked, only the base emoji name is read.
 7. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
 8. Read punctuation and symbols in Indonesian. On by default. See the Punctuation and symbols section.
-9. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
-10. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
+9. Check for updates when NVDA starts. On by default. See the Updates section.
+10. Check for Updates Now button.
+11. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
+12. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
 
 Settings are saved per NVDA configuration profile.
 
@@ -63,6 +65,12 @@ Emoji ID has a command that turns Indonesian emoji reading on or off. It has no 
 When you use the command, NVDA says "Emoji ID on" or "Emoji ID off".
 
 In the same way, you can assign a gesture to "Turns Indonesian punctuation and symbol reading on or off". NVDA then says "Indonesian punctuation on" or "Indonesian punctuation off".
+
+## Updates
+
+Emoji ID is not in the NVDA Add-on Store yet, so it checks GitHub for a newer version when NVDA starts. If one exists, a message offers three choices: Download and Install, Open Release Page, or Later. If you choose Download and Install, NVDA asks you to confirm the installation as usual.
+
+You can also check at any time with the Check for Updates Now button in the Emoji ID settings. To turn off the automatic check, uncheck "Check for updates when NVDA starts".
 
 ## Donations
 

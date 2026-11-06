@@ -2,7 +2,7 @@
 
 Format mengikuti Keep a Changelog.
 
-## [Belum dirilis]
+## [1.3.0] - 2026-11-07
 
 ### Ditambahkan
 
@@ -10,10 +10,12 @@ Format mengikuti Keep a Changelog.
 - Kamus ini mencakup 806 tanda baca dan simbol yang dikenal NVDA, termasuk simbol matematika, panah, mata uang, dan pola braille. Nama mengikuti EYD Edisi V dan KBBI bila ada, misalnya "titik koma", "tanda pisah", "elipsis", "tilde", dan "tanda pagar". Simbol lain memakai nama yang lazim, misalnya "garis miring terbalik" dan "et".
 - Tingkat simbol NVDA tetap berlaku. Misalnya, pada tingkat "sebagian", koma tetap tidak dibacakan.
 - Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, di daftar kamus simbol pada pengaturan Ucapan NVDA, atau dengan perintah baru tanpa tombol pintas di Gestur Masukan.
+- Pemeriksa pembaruan. Saat NVDA dijalankan, Emoji ID memeriksa rilis terbaru di GitHub dan menawarkan untuk mengunduh dan memasangnya. Pemeriksaan juga bisa dilakukan kapan saja dengan tombol "Periksa Pembaruan Sekarang" di pengaturan Emoji ID, dan pemeriksaan otomatis bisa dimatikan. Fitur ini sementara dan akan dihapus setelah Emoji ID masuk Add-on Store NVDA.
 
 ### Untuk pengembang
 
 - Kamus ada di `addon/locale/id/symbols-simbolIndonesia.dic` dan didaftarkan lewat `symbolDictionaries` di `buildVars.py`.
+- Pemeriksa pembaruan ada di `addon/globalPlugins/emojiID/updateCheck.py`. Hapus modul ini, pengaturannya, dan tombolnya saat add-on dikirim ke Add-on Store.
 - `sconstruct` melewati folder bahasa yang tidak punya berkas terjemahan, misalnya `locale/id` yang hanya berisi kamus simbol.
 
 ## [1.2.0] - 2026-11-03

@@ -471,3 +471,111 @@ def test_symbolsOnByDefaultOnlyOnce() -> None:
 	second.terminate()
 	characterProcessing.processSpeechSymbol = nvda_mocks.originalProcessSpeechSymbol
 	characterProcessing.processSpeechSymbols = nvda_mocks.originalProcessSpeechSymbols
+
+
+@pytest.mark.parametrize(
+	("latest", "current", "expected"),
+	[
+		("1.3.0", "1.2.0", True),
+		("v1.10.0", "1.9.9", True),
+		("1.2.0", "1.2.0", False),
+		("1.2.0", "1.3.0", False),
+		("2.0", "1.9.9", True),
+	],
+)
+def test_updateVersionComparison(latest: str, current: str, expected: bool) -> None:
+	from emojiID.updateCheck import isNewer
+
+	assert isNewer(latest, current) is expected
+
+
+class _FakeResponse:
+	def __init__(self, body: bytes) -> None:
+		self.body = body
+
+	def read(self) -> bytes:
+		return self.body
+
+	def __enter__(self) -> "_FakeResponse":
+		return self
+
+	def __exit__(self, *args: object) -> None:
+		pass
+
+
+_RELEASE_JSON = (
+	b'{"tag_name": "v1.4.0", "html_url": "https://github.com/InfiArtt/emoji-id/releases/tag/v1.4.0",'
+	b' "assets": [{"name": "emojiID.pot", "browser_download_url": "https://example.invalid/pot"},'
+	b' {"name": "emojiID-1.4.0.nvda-addon", "browser_download_url": "https://example.invalid/addon"}]}'
+)
+
+
+def test_fetchLatestRelease(monkeypatch: pytest.MonkeyPatch) -> None:
+	from emojiID import updateCheck
+
+	monkeypatch.setattr(
+		updateCheck.urllib.request, "urlopen", lambda *args, **kwargs: _FakeResponse(_RELEASE_JSON)
+	)
+	release = updateCheck.fetchLatestRelease()
+	assert release.version == "1.4.0"
+	assert release.downloadUrl == "https://example.invalid/addon"
+
+
+def test_updateCheckOffersNewerVersion(monkeypatch: pytest.MonkeyPatch) -> None:
+	from emojiID import updateCheck
+
+	nvda_mocks.calledAfter.clear()
+	monkeypatch.setattr(
+		updateCheck.urllib.request, "urlopen", lambda *args, **kwargs: _FakeResponse(_RELEASE_JSON)
+	)
+	assert updateCheck._checkLock.acquire(blocking=False)
+	updateCheck._check(isManual=False)
+	function, release, installed = nvda_mocks.calledAfter[-1]
+	assert function == updateCheck._offerUpdate
+	assert (release.version, installed) == ("1.4.0", "1.3.0")
+	# The lock is released so the next check can run.
+	assert updateCheck._checkLock.acquire(blocking=False)
+	updateCheck._checkLock.release()
+
+
+def test_updateCheckSilentAtStartupWhenCurrent(monkeypatch: pytest.MonkeyPatch) -> None:
+	from emojiID import updateCheck
+
+	nvda_mocks.calledAfter.clear()
+	current = _RELEASE_JSON.replace(b"1.4.0", b"1.3.0")
+	monkeypatch.setattr(updateCheck.urllib.request, "urlopen", lambda *args, **kwargs: _FakeResponse(current))
+	updateCheck._checkLock.acquire()
+	updateCheck._check(isManual=False)
+	assert nvda_mocks.calledAfter == []
+	updateCheck._checkLock.acquire()
+	updateCheck._check(isManual=True)
+	assert nvda_mocks.calledAfter[-1] == (updateCheck._showUpToDate, "1.3.0")
+
+
+def test_updateCheckReportsFailureOnlyWhenManual(monkeypatch: pytest.MonkeyPatch) -> None:
+	from emojiID import updateCheck
+
+	def failingUrlopen(*args: object, **kwargs: object) -> None:
+		raise OSError("offline")
+
+	nvda_mocks.calledAfter.clear()
+	monkeypatch.setattr(updateCheck.urllib.request, "urlopen", failingUrlopen)
+	updateCheck._checkLock.acquire()
+	updateCheck._check(isManual=False)
+	assert nvda_mocks.calledAfter == []
+	updateCheck._checkLock.acquire()
+	updateCheck._check(isManual=True)
+	assert nvda_mocks.calledAfter[-1] == (updateCheck._showCheckFailed,)
+
+
+def test_updateOfferOpensReleasePage(monkeypatch: pytest.MonkeyPatch) -> None:
+	from emojiID import updateCheck
+
+	opened: list[str] = []
+	monkeypatch.setattr(updateCheck.os, "startfile", opened.append, raising=False)
+	release = updateCheck.Release("1.4.0", "https://github.com/InfiArtt/emoji-id/releases/tag/v1.4.0", None)
+	nvda_mocks.FakeMessageDialog.askAnswer = nvda_mocks.ReturnCode.NO
+	updateCheck._offerUpdate(release, "1.3.0")
+	nvda_mocks.FakeMessageDialog.askAnswer = nvda_mocks.ReturnCode.CANCEL
+	assert opened == [release.pageUrl]
+	assert "1.4.0" in nvda_mocks.FakeMessageDialog.shown[-1]

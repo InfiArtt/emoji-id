@@ -162,7 +162,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			ui.message(_("Tanda baca bahasa Indonesia nonaktif"))
 
 	def _onNvdaStartupComplete(self) -> None:
-		"""Show the welcome dialog if installTasks could not, and start the donation reminder."""
+		"""Show the welcome dialog if installTasks could not, check for updates and start the reminder."""
 		conf = getConfig()
 		if conf["firstRun"]:
 			conf["firstRun"] = False
@@ -173,6 +173,10 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 			from .donation import showWelcomeDialog
 
 			wx.CallAfter(showWelcomeDialog)
+		if conf["checkUpdateAtStartup"]:
+			from .updateCheck import checkForUpdate
+
+			checkForUpdate(isManual=False)
 		self._scheduleReminder(*FIRST_REMINDER_DELAY_MINUTES)
 
 	def _isReminderEnabled(self) -> bool:

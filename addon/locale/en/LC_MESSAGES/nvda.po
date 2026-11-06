@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-03 08:48+0700\n"
+"POT-Creation-Date: 2026-11-07 03:18+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,20 +70,15 @@ msgstr "Welcome to Emoji ID"
 msgid ""
 "Selamat datang di Emoji ID!\n"
 "\n"
-"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang "
-"kamu pakai.\n"
+"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n"
 "\n"
-"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi "
-"sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak "
-"Sekarang untuk menutup pesan ini."
+"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak Sekarang untuk menutup pesan ini."
 msgstr ""
 "Welcome to Emoji ID!\n"
 "\n"
 "This add-on reads emoji in Indonesian, whatever TTS voice you use.\n"
 "\n"
-"If you find it useful, you can support the developer with a voluntary "
-"donation through GoPay. Choose Donate to see the number, or Not Now to close "
-"this message."
+"If you find it useful, you can support the developer with a voluntary donation through GoPay. Choose Donate to see the number, or Not Now to close this message."
 
 #. Translators: Title of the periodic donation reminder.
 msgid "Dukungan Pengembang - Emoji ID"
@@ -93,15 +88,11 @@ msgstr "Support the Developer - Emoji ID"
 msgid ""
 "Semoga Emoji ID membantu aktivitasmu sehari-hari.\n"
 "\n"
-"Kalau kamu ingin add-on ini terus diperbarui, kamu bisa mendukung "
-"pengembangnya lewat donasi sukarela melalui GoPay. Pengingat ini bisa "
-"dimatikan di pengaturan Emoji ID."
+"Kalau kamu ingin add-on ini terus diperbarui, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pengingat ini bisa dimatikan di pengaturan Emoji ID."
 msgstr ""
 "We hope Emoji ID helps you every day.\n"
 "\n"
-"If you would like this add-on to keep being updated, you can support the "
-"developer with a voluntary donation through GoPay. You can turn off this "
-"reminder in the Emoji ID settings."
+"If you would like this add-on to keep being updated, you can support the developer with a voluntary donation through GoPay. You can turn off this reminder in the Emoji ID settings."
 
 #. Translators: Title of the Emoji ID category in the NVDA settings dialog.
 #. Translators: Category of Emoji ID commands in the Input Gestures dialog.
@@ -125,8 +116,7 @@ msgid "Kata awalan hanya sekali untuk emoji berturut-turut"
 msgstr "Prefix only once for consecutive emoji"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid ""
-"Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
+msgid "Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
 msgstr "Collapse repeated identical emoji (for example '3 kali wajah gembira')"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
@@ -142,12 +132,69 @@ msgid "Bacakan tanda baca dan simbol dalam bahasa Indonesia"
 msgstr "Read punctuation and symbols in Indonesian"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
+msgid "Periksa pembaruan saat NVDA dijalankan"
+msgstr "Check for updates when NVDA starts"
+
+#. Translators: Button in the Emoji ID settings panel that checks GitHub for a newer version.
+msgid "Periksa Pembaruan Sekarang"
+msgstr "Check for Updates Now"
+
+#. Translators: Checkbox in the Emoji ID settings panel.
 msgid "Tampilkan pengingat donasi berkala"
 msgstr "Show periodic donation reminder"
 
 #. Translators: Button in the Emoji ID settings panel that opens the donation details.
 msgid "Dukung Pengembang (Donasi GoPay)..."
 msgstr "Support the Developer (GoPay Donation)..."
+
+#. Translators: Announced when the user starts an update check.
+msgid "Memeriksa pembaruan Emoji ID..."
+msgstr "Checking for Emoji ID updates..."
+
+#. Translators: Shown when the update check could not reach GitHub.
+msgid "Gagal memeriksa pembaruan. Periksa koneksi internet, lalu coba lagi."
+msgstr "Could not check for updates. Check your internet connection and try again."
+
+#. Translators: Title of the update check dialogs.
+msgid "Pembaruan Emoji ID"
+msgstr "Emoji ID Update"
+
+#. Translators: Shown when no newer version exists. {version} is the installed version.
+#, python-brace-format
+msgid "Emoji ID versi {version} sudah yang terbaru."
+msgstr "Emoji ID version {version} is the latest version."
+
+#. Translators: Shown when a newer version exists. {new} and {installed} are version numbers.
+#, python-brace-format
+msgid ""
+"Emoji ID versi {new} sudah tersedia. Versi yang terpasang sekarang {installed}.\n"
+"\n"
+"Pilih Unduh dan Pasang untuk memasangnya, Buka Halaman Rilis untuk membaca perubahannya, atau Nanti untuk menutup pesan ini."
+msgstr ""
+"Emoji ID version {new} is available. The installed version is {installed}.\n"
+"\n"
+"Choose Download and Install to install it, Open Release Page to read what changed, or Later to close this message."
+
+#. Translators: Button that downloads and installs the new version.
+msgid "Unduh dan Pasang"
+msgstr "Download and Install"
+
+#. Translators: Button that opens the release page in the web browser.
+msgid "Buka Halaman Rilis"
+msgstr "Open Release Page"
+
+#. Translators: Button that closes the update message.
+msgid "Nanti"
+msgstr "Later"
+
+#. Translators: Announced while the new version is being downloaded.
+msgid "Mengunduh pembaruan Emoji ID..."
+msgstr "Downloading the Emoji ID update..."
+
+#. Translators: Shown when the new version could not be downloaded. {url} is the release page.
+#, python-brace-format
+msgid "Gagal mengunduh pembaruan. Kamu bisa mengunduhnya sendiri dari {url}"
+msgstr "Could not download the update. You can download it yourself from {url}"
 
 #. Translators: Description of the command that turns Emoji ID on or off, shown in Input Gestures.
 msgid "Aktifkan atau nonaktifkan pembacaan emoji dalam bahasa Indonesia"
@@ -162,9 +209,7 @@ msgid "Emoji ID nonaktif"
 msgstr "Emoji ID off"
 
 #. Translators: Description of the command that turns Indonesian punctuation and symbols on or off.
-msgid ""
-"Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa "
-"Indonesia"
+msgid "Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa Indonesia"
 msgstr "Turns Indonesian punctuation and symbol reading on or off"
 
 #. Translators: Announced when Indonesian punctuation and symbols are turned on.
@@ -179,20 +224,15 @@ msgstr "Indonesian punctuation off"
 msgid ""
 "Selamat datang di Emoji ID!\n"
 "\n"
-"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang "
-"kamu pakai.\n"
+"Add-on ini membacakan emoji dalam bahasa Indonesia, apa pun suara TTS yang kamu pakai.\n"
 "\n"
-"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi "
-"sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak "
-"Sekarang untuk melanjutkan instalasi."
+"Kalau add-on ini bermanfaat, kamu bisa mendukung pengembangnya lewat donasi sukarela melalui GoPay. Pilih Donasi untuk melihat nomornya, atau Tidak Sekarang untuk melanjutkan instalasi."
 msgstr ""
 "Welcome to Emoji ID!\n"
 "\n"
 "This add-on reads emoji in Indonesian, whatever TTS voice you use.\n"
 "\n"
-"If you find it useful, you can support the developer with a voluntary "
-"donation through GoPay. Choose Donate to see the number, or Not Now to "
-"continue the installation."
+"If you find it useful, you can support the developer with a voluntary donation through GoPay. Choose Donate to see the number, or Not Now to continue the installation."
 
 #. Translators: Donation details. {number} is the GoPay phone number, {name} is the account holder.
 #, python-brace-format
@@ -220,34 +260,24 @@ msgid "Emoji ID - Pembaca Emoji Bahasa Indonesia"
 msgstr "Emoji ID - Indonesian Emoji Reader"
 
 #. Translators: Long description to be shown for this add-on on add-on information from add-on store
-msgid ""
-"Membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara TTS yang "
-"dipakai. Mendukung emoji dasar, rangkaian ZWJ, bendera, keycap, dan warna "
-"kulit."
-msgstr ""
-"Reads emoji in Indonesian, whatever language your TTS voice uses. Supports "
-"basic emoji, ZWJ sequences, flags, keycaps, and skin tones."
+msgid "Membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara TTS yang dipakai. Mendukung emoji dasar, rangkaian ZWJ, bendera, keycap, dan warna kulit."
+msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Supports basic emoji, ZWJ sequences, flags, keycaps, and skin tones."
 
 #. Brief changelog for this version
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 msgid ""
 "\n"
-"- Tanda baca dan simbol sekarang dibacakan dalam bahasa Indonesia, walaupun "
-"suara TTS berbahasa Inggris. Kamusnya mencakup 806 tanda baca dan simbol, "
-"mengikuti EYD Edisi V dan KBBI bila ada.\n"
+"- Tanda baca dan simbol sekarang dibacakan dalam bahasa Indonesia, walaupun suara TTS berbahasa Inggris. Kamusnya mencakup 806 tanda baca dan simbol, mengikuti EYD Edisi V dan KBBI bila ada.\n"
 "- Tingkat simbol NVDA tetap berlaku.\n"
-"- Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, "
-"di pengaturan Ucapan NVDA, atau dengan perintah baru di Gestur Masukan.\n"
+"- Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, di pengaturan Ucapan NVDA, atau dengan perintah baru di Gestur Masukan.\n"
+"- Pemeriksa pembaruan: saat NVDA dijalankan, Emoji ID memeriksa versi terbaru di GitHub. Pemeriksaan juga bisa dilakukan dengan tombol Periksa Pembaruan Sekarang di pengaturan Emoji ID.\n"
 "\t"
 msgstr ""
 "\n"
-"- Punctuation and symbols are now read in Indonesian, even with an English "
-"voice. The dictionary covers 806 punctuation marks and symbols and follows "
-"EYD Edisi V and KBBI where they name one.\n"
+"- Punctuation and symbols are now read in Indonesian, even with an English voice. The dictionary covers 806 punctuation marks and symbols and follows EYD Edisi V and KBBI where they name one.\n"
 "- NVDA's symbol levels still apply.\n"
-"- The feature is on by default and can be turned off in the Emoji ID "
-"settings, in NVDA's speech settings, or with a new command in Input "
-"Gestures.\n"
+"- The feature is on by default and can be turned off in the Emoji ID settings, in NVDA's speech settings, or with a new command in Input Gestures.\n"
+"- Update check: when NVDA starts, Emoji ID checks GitHub for a newer version. You can also check with the Check for Updates Now button in the Emoji ID settings.\n"
 "\t"
 
 #. Translators: Name of the symbol dictionary shown in NVDA's speech settings.

@@ -65,6 +65,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
 	"periodicDonationReminder": False,
 	"firstRun": False,
 	"symbolsEnabledOnce": False,
+	"checkUpdateAtStartup": False,
 }
 
 
@@ -79,7 +80,13 @@ class _Conf(dict[str, Any]):
 
 
 _module("logHandler", log=_Log())
-_module("addonHandler", initTranslation=lambda: None)
+
+
+class _CodeAddon:
+	version = "1.3.0"
+
+
+_module("addonHandler", initTranslation=lambda: None, getCodeAddon=_CodeAddon)
 _module("config", conf=_Conf(), AggregatedSection=dict)
 symbolCalls: list[tuple[str, str]] = []
 symbolCacheClears: list[bool] = []
@@ -171,7 +178,7 @@ class FakeCallLater:
 		self.func()
 
 
-calledAfter: list[Callable[[], None]] = []
+calledAfter: list[tuple[Any, ...]] = []
 _module(
 	"wx",
 	Window=FakeWindow,
@@ -183,7 +190,7 @@ _module(
 	BoxSizer=FakeWindow,
 	CommandEvent=object,
 	CallLater=FakeCallLater,
-	CallAfter=calledAfter.append,
+	CallAfter=lambda *args: calledAfter.append(args),
 	**{
 		name: 0
 		for name in (
@@ -236,18 +243,26 @@ class _MainFrame:
 class ReturnCode:
 	OK = 1
 	CANCEL = 2
+	YES = 3
+	NO = 4
 
 
 class FakeMessageDialog:
-	"""Answers ``confirm`` with ``confirmAnswer`` and records every message shown."""
+	"""Answers ``confirm`` and ``ask`` with preset answers and records every message shown."""
 
 	confirmAnswer = ReturnCode.CANCEL
+	askAnswer = ReturnCode.CANCEL
 	shown: list[str] = []
 
 	@classmethod
 	def confirm(cls, message: str, caption: str, **kwargs: Any) -> int:
 		cls.shown.append(message)
 		return cls.confirmAnswer
+
+	@classmethod
+	def ask(cls, message: str, caption: str, **kwargs: Any) -> int:
+		cls.shown.append(message)
+		return cls.askAnswer
 
 	@classmethod
 	def alert(cls, message: str, caption: str, **kwargs: Any) -> None:

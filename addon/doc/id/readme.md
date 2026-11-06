@@ -43,8 +43,10 @@ Buka menu NVDA, Preferensi, Pengaturan, lalu pilih kategori Emoji ID. Pilihan ya
 6. Sertakan detail warna kulit. Jika tidak dicentang, hanya nama dasar emoji yang dibacakan.
 7. Bersihkan tanda hubung dan tanda kurung pada nama emoji. Bawaannya aktif. "kupu-kupu" dikirim ke synthesizer sebagai "kupu kupu", dan tanda kurung dihapus, supaya synthesizer seperti Eloquence tidak mengucapkan "dash" atau "left paren". Tanda baca di luar nama emoji tidak diubah.
 8. Bacakan tanda baca dan simbol dalam bahasa Indonesia. Bawaannya aktif. Lihat bagian Tanda baca dan simbol.
-9. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
-10. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
+9. Periksa pembaruan saat NVDA dijalankan. Bawaannya aktif. Lihat bagian Pembaruan.
+10. Tombol Periksa Pembaruan Sekarang.
+11. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
+12. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
 
 Pengaturan disimpan per profil konfigurasi NVDA.
 
@@ -61,6 +63,12 @@ Emoji ID punya perintah untuk menyalakan atau mematikan pembacaan emoji, tanpa t
 Saat perintah dijalankan, NVDA mengucapkan "Emoji ID aktif" atau "Emoji ID nonaktif".
 
 Dengan cara yang sama, Anda bisa memasang tombol pintasan untuk perintah "Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa Indonesia". NVDA lalu mengucapkan "Tanda baca bahasa Indonesia aktif" atau "Tanda baca bahasa Indonesia nonaktif".
+
+## Pembaruan
+
+Emoji ID belum ada di Add-on Store NVDA, jadi add-on ini memeriksa sendiri versi terbaru di GitHub saat NVDA dijalankan. Kalau ada versi baru, muncul pesan dengan tiga pilihan: Unduh dan Pasang, Buka Halaman Rilis, atau Nanti. Jika Anda memilih Unduh dan Pasang, NVDA akan meminta konfirmasi pemasangan seperti biasa.
+
+Pemeriksaan juga bisa dilakukan kapan saja dengan tombol Periksa Pembaruan Sekarang di pengaturan Emoji ID. Pemeriksaan otomatis bisa dimatikan dengan menghapus centang "Periksa pembaruan saat NVDA dijalankan".
 
 ## Donasi
 
