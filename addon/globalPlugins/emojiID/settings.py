@@ -30,6 +30,12 @@ CONF_SPEC: dict[str, str] = {
 	"firstRun": "boolean(default=True)",
 	"symbolsEnabledOnce": "boolean(default=False)",
 	"checkUpdateAtStartup": "boolean(default=True)",
+	"maxEmojiInRun": "integer(default=0, min=0, max=20)",
+	"pickerRecent": "string_list(default=list())",
+	"pickerFavorites": "string_list(default=list())",
+	"pickerSkinTone": "integer(default=0, min=0, max=5)",
+	"pickerSecondSkinTone": "integer(default=0, min=0, max=5)",
+	"pickerGender": 'option("", "pria", "wanita", default="")',
 }
 
 
@@ -93,6 +99,15 @@ class EmojiIDSettingsPanel(SettingsPanel):
 			),
 		)
 		self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])
+
+		self.maxEmojiInRunSpin = sHelper.addLabeledControl(
+			# Translators: Label of the number of emoji read in a row before the rest are summarized.
+			_("Jumlah emoji berturut-turut yang dibacakan (0 berarti semua):"),
+			wx.SpinCtrl,
+			min=0,
+			max=20,
+		)
+		self.maxEmojiInRunSpin.SetValue(conf["maxEmojiInRun"])
 
 		self.skinToneDetailCheckbox = sHelper.addItem(
 			# Translators: Checkbox in the Emoji ID settings panel.
@@ -159,6 +174,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		self.prefixTextCtrl.Enable(hasPrefix)
 		self.prefixOnceCheckbox.Enable(hasPrefix)
 		self.collapseRepeatedCheckbox.Enable(isOn)
+		self.maxEmojiInRunSpin.Enable(isOn)
 		self.skinToneDetailCheckbox.Enable(isOn)
 		self.cleanSymbolsCheckbox.Enable(isOn)
 
@@ -169,6 +185,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
 		conf["prefixText"] = self.prefixTextCtrl.GetValue().strip()
 		conf["prefixOnce"] = self.prefixOnceCheckbox.GetValue()
 		conf["collapseRepeated"] = self.collapseRepeatedCheckbox.GetValue()
+		conf["maxEmojiInRun"] = self.maxEmojiInRunSpin.GetValue()
 		conf["skinToneDetail"] = self.skinToneDetailCheckbox.GetValue()
 		conf["cleanSymbols"] = self.cleanSymbolsCheckbox.GetValue()
 		conf["periodicDonationReminder"] = self.periodicReminderCheckbox.GetValue()

@@ -40,13 +40,14 @@ Buka menu NVDA, Preferensi, Pengaturan, lalu pilih kategori Emoji ID. Pilihan ya
 3. Kata awalan. Kata yang diucapkan sebelum nama emoji. Bawaannya "emoji".
 4. Kata awalan hanya sekali untuk emoji berturut-turut. Jika dicentang, kata awalan hanya diucapkan sebelum emoji pertama dalam satu deret emoji.
 5. Gabungkan emoji yang sama dan berulang. Jika dicentang, tiga 😀 berturut-turut dibacakan "3 wajah gembira", atau "3 emoji wajah gembira" jika kata awalan aktif.
-6. Sertakan detail warna kulit. Jika tidak dicentang, hanya nama dasar emoji yang dibacakan.
-7. Bersihkan tanda hubung dan tanda kurung pada nama emoji. Bawaannya aktif. "kupu-kupu" dikirim ke synthesizer sebagai "kupu kupu", dan tanda kurung dihapus, supaya synthesizer seperti Eloquence tidak mengucapkan "dash" atau "left paren". Tanda baca di luar nama emoji tidak diubah.
-8. Bacakan tanda baca dan simbol dalam bahasa Indonesia. Bawaannya aktif. Lihat bagian Tanda baca dan simbol.
-9. Periksa pembaruan saat NVDA dijalankan. Bawaannya aktif. Lihat bagian Pembaruan.
-10. Tombol Periksa Pembaruan Sekarang.
-11. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
-12. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
+6. Jumlah emoji berturut-turut yang dibacakan. Bawaannya 0, artinya semua dibacakan. Dengan angka 3, misalnya, deretan delapan emoji dibacakan tiga nama, lalu "dan 5 emoji lainnya". Emoji yang sama dan berulang yang sudah digabung dihitung sebagai satu kelompok.
+7. Sertakan detail warna kulit. Jika tidak dicentang, hanya nama dasar emoji yang dibacakan.
+8. Bersihkan tanda hubung dan tanda kurung pada nama emoji. Bawaannya aktif. "kupu-kupu" dikirim ke synthesizer sebagai "kupu kupu", dan tanda kurung dihapus, supaya synthesizer seperti Eloquence tidak mengucapkan "dash" atau "left paren". Tanda baca di luar nama emoji tidak diubah.
+9. Bacakan tanda baca dan simbol dalam bahasa Indonesia. Bawaannya aktif. Lihat bagian Tanda baca dan simbol.
+10. Periksa pembaruan saat NVDA dijalankan. Bawaannya aktif. Lihat bagian Pembaruan.
+11. Tombol Periksa Pembaruan Sekarang.
+12. Tampilkan pengingat donasi berkala. Bawaannya nonaktif. Jika dicentang, ajakan donasi muncul pertama kali 20 sampai 45 menit setelah NVDA dijalankan, lalu setiap 90 sampai 180 menit.
+13. Tombol Dukung Pengembang. Membuka informasi donasi GoPay dengan tombol untuk menyalin nomor.
 
 Pengaturan disimpan per profil konfigurasi NVDA.
 
@@ -63,6 +64,26 @@ Emoji ID punya perintah untuk menyalakan atau mematikan pembacaan emoji, tanpa t
 Saat perintah dijalankan, NVDA mengucapkan "Emoji ID aktif" atau "Emoji ID nonaktif".
 
 Dengan cara yang sama, Anda bisa memasang tombol pintasan untuk perintah "Aktifkan atau nonaktifkan pembacaan tanda baca dan simbol dalam bahasa Indonesia". NVDA lalu mengucapkan "Tanda baca bahasa Indonesia aktif" atau "Tanda baca bahasa Indonesia nonaktif".
+
+## Sisipkan emoji
+
+Dialog Sisipkan Emoji dibuat mirip panel emoji Windows 11 (Windows+titik), tetapi semua namanya berbahasa Indonesia dan semua bagiannya bisa dicari. Dialog ini hanya bisa dibuka lewat perintah "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID. Perintah ini tidak punya tombol pintas bawaan, jadi tetapkan sendiri tombolnya dengan cara di bagian Perintah untuk menyalakan dan mematikan.
+
+Isi dialog, sesuai urutan tombol Tab:
+
+1. Jenis: Emoji, Simbol, atau Kaomoji.
+2. Cari. Hasil langsung diperbarui saat mengetik. Pencarian memakai nama Indonesia dan kata kunci, misalnya "ngakak", "terima kasih", atau "bendera jepang". Pencarian mencakup semua kategori jenis yang dipilih.
+3. Kategori, mengikuti kategori Windows, ditambah Terakhir dipakai dan Favorit.
+4. Subkategori, khusus emoji, misalnya Wajah tersenyum atau Bendera negara.
+5. Hasil. Tekan Enter untuk menyisipkan emoji yang dipilih.
+6. Warna kulit, untuk emoji orang dan tangan.
+7. Warna kulit orang kedua, untuk emoji dua orang seperti jabat tangan dan pasangan.
+8. Jenis kelamin: netral, pria, atau wanita, untuk emoji yang punya ketiga versi itu.
+9. Arah: bawaan atau menghadap kanan, untuk emoji seperti orang berlari dan orang dengan tongkat putih.
+10. Rangkaian: daftar emoji yang dikumpulkan dengan tombol Tambah ke Rangkaian, untuk disisipkan sekaligus.
+11. Tombol Sisipkan, Tambah ke Rangkaian, Hapus Terakhir, Kosongkan Rangkaian, Salin, Tambah ke Favorit atau Hapus dari Favorit, Detail, dan Tutup.
+
+Setelah Sisipkan ditekan, dialog langsung tertutup dan emoji ditempel ke tempat Anda mengetik. Isi papan klip sebelumnya dikembalikan. Kalau sebuah aplikasi tidak menerima tempelan, pakai tombol Salin, lalu tempel sendiri dengan Control+V. Pilihan warna kulit dan jenis kelamin terakhir diingat untuk pemakaian berikutnya.
 
 ## Pembaruan
 

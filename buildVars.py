@@ -29,6 +29,8 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
+- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11: cari emoji, simbol, dan kaomoji dengan kata bahasa Indonesia, jelajahi kategori Windows, pilih warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Tidak ada tombol pintas bawaan; tetapkan di Gestur Masukan.
+- Mode baca ringkas: hanya membacakan sejumlah emoji berturut-turut, lalu "dan N emoji lainnya".
 - Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali", misalnya "3 emoji bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
 	"""),

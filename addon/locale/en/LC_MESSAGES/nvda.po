@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-07 03:50+0700\n"
+"POT-Creation-Date: 2026-11-07 04:15+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,6 +39,7 @@ msgid "Salin Nomor"
 msgstr "Copy Number"
 
 #. Translators: Button that closes the donation details dialog.
+#. Translators: Button that closes the insert emoji dialog.
 msgid "Tutup"
 msgstr "Close"
 
@@ -94,6 +95,697 @@ msgstr ""
 "\n"
 "If you would like this add-on to keep being updated, you can support the developer with a voluntary donation through GoPay. You can turn off this reminder in the Emoji ID settings."
 
+#. Translators: Announced after the chosen emoji were copied from the insert emoji dialog.
+msgid "Disalin ke papan klip"
+msgstr "Copied to the clipboard"
+
+#. Translators: Announced when the chosen emoji could not be inserted.
+msgid "Gagal menyisipkan emoji"
+msgstr "Could not insert the emoji"
+
+#. Translators: Title of the insert emoji dialog.
+msgid "Sisipkan Emoji - Emoji ID"
+msgstr "Insert Emoji - Emoji ID"
+
+#. Translators: Label of the choice between emoji, symbols and kaomoji in the insert emoji dialog.
+msgid "Jenis:"
+msgstr "Kind:"
+
+#. Translators: Kind of items in the insert emoji dialog.
+msgid "Emoji"
+msgstr "Emoji"
+
+#. Translators: Kind of items in the insert emoji dialog.
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Simbol"
+msgstr "Symbols"
+
+#. Translators: Kind of items in the insert emoji dialog.
+msgid "Kaomoji"
+msgstr "Kaomoji"
+
+#. Translators: Label of the search field in the insert emoji dialog.
+msgid "Cari:"
+msgstr "Search:"
+
+#. Translators: Label of the category choice in the insert emoji dialog.
+msgid "Kategori:"
+msgstr "Category:"
+
+#. Translators: Label of the subcategory choice in the insert emoji dialog.
+msgid "Subkategori:"
+msgstr "Subcategory:"
+
+#. Translators: Label of the results list in the insert emoji dialog.
+msgid "Hasil:"
+msgstr "Results:"
+
+#. Translators: Label of the skin tone choice in the insert emoji dialog.
+msgid "Warna kulit:"
+msgstr "Skin tone:"
+
+#. Translators: Label of the skin tone choice for the second person in two person emoji.
+msgid "Warna kulit orang kedua:"
+msgstr "Second person's skin tone:"
+
+#. Translators: Choice that gives the second person the same skin tone as the first.
+msgid "Sama dengan orang pertama"
+msgstr "Same as the first person"
+
+#. Translators: Label of the gender choice in the insert emoji dialog.
+msgid "Jenis kelamin:"
+msgstr "Gender:"
+
+#. Translators: Gender choice in the insert emoji dialog.
+msgid "Netral"
+msgstr "Neutral"
+
+#. Translators: Gender choice in the insert emoji dialog.
+msgid "Pria"
+msgstr "Man"
+
+#. Translators: Gender choice in the insert emoji dialog.
+msgid "Wanita"
+msgstr "Woman"
+
+#. Translators: Label of the direction choice in the insert emoji dialog.
+msgid "Arah:"
+msgstr "Direction:"
+
+#. Translators: Direction choice in the insert emoji dialog.
+msgid "Bawaan"
+msgstr "Default"
+
+#. Translators: Direction choice in the insert emoji dialog.
+msgid "Menghadap kanan"
+msgstr "Facing right"
+
+#. Translators: Label of the read-only field listing the emoji collected to insert together.
+msgid "Rangkaian:"
+msgstr "Collection:"
+
+#. Translators: Button that inserts the chosen emoji and closes the dialog.
+msgid "Sisipkan"
+msgstr "Insert"
+
+#. Translators: Button that adds the selected emoji to the collection.
+msgid "Tambah ke Rangkaian"
+msgstr "Add to Collection"
+
+#. Translators: Button that removes the last emoji from the collection.
+msgid "Hapus Terakhir"
+msgstr "Remove Last"
+
+#. Translators: Button that empties the collection.
+msgid "Kosongkan Rangkaian"
+msgstr "Clear Collection"
+
+#. Translators: Button that copies the chosen emoji to the clipboard and closes the dialog.
+msgid "Salin"
+msgstr "Copy"
+
+#. Translators: Button that adds the selected item to the favorites.
+msgid "Tambah ke Favorit"
+msgstr "Add to Favorites"
+
+#. Translators: Button that reads details about the selected item.
+#. Translators: Title of the dialog with the details of an item.
+msgid "Detail"
+msgstr "Details"
+
+#. Translators: First choice of the subcategory list, showing every subcategory.
+msgid "Semua subkategori"
+msgstr "All subcategories"
+
+#. Translators: Shown in the results list when nothing matches.
+msgid "Tidak ada hasil"
+msgstr "No results"
+
+#. Translators: Button that removes the selected item from the favorites.
+msgid "Hapus dari Favorit"
+msgstr "Remove from Favorites"
+
+#. Translators: Announced when nothing is selected in the insert emoji dialog.
+msgid "Tidak ada yang dipilih"
+msgstr "Nothing selected"
+
+#, python-brace-format
+msgid "{name} ditambahkan, {count} dalam rangkaian"
+msgstr "{name} added, {count} in the collection"
+
+#. Translators: Announced when the collection is already empty.
+msgid "Rangkaian kosong"
+msgstr "The collection is empty"
+
+#. Translators: Announced when the last item is removed from the collection. {name} is its name.
+#, python-brace-format
+msgid "{name} dihapus dari rangkaian"
+msgstr "{name} removed from the collection"
+
+#. Translators: Announced when the collection is emptied.
+msgid "Rangkaian dikosongkan"
+msgstr "Collection cleared"
+
+#. Translators: Announced when an item is removed from the favorites. {name} is its name.
+#, python-brace-format
+msgid "{name} dihapus dari favorit"
+msgstr "{name} removed from favorites"
+
+#. Translators: Announced when an item is added to the favorites. {name} is its name.
+#, python-brace-format
+msgid "{name} ditambahkan ke favorit"
+msgstr "{name} added to favorites"
+
+#. Translators: Line of the details of an item. {name} is its name.
+#, python-brace-format
+msgid "Nama: {name}"
+msgstr "Name: {name}"
+
+#. Translators: Line of the details of an item. {code} is its Unicode code points.
+#, python-brace-format
+msgid "Kode Unicode: {code}"
+msgstr "Unicode code: {code}"
+
+#. Translators: Line of the details of an item. {category} is its category.
+#, python-brace-format
+msgid "Kategori: {category}"
+msgstr "Category: {category}"
+
+#. Translators: Line of the details of an item. {subgroup} is its subcategory.
+#, python-brace-format
+msgid "Subkategori: {subgroup}"
+msgstr "Subcategory: {subgroup}"
+
+#. Translators: Line of the details of an item. {keywords} lists its search keywords.
+#, python-brace-format
+msgid "Kata kunci: {keywords}"
+msgstr "Keywords: {keywords}"
+
+#. Translators: Emoji category in the insert emoji dialog.
+#. Translators: Symbol category in the insert emoji dialog.
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Terakhir dipakai"
+msgstr "Most recently used"
+
+#. Translators: Emoji category in the insert emoji dialog.
+#. Translators: Symbol category in the insert emoji dialog.
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Favorit"
+msgstr "Favorites"
+
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Wajah dan hewan"
+msgstr "Smiley faces and animals"
+
+#. Translators: Emoji category in the insert emoji dialog.
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Orang"
+msgstr "People"
+
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Perayaan dan benda"
+msgstr "Celebrations and objects"
+
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Makanan dan tumbuhan"
+msgstr "Food and plants"
+
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Transportasi dan tempat"
+msgstr "Transportation and places"
+
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Bendera"
+msgstr "Flags"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Tanda baca umum"
+msgstr "General punctuation"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol mata uang"
+msgstr "Currency symbols"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol huruf Latin"
+msgstr "Latin symbols"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol geometri"
+msgstr "Geometric symbols"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol matematika"
+msgstr "Math symbols"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol tambahan"
+msgstr "Supplemental symbols"
+
+#. Translators: Symbol category in the insert emoji dialog.
+msgid "Simbol bahasa"
+msgstr "Language symbols"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Emotikon ASCII klasik"
+msgstr "Classic ASCII emoticons"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Senang"
+msgstr "Happy"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Menyapa"
+msgstr "Greeting"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Bertingkah imut"
+msgstr "Acting cute"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Marah"
+msgstr "Angry"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Sedih"
+msgstr "Sad"
+
+#. Translators: Kaomoji category in the insert emoji dialog.
+msgid "Terkejut dan terdiam"
+msgstr "Surprised and speechless"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah tersenyum"
+msgstr "Smiling faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah penuh kasih sayang"
+msgstr "Affectionate faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah menjulurkan lidah"
+msgstr "Faces with tongue"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah dengan tangan"
+msgstr "Faces with hand"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah datar dan ragu"
+msgstr "Neutral and skeptical faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah mengantuk"
+msgstr "Sleepy faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah sakit"
+msgstr "Unwell faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah bertopi"
+msgstr "Faces with hat"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah berkacamata"
+msgstr "Faces with glasses"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah cemas"
+msgstr "Concerned faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah marah"
+msgstr "Negative faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah kostum"
+msgstr "Costume faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah kucing"
+msgstr "Cat faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Wajah monyet"
+msgstr "Monkey faces"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Hati"
+msgstr "Hearts"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Simbol emosi"
+msgstr "Emotion symbols"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tangan dengan jari terbuka"
+msgstr "Hands with open fingers"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tangan dengan sebagian jari"
+msgstr "Hands with some fingers"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tangan dengan satu jari"
+msgstr "Hands with one finger"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tangan terkepal"
+msgstr "Closed hands"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Kedua tangan"
+msgstr "Both hands"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tangan memegang benda"
+msgstr "Hands with objects"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bagian tubuh"
+msgstr "Body parts"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Orang dengan gerak isyarat"
+msgstr "People gesturing"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Profesi dan peran"
+msgstr "Jobs and roles"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tokoh khayalan"
+msgstr "Fantasy characters"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Orang berkegiatan"
+msgstr "People doing activities"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Orang berolahraga"
+msgstr "People playing sports"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Orang beristirahat"
+msgstr "People resting"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Keluarga dan pasangan"
+msgstr "Families and couples"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Simbol orang"
+msgstr "People symbols"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Mamalia"
+msgstr "Mammals"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Burung"
+msgstr "Birds"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Amfibi"
+msgstr "Amphibians"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Reptil"
+msgstr "Reptiles"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Hewan laut"
+msgstr "Sea animals"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Serangga"
+msgstr "Bugs"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bunga"
+msgstr "Flowers"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tumbuhan lain"
+msgstr "Other plants"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Buah"
+msgstr "Fruit"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Sayuran"
+msgstr "Vegetables"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Makanan olahan"
+msgstr "Prepared food"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Makanan Asia"
+msgstr "Asian food"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Makanan manis"
+msgstr "Sweets"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Minuman"
+msgstr "Drinks"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Peralatan makan"
+msgstr "Dishware"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Peta"
+msgstr "Maps"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tempat alam"
+msgstr "Geographic places"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bangunan"
+msgstr "Buildings"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tempat ibadah"
+msgstr "Places of worship"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tempat lain"
+msgstr "Other places"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Transportasi darat"
+msgstr "Land transport"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Transportasi air"
+msgstr "Water transport"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Transportasi udara"
+msgstr "Air transport"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Hotel"
+msgstr "Hotel"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Waktu"
+msgstr "Time"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Langit dan cuaca"
+msgstr "Sky and weather"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Acara"
+msgstr "Events"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Penghargaan dan medali"
+msgstr "Awards and medals"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Olahraga"
+msgstr "Sports"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Permainan"
+msgstr "Games"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Seni dan kerajinan"
+msgstr "Arts and crafts"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Pakaian"
+msgstr "Clothing"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Suara"
+msgstr "Sound"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Musik"
+msgstr "Music"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Alat musik"
+msgstr "Musical instruments"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Telepon"
+msgstr "Phones"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Komputer"
+msgstr "Computers"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Lampu dan video"
+msgstr "Light and video"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Buku dan kertas"
+msgstr "Books and paper"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Uang"
+msgstr "Money"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Surat"
+msgstr "Mail"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Alat tulis"
+msgstr "Writing"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Kantor"
+msgstr "Office"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Kunci"
+msgstr "Locks"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Perkakas"
+msgstr "Tools"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Sains"
+msgstr "Science"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Medis"
+msgstr "Medical"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Rumah tangga"
+msgstr "Household"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Benda lain"
+msgstr "Other objects"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Rambu transportasi"
+msgstr "Transport signs"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Peringatan"
+msgstr "Warnings"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Panah"
+msgstr "Arrows"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Agama"
+msgstr "Religion"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Zodiak"
+msgstr "Zodiac"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Simbol audio dan video"
+msgstr "Audio and video symbols"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Gender"
+msgstr "Gender"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Matematika"
+msgstr "Math"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tanda baca"
+msgstr "Punctuation"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Mata uang"
+msgstr "Currency"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Simbol lain"
+msgstr "Other symbols"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Tombol angka"
+msgstr "Keycaps"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Huruf dan angka"
+msgstr "Letters and numbers"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bentuk geometri"
+msgstr "Geometric shapes"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bendera umum"
+msgstr "Flags"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bendera negara"
+msgstr "Country flags"
+
+#. Translators: Emoji subcategory in the insert emoji dialog.
+msgid "Bendera wilayah"
+msgstr "Region flags"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Tanpa warna kulit"
+msgstr "No skin tone"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Cerah"
+msgstr "Light"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Cerah sedang"
+msgstr "Medium light"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Sedang"
+msgstr "Medium"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Gelap sedang"
+msgstr "Medium dark"
+
+#. Translators: Skin tone choice in the insert emoji dialog.
+msgid "Gelap"
+msgstr "Dark"
+
 #. Translators: Title of the Emoji ID category in the NVDA settings dialog.
 #. Translators: Category of Emoji ID commands in the Input Gestures dialog.
 msgid "Emoji ID"
@@ -118,6 +810,10 @@ msgstr "Prefix only once for consecutive emoji"
 #. Translators: Checkbox in the Emoji ID settings panel.
 msgid "Gabungkan emoji yang sama dan berulang (misalnya '3 wajah gembira')"
 msgstr "Collapse repeated identical emoji (for example '3 wajah gembira')"
+
+#. Translators: Label of the number of emoji read in a row before the rest are summarized.
+msgid "Jumlah emoji berturut-turut yang dibacakan (0 berarti semua):"
+msgstr "Number of emoji in a row to read (0 reads all):"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
 msgid "Sertakan detail warna kulit"
@@ -220,6 +916,10 @@ msgstr "Indonesian punctuation on"
 msgid "Tanda baca bahasa Indonesia nonaktif"
 msgstr "Indonesian punctuation off"
 
+#. Translators: Description of the command that opens the insert emoji dialog, shown in Input Gestures.
+msgid "Buka dialog sisipkan emoji"
+msgstr "Opens the insert emoji dialog"
+
 #. Translators: Message of the welcome dialog shown while Emoji ID is being installed.
 msgid ""
 "Selamat datang di Emoji ID!\n"
@@ -267,11 +967,15 @@ msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Suppor
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 msgid ""
 "\n"
+"- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11: cari emoji, simbol, dan kaomoji dengan kata bahasa Indonesia, jelajahi kategori Windows, pilih warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Tidak ada tombol pintas bawaan; tetapkan di Gestur Masukan.\n"
+"- Mode baca ringkas: hanya membacakan sejumlah emoji berturut-turut, lalu \"dan N emoji lainnya\".\n"
 "- Emoji yang sama dan berulang sekarang dibacakan tanpa kata \"kali\", misalnya \"3 emoji bendera Indonesia\".\n"
 "- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi \"Emoji ID versi ... sudah versi terbaru\".\n"
 "\t"
 msgstr ""
 "\n"
+"- Insert Emoji dialog, modelled on the Windows 11 emoji panel: search emoji, symbols and kaomoji with Indonesian words, browse the Windows categories, choose skin tones (also for each person of two person emoji), gender and direction, keep favorites and recently used items, collect several emoji and insert them at once, or copy them. It has no default gesture: assign one in Input Gestures.\n"
+"- Brief reading mode: read only a set number of emoji in a row, then \"dan N emoji lainnya\".\n"
 "- Repeated identical emoji are now read without the word \"kali\", for example \"3 emoji bendera Indonesia\".\n"
 "- The update check message when no newer version exists now uses more natural Indonesian wording.\n"
 "\t"

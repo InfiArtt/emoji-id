@@ -13,6 +13,7 @@ Add-on NVDA yang membacakan emoji dalam bahasa Indonesia, apa pun bahasa suara T
 - `addon/doc/`: panduan pengguna dalam bahasa Indonesia dan Inggris.
 - `addon/locale/id/symbols-simbolIndonesia.dic`: kamus tanda baca dan simbol bahasa Indonesia untuk NVDA. Setiap baris berisi simbol, tab, lalu nama Indonesianya. Tingkat simbol diambil dari kamus bawaan NVDA.
 - `tools/build_emoji_data.py`: membangun ulang data emoji dari Unicode CLDR, ditambah penggantian nama dari `tools/overrides.tsv`.
+- `tools/build_picker_data.py`: membangun data dialog Sisipkan Emoji (`data/picker.json`) dari daftar emoji Unicode, kata kunci CLDR bahasa Indonesia, kamus simbol, dan `tools/kaomoji.tsv`.
 - `tests/`: tes unit yang berjalan tanpa NVDA.
 - `buildVars.py`: informasi add-on dan konfigurasi build, mengikuti NVDA AddonTemplate.
 - `sconstruct` dan `site_scons/`: skrip build SCons dari AddonTemplate.

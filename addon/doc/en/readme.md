@@ -42,13 +42,14 @@ Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The
 3. Prefix word. The word spoken before each emoji name. "emoji" by default.
 4. Prefix only once for consecutive emoji. When checked, the prefix is spoken only before the first emoji in a run.
 5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 wajah gembira", or "3 emoji wajah gembira" with the prefix word.
-6. Include skin tone details. When unchecked, only the base emoji name is read.
-7. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
-8. Read punctuation and symbols in Indonesian. On by default. See the Punctuation and symbols section.
-9. Check for updates when NVDA starts. On by default. See the Updates section.
-10. Check for Updates Now button.
-11. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
-12. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
+6. Number of emoji in a row to read. 0 by default, which reads all. With 3, for example, a run of eight emoji is read as three names, then "dan 5 emoji lainnya". Repeated identical emoji that are already collapsed count as one group.
+7. Include skin tone details. When unchecked, only the base emoji name is read.
+8. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
+9. Read punctuation and symbols in Indonesian. On by default. See the Punctuation and symbols section.
+10. Check for updates when NVDA starts. On by default. See the Updates section.
+11. Check for Updates Now button.
+12. Show periodic donation reminder. Off by default. When checked, a donation invitation appears 20 to 45 minutes after NVDA starts, then every 90 to 180 minutes.
+13. Support the Developer (GoPay Donation) button. Opens the GoPay donation details with a button that copies the number.
 
 Settings are saved per NVDA configuration profile.
 
@@ -65,6 +66,26 @@ Emoji ID has a command that turns Indonesian emoji reading on or off. It has no 
 When you use the command, NVDA says "Emoji ID on" or "Emoji ID off".
 
 In the same way, you can assign a gesture to "Turns Indonesian punctuation and symbol reading on or off". NVDA then says "Indonesian punctuation on" or "Indonesian punctuation off".
+
+## Insert emoji
+
+The Insert Emoji dialog is modelled on the Windows 11 emoji panel (Windows+period), but every name is Indonesian and every part can be searched. It opens only through the "Opens the insert emoji dialog" command in Input Gestures, Emoji ID category. The command has no default gesture, so assign one as described in the Toggle command section.
+
+The dialog contains, in Tab order:
+
+1. Kind: Emoji, Symbols or Kaomoji.
+2. Search. Results update as you type. Search uses Indonesian names and keywords, for example "ngakak", "terima kasih" or "bendera jepang", across every category of the chosen kind.
+3. Category, following the Windows categories, plus Most recently used and Favorites.
+4. Subcategory, for emoji only, such as Smiling faces or Country flags.
+5. Results. Press Enter to insert the selected emoji.
+6. Skin tone, for people and hand emoji.
+7. Second person's skin tone, for two person emoji such as handshake and couples.
+8. Gender: neutral, man or woman, for emoji that exist in all three.
+9. Direction: default or facing right, for emoji such as a person running or a person with a white cane.
+10. Collection: emoji gathered with Add to Collection, to insert together.
+11. Buttons Insert, Add to Collection, Remove Last, Clear Collection, Copy, Add to Favorites or Remove from Favorites, Details, and Close.
+
+After Insert, the dialog closes and the emoji is pasted where you were typing. The previous clipboard text is put back. If an application does not accept pasting, use Copy and paste with Control+V yourself. The last skin tone and gender are remembered.
 
 ## Updates
 

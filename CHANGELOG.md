@@ -4,10 +4,26 @@ Format mengikuti Keep a Changelog.
 
 ## [Belum dirilis]
 
+### Ditambahkan
+
+- Dialog Sisipkan Emoji, dibuat mirip panel emoji Windows 11:
+  - Ada tiga jenis: Emoji, Simbol, dan Kaomoji. Kategorinya mengikuti Windows, ditambah 100 subkategori emoji resmi Unicode yang namanya ditulis dalam bahasa Indonesia.
+  - Pencarian memakai nama Indonesia dan kata kunci CLDR bahasa Indonesia, misalnya "ngakak" atau "terima kasih". Berbeda dari Windows, simbol dan kaomoji juga bisa dicari.
+  - Pilihan warna kulit, termasuk warna kulit per orang untuk emoji dua orang seperti jabat tangan, ditambah pilihan jenis kelamin dan arah hadap.
+  - Daftar terakhir dipakai, favorit, rangkaian beberapa emoji yang disisipkan sekaligus, tombol Salin, dan tombol Detail.
+  - Berisi 82 kaomoji bernama Indonesia dalam kategori Windows, serta simbol huruf Latin dan huruf Yunani bernama Indonesia.
+  - Dialog langsung tertutup setelah menyisipkan, lalu teksnya ditempel ke tempat mengetik. Isi papan klip sebelumnya dikembalikan.
+  - Dialog hanya dibuka lewat perintahnya di Gestur Masukan, yang tidak punya tombol pintas bawaan.
+- Mode baca ringkas: pengaturan "Jumlah emoji berturut-turut yang dibacakan". Misalnya dengan angka 3, deretan delapan emoji dibacakan tiga nama, lalu "dan 5 emoji lainnya". Bawaannya 0, artinya semua dibacakan.
+
 ### Diubah
 
 - Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali". Tiga 🇮🇩 berturut-turut dibacakan "3 emoji bendera Indonesia", bukan lagi "emoji 3 kali bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
+
+### Untuk pengembang
+
+- Data dialog Sisipkan Emoji dibuat dengan `tools/build_picker_data.py` menjadi `data/picker.json`. Daftar kaomoji ada di `tools/kaomoji.tsv`.
 
 ## [1.3.0] - 2026-11-07
 

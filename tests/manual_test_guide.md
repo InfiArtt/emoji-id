@@ -93,3 +93,21 @@ Jalankan kasus berikut sebelum mengubah `lastTestedNVDAVersion` atau merilis ver
 - Navigasi per karakter. Gerakkan kursor per karakter pada `a.b,c`. Hasil yang diharapkan: "titik" dan "koma".
 - Saklar di pengaturan. Hapus centang "Bacakan tanda baca dan simbol dalam bahasa Indonesia", lalu tekan OK. Hasil yang diharapkan: tanda baca kembali dibacakan dalam bahasa Inggris. Di pengaturan Ucapan NVDA, kamus "Tanda baca dan simbol bahasa Indonesia (Emoji ID)" juga ikut tidak tercentang.
 - Mulai ulang NVDA setelah fitur dimatikan. Hasil yang diharapkan: fitur tetap mati.
+
+## Kasus uji dialog Sisipkan Emoji
+
+Tetapkan dulu tombol pintas untuk "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID.
+
+- Membuka dialog. Buka Notepad, lalu tekan tombol pintas itu. Hasil yang diharapkan: dialog "Sisipkan Emoji - Emoji ID" terbuka dengan fokus di kolom Cari. Dialog tidak bisa dibuka dari menu NVDA.
+- Mencari dan menyisipkan. Ketik "ngakak", lalu tekan Enter. Hasil yang diharapkan: dialog tertutup, 🤣 tertempel di Notepad, dan isi papan klip sebelumnya kembali.
+- Warna kulit. Buka dialog, cari "jempol", atur Warna kulit ke Sedang, lalu tekan Enter. Hasil yang diharapkan: tertempel 👍🏽. Saat dialog dibuka lagi, Warna kulit masih Sedang.
+- Dua orang. Cari "jabat", atur Warna kulit ke Cerah dan Warna kulit orang kedua ke Gelap, lalu tekan Enter. Hasil yang diharapkan: tertempel jabat tangan dengan dua warna kulit berbeda.
+- Jenis kelamin dan arah. Cari "berlari", atur Jenis kelamin ke Wanita dan Arah ke Menghadap kanan. Hasil yang diharapkan: daftar menyebut "wanita berlari ... menghadap kanan".
+- Rangkaian. Cari "kue ulang tahun", tekan Tambah ke Rangkaian, lalu cari "terima kasih" dan tekan Tambah ke Rangkaian. Tekan Sisipkan. Hasil yang diharapkan: 🎂🙏 tertempel sekaligus.
+- Kaomoji. Pilih Jenis Kaomoji, cari "bahu", lalu tekan Enter. Hasil yang diharapkan: `¯\_(ツ)_/¯` tertempel.
+- Favorit dan terakhir dipakai. Tekan Tambah ke Favorit pada sebuah emoji, tutup, lalu buka lagi dan pilih kategori Favorit. Hasil yang diharapkan: emoji itu ada di daftar. Kategori Terakhir dipakai berisi emoji yang tadi disisipkan.
+- Bahasa Inggris. Ganti bahasa NVDA ke bahasa Inggris dan mulai ulang NVDA. Hasil yang diharapkan: semua label, tombol, kategori, dan subkategori di dialog berbahasa Inggris. Nama emoji dan kaomoji tetap berbahasa Indonesia.
+
+## Kasus uji mode baca ringkas
+
+- Atur "Jumlah emoji berturut-turut yang dibacakan" ke 3, lalu baca baris `Mantap 😀❤️👍🎉🔥😂 ok`. Hasil yang diharapkan: "Mantap wajah gembira hati merah jempol ke atas dan 3 emoji lainnya ok".

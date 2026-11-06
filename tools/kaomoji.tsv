@@ -1,0 +1,86 @@
+# Emoji ID - kaomoji for the insert emoji dialog
+# Format: category<TAB>kaomoji<TAB>Indonesian name
+# Categories follow the Windows 11 emoji panel: classic, happy, greeting, cute, angry, sad, surprised.
+# Most kaomoji come from the Windows emoji panel; Windows gives them no names, so the names are our own.
+classic	:-)	senyum
+classic	;-)	mengedipkan mata
+classic	:-D	tertawa lebar
+classic	:-(	sedih
+classic	:'(	menangis
+classic	:-P	menjulurkan lidah
+classic	:-O	terkejut
+classic	:-|	datar
+classic	:-/	ragu
+classic	<3	hati
+classic	^_^	senyum gembira
+classic	-_-	kesal datar
+classic	T_T	menangis
+classic	XD	tertawa terbahak
+classic	o_O	heran
+happy	(●'◡'●)	senyum manis
+happy	(✿◕‿◕✿)	senyum imut
+happy	(*^▽^*)	senang sekali
+happy	o(≧∀≦)o	kegirangan
+happy	O(∩_∩)O	tersenyum lebar
+happy	ヾ(≧▽≦*)o	bersorak
+happy	(～￣▽￣)～	menari senang
+happy	♪(´▽｀)	bernyanyi riang
+happy	(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧	gembira berkilau
+happy	(★ ω ★)	mata berbinar
+happy	b(￣▽￣)d	dua jempol
+happy	( •̀ ω •́ )✧	percaya diri
+happy	(⌐■_■)	keren berkacamata hitam
+happy	( •_•)>⌐■-■	memakai kacamata hitam
+happy	ᕦ(ò_óˇ)ᕤ	kuat berotot
+greeting	(。・・)ノ	melambai
+greeting	(｡･∀･)ﾉﾞ	halo
+greeting	ヾ(＠⌒ー⌒＠)ノ	melambai senang
+greeting	Hi~ o(*￣▽￣*)ブ	hai
+greeting	(＾Ｕ＾)ノ~ＹＯ	yo
+greeting	m( _ _ )m	membungkuk berterima kasih
+greeting	<( _ _ )>	membungkuk hormat
+greeting	(^_-)db(-_^)	tos jempol
+greeting	( ´･･)ﾉ(._.`)	menepuk kepala
+cute	(❁´◡`❁)	senyum malu
+cute	(*/ω＼*)	malu menutup wajah
+cute	(^///^)	tersipu
+cute	(。・ω・。)	imut polos
+cute	(´▽`ʃ♡ƪ)	jatuh cinta
+cute	(っ´Ι`)っ	ingin memeluk
+cute	(づ￣ 3￣)づ	ingin mencium
+cute	(* ￣3)(ε￣ *)	berciuman
+cute	ლ(╹◡╹ლ)	manja
+cute	(^・ω・^ )	kucing
+cute	o(=•ェ•=)m	kucing imut
+cute	( ͡° ͜ʖ ͡°)	senyum nakal
+angry	(ノ｀Д)ノ	marah
+angry	(＃°Д°)	sangat marah
+angry	ヾ(≧へ≦)〃	kesal
+angry	(σ｀д′)σ	menunjuk dengan marah
+angry	ψ(｀∇´)ψ	jahil licik
+angry	(¬_¬ )	curiga
+angry	┌( ಠ_ಠ)┘	menatap tidak setuju
+angry	(ง •_•)ง	siap bertarung
+angry	(╯°□°）╯︵ ┻━┻	membalik meja karena kesal
+angry	┳━┳ ノ( ゜-゜ノ)	mengembalikan meja
+sad	(┬┬﹏┬┬)	menangis tersedu
+sad	(ಥ _ ಥ)	menangis
+sad	/(ㄒoㄒ)/~~	meraung
+sad	o(TヘTo)	menangis kecewa
+sad	(。﹏。*)	sedih
+sad	( ˘︹˘ )	cemberut
+sad	(´。＿。｀)	murung
+sad	╮(╯▽╰)╭	pasrah
+sad	_(:з)∠)_	rebahan lelah
+sad	(￣o￣) . z Z	tidur
+surprised	(⊙_⊙)	melongo
+surprised	(°ロ°)	kaget
+surprised	Σ(っ °Д °;)っ	terkejut mundur
+surprised	w(ﾟДﾟ)w	panik
+surprised	(⊙o⊙)？	heran bertanya
+surprised	(＠_＠;)	pusing bingung
+surprised	(+_+)?	bingung
+surprised	(x_x)	pingsan
+surprised	…(⊙_⊙;)…	terdiam
+surprised	(•_•)	datar
+surprised	¯\_(ツ)_/¯	angkat bahu, tidak tahu

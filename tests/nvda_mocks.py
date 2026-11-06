@@ -66,6 +66,12 @@ DEFAULT_CONFIG: dict[str, Any] = {
 	"firstRun": False,
 	"symbolsEnabledOnce": False,
 	"checkUpdateAtStartup": False,
+	"maxEmojiInRun": 0,
+	"pickerRecent": [],
+	"pickerFavorites": [],
+	"pickerSkinTone": 0,
+	"pickerSecondSkinTone": 0,
+	"pickerGender": "",
 }
 
 
@@ -106,12 +112,33 @@ _module(
 speechTypes = _module("speech.types", SpeechSequence=list)
 speechExtensions = _module("speech.extensions", filter_speechSequence=HandlerRegistry())
 _module("speech", extensions=speechExtensions, types=speechTypes)
-_module("core", postNvdaStartup=HandlerRegistry())
+calledLater: list[tuple[Any, ...]] = []
+_module("core", postNvdaStartup=HandlerRegistry(), callLater=lambda *args: calledLater.append(args))
 _module("inputCore", InputGesture=object)
 spokenMessages: list[str] = []
 _module("ui", message=spokenMessages.append)
 clipboard: list[str] = []
-_module("api", copyToClip=lambda text: clipboard.append(text) or True)
+_module(
+	"api",
+	copyToClip=lambda text, notify=False: clipboard.append(text) or True,
+	getClipData=lambda: clipboard[-1] if clipboard else "",
+)
+sentGestures: list[str] = []
+
+
+class _KeyboardInputGesture:
+	def __init__(self, name: str) -> None:
+		self.name = name
+
+	@classmethod
+	def fromName(cls, name: str) -> "_KeyboardInputGesture":
+		return cls(name)
+
+	def send(self) -> None:
+		sentGestures.append(self.name)
+
+
+_module("keyboardHandler", KeyboardInputGesture=_KeyboardInputGesture)
 
 
 def _script(**kwargs: Any) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
@@ -143,6 +170,28 @@ class FakeWindow:
 		self.value: Any = kwargs.get("value", "")
 		self.label: str = kwargs.get("label", "")
 		self.isEnabled = True
+		self.items: list[str] = list(kwargs.get("choices", []))
+		self.selection = -1
+		self.endModalCode: int | None = None
+
+	def SetItems(self, items: list[str]) -> None:
+		self.items = list(items)
+		self.selection = -1
+
+	def GetCount(self) -> int:
+		return len(self.items)
+
+	def GetSelection(self) -> int:
+		return self.selection
+
+	def SetSelection(self, index: int) -> None:
+		self.selection = index
+
+	def SetLabel(self, label: str) -> None:
+		self.label = label
+
+	def EndModal(self, code: int) -> None:
+		self.endModalCode = code
 
 	def SetValue(self, value: Any) -> None:
 		self.value = value
@@ -165,9 +214,10 @@ class FakeCallLater:
 
 	instances: list["FakeCallLater"] = []
 
-	def __init__(self, delayMs: int, func: Callable[[], None]) -> None:
+	def __init__(self, delayMs: int, func: Callable[..., None], *args: Any) -> None:
 		self.delayMs = delayMs
 		self.func = func
+		self.args = args
 		self.isStopped = False
 		FakeCallLater.instances.append(self)
 
@@ -175,7 +225,7 @@ class FakeCallLater:
 		self.isStopped = True
 
 	def fire(self) -> None:
-		self.func()
+		self.func(*self.args)
 
 
 calledAfter: list[tuple[Any, ...]] = []
@@ -188,6 +238,9 @@ _module(
 	TextCtrl=FakeWindow,
 	StaticText=FakeWindow,
 	BoxSizer=FakeWindow,
+	Choice=FakeWindow,
+	ListBox=FakeWindow,
+	SpinCtrl=FakeWindow,
 	CommandEvent=object,
 	CallLater=FakeCallLater,
 	CallAfter=lambda *args: calledAfter.append(args),
@@ -203,8 +256,13 @@ _module(
 			"TE_MULTILINE",
 			"TE_READONLY",
 			"ID_CANCEL",
+			"ID_OK",
 			"EVT_CHECKBOX",
 			"EVT_BUTTON",
+			"EVT_TEXT",
+			"EVT_CHOICE",
+			"EVT_LISTBOX",
+			"EVT_LISTBOX_DCLICK",
 		)
 	},
 )
@@ -212,13 +270,21 @@ _module(
 
 class _BoxSizerHelper:
 	def __init__(self, *args: Any, **kwargs: Any) -> None:
-		pass
+		self.sizer = FakeWindow()
 
 	def addItem(self, item: Any) -> Any:
 		return item
 
 	def addLabeledControl(self, label: str, controlClass: type, **kwargs: Any) -> Any:
-		return controlClass(label=label)
+		return controlClass(label=label, choices=kwargs.get("choices", []))
+
+
+class _ButtonHelper:
+	def __init__(self, *args: Any, **kwargs: Any) -> None:
+		pass
+
+	def addButton(self, parent: Any, id: int = 0, label: str = "") -> FakeWindow:
+		return FakeWindow(label=label)
 
 
 class _SettingsPanel(FakeWindow):
@@ -272,6 +338,8 @@ class FakeMessageDialog:
 guiHelper = _module(
 	"gui.guiHelper",
 	BoxSizerHelper=_BoxSizerHelper,
+	ButtonHelper=_ButtonHelper,
+	BORDER_FOR_DIALOGS=10,
 	wxCallOnMain=lambda function: function(),
 )
 guiMessage = _module("gui.message", MessageDialog=FakeMessageDialog, ReturnCode=ReturnCode)

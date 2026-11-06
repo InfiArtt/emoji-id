@@ -109,6 +109,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 					shouldCollapseRepeated=conf["collapseRepeated"],
 					hasSkinToneDetail=conf["skinToneDetail"],
 					shouldCleanSymbols=conf["cleanSymbols"],
+					maxInRun=conf["maxEmojiInRun"],
 				)
 				if not item:
 					continue
@@ -160,6 +161,16 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		else:
 			# Translators: Announced when Indonesian punctuation and symbols are turned off.
 			ui.message(_("Tanda baca bahasa Indonesia nonaktif"))
+
+	@script(
+		# Translators: Description of the command that opens the insert emoji dialog, shown in Input Gestures.
+		description=_("Buka dialog sisipkan emoji"),
+	)
+	def script_openEmojiPicker(self, gesture: inputCore.InputGesture) -> None:
+		from .picker import openPicker
+
+		# Leave the script handler before showing a modal dialog.
+		wx.CallAfter(openPicker, self._matcher.lookup)
 
 	def _onNvdaStartupComplete(self) -> None:
 		"""Show the welcome dialog if installTasks could not, check for updates and start the reminder."""

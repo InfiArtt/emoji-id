@@ -208,6 +208,7 @@ class EmojiMatcher:
 		shouldCollapseRepeated: bool = False,
 		hasSkinToneDetail: bool = True,
 		shouldCleanSymbols: bool = True,
+		maxInRun: int = 0,
 	) -> str:
 		"""Replace all emoji in text with their Indonesian names.
 
@@ -217,6 +218,7 @@ class EmojiMatcher:
 		:param shouldCollapseRepeated: Speak repeated identical emoji as a count and one name.
 		:param hasSkinToneDetail: Include skin tone descriptions.
 		:param shouldCleanSymbols: Remove punctuation from emoji names.
+		:param maxInRun: Speak at most this many emoji of a run, then "dan N emoji lainnya". 0 speaks all.
 		:return: The text with emoji replaced.
 		"""
 		if self._pattern is None or not _EMOJI_QUICK_CHECK.search(text):
@@ -227,13 +229,27 @@ class EmojiMatcher:
 		currentName: str | None = None
 		currentCount = 0
 		isInEmojiRun = False
+		# Emoji spoken and left out in the current run, for maxInRun.
+		runSpoken = 0
+		runHidden = 0
 
 		def flushEmoji() -> None:
-			nonlocal isInEmojiRun
+			nonlocal isInEmojiRun, runSpoken, runHidden
 			if currentName is None or currentCount <= 0:
 				return
 			isCollapsed = shouldCollapseRepeated and currentCount > 1
-			itemText = currentName if isCollapsed else " ".join([currentName] * currentCount)
+			spokenCount = currentCount
+			if maxInRun:
+				available = maxInRun - runSpoken
+				if available <= 0:
+					runHidden += currentCount
+					isInEmojiRun = True
+					return
+				if not isCollapsed and currentCount > available:
+					runHidden += currentCount - available
+					spokenCount = available
+				runSpoken += currentCount if isCollapsed else spokenCount
+			itemText = currentName if isCollapsed else " ".join([currentName] * spokenCount)
 			if prefix and not (isPrefixOnce and isInEmojiRun):
 				itemText = f"{prefix} {itemText}"
 			if isCollapsed:
@@ -244,6 +260,16 @@ class EmojiMatcher:
 				resultParts.append(" ")
 			resultParts.append(itemText)
 			isInEmojiRun = True
+
+		def endRun() -> None:
+			"""Say how many emoji of the run were left out, then start counting again."""
+			nonlocal runSpoken, runHidden
+			if runHidden:
+				if resultParts and not resultParts[-1][-1].isspace():
+					resultParts.append(" ")
+				resultParts.append(f"dan {runHidden} emoji lainnya")
+			runSpoken = 0
+			runHidden = 0
 
 		for match in self._pattern.finditer(text):
 			start, end = match.span()
@@ -257,6 +283,7 @@ class EmojiMatcher:
 				# Unknown emoji, or half of a flag that was cut off by word or character navigation.
 				# A lone regional indicator is spoken as its letter, without the emoji prefix.
 				flushEmoji()
+				endRun()
 				currentName = None
 				currentCount = 0
 				before = text[lastEnd:start]
@@ -281,6 +308,7 @@ class EmojiMatcher:
 			if re.search(r"\w", betweenText):
 				# Words between emoji end the run.
 				flushEmoji()
+				endRun()
 				resultParts.append(betweenText)
 				isInEmojiRun = False
 				currentName = name
@@ -291,13 +319,15 @@ class EmojiMatcher:
 			else:
 				flushEmoji()
 				# Spaces and punctuation between emoji keep the run going.
-				if betweenText:
+				# They are left out once the rest of the run is no longer spoken.
+				if betweenText and not (maxInRun and runSpoken >= maxInRun):
 					resultParts.append(betweenText)
 				currentName = name
 				currentCount = 1
 			lastEnd = end
 
 		flushEmoji()
+		endRun()
 		if lastEnd < len(text):
 			resultParts.append(text[lastEnd:])
 		return "".join(resultParts)
