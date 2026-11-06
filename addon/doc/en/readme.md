@@ -71,21 +71,33 @@ In the same way, you can assign a gesture to "Turns Indonesian punctuation and s
 
 The Insert Emoji dialog is modelled on the Windows 11 emoji panel (Windows+period), but every name is Indonesian and every part can be searched. It opens only through the "Opens the insert emoji dialog" command in Input Gestures, Emoji ID category. The command has no default gesture, so assign one as described in the Toggle command section.
 
-The dialog contains, in Tab order:
+The dialog has three tabs: Emoji, Symbols and Kaomoji. Each tab contains, in Tab order:
 
-1. Kind: Emoji, Symbols or Kaomoji.
-2. Search. Results update as you type. Search uses Indonesian names and keywords, for example "ngakak", "terima kasih" or "bendera jepang", across every category of the chosen kind.
-3. Category, following the Windows categories, plus Most recently used and Favorites.
-4. Subcategory, for emoji only, such as Smiling faces or Country flags.
-5. Results. Press Enter to insert the selected emoji.
-6. Collection: emoji gathered with Add to Collection, to insert together.
-7. Buttons Insert, Add to Collection, Remove Last, Clear Collection, Copy, Add to Favorites or Remove from Favorites, Details, and Close.
+1. Search. Results update as you type. Search uses Indonesian names and keywords, for example "ngakak", "terima kasih" or "bendera jepang", across every category of the tab.
+2. Category, following the Windows categories, plus Most recently used and Favorites.
+3. Subcategory, on the Emoji tab only, such as Smiling faces or Country flags. It filters the Results list.
+4. Results. NVDA reports the position of each item, for example "5 of 140". Typing a letter jumps to a name starting with it. On the Emoji tab, when Subcategory is set to All subcategories and Search is empty, the right arrow jumps to the start of the next subcategory and the left arrow to the start of the previous one. The subcategory name is then spoken.
+
+Below the tabs are the Collection field, listing emoji gathered to insert together, and the buttons. Every button names its shortcut, and the shortcuts work from anywhere in the dialog:
+
+- Insert (Enter): inserts the selected emoji, or the whole collection when it is not empty.
+- Personalize (Shift+Enter): enabled only for emoji that can be personalized.
+- Add to Collection (Ctrl+Enter).
+- Remove Last (Ctrl+Shift+Backspace): removes the last emoji from the collection.
+- Clear Collection (Ctrl+Shift+Delete).
+- Copy (Ctrl+Shift+C): copies without inserting.
+- Add to Favorites or Remove from Favorites (Ctrl+D).
+- Details (Alt+Enter).
+- Shortcuts (F1): lists every shortcut.
+- Close (Escape).
+
+Other shortcuts without a button: Control+Tab and Control+Shift+Tab for the next or previous tab, Control+1, Control+2 and Control+3 to go straight to the Emoji, Symbols or Kaomoji tab, Control+F to move to Search, and Control+R to read the collection.
 
 Enter always inserts the selected emoji right away. Emoji with a skin tone, gender or direction to choose are marked in the list, for example "jempol ke atas, can be personalized, press Shift+Enter". Shift+Enter opens the Personalize dialog:
 
 - Only the options that apply to that emoji appear: gender, direction, skin tone, and the second person's skin tone for two person emoji such as handshake.
 - The Result field names the emoji you will get.
-- Press Enter to insert it, or use Add to Collection or Copy. Press Escape to cancel.
+- Press Enter to insert it, Control+Enter to add it to the collection, or Control+Shift+C to copy it. Press Escape to cancel.
 
 After Insert, the dialog closes and the emoji is pasted where you were typing. The previous clipboard text is put back. If an application does not accept pasting, use Copy and paste with Control+V yourself. The last personalization choices are remembered.
 

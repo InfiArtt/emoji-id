@@ -106,10 +106,11 @@ def test_historyEncodingKeepsKaomojiSafe() -> None:
 
 
 def _search(dialog: picker.EmojiPickerDialog, query: str) -> None:
-	dialog.searchField.SetValue(query)
-	dialog._onFilterChanged(None)
+	page = dialog.page
+	page.searchField.SetValue(query)
+	page._onFilterChanged(None)
 	# Results follow typing after a short delay; run it now.
-	dialog._fillResults()
+	page.fillResults()
 
 
 class _ChoosingPersonalizeDialog:
@@ -132,25 +133,33 @@ class _ChoosingPersonalizeDialog:
 
 
 class _KeyEvent:
-	def __init__(self, keyCode: int, isShift: bool) -> None:
-		self.keyCode = keyCode
-		self.isShift = isShift
+	def __init__(
+		self, keyCode: int | str, ctrl: bool = False, shift: bool = False, alt: bool = False
+	) -> None:
+		self.keyCode = ord(keyCode) if isinstance(keyCode, str) else keyCode
+		self.ctrl = ctrl
+		self.shift = shift
+		self.alt = alt
 		self.isSkipped = False
 
 	def GetKeyCode(self) -> int:
 		return self.keyCode
 
 	def ShiftDown(self) -> bool:
-		return self.isShift
+		return self.shift
 
 	def ControlDown(self) -> bool:
-		return False
+		return self.ctrl
 
 	def AltDown(self) -> bool:
-		return False
+		return self.alt
 
 	def Skip(self) -> None:
 		self.isSkipped = True
+
+
+def _wx() -> object:
+	return nvda_mocks.sys.modules["wx"]
 
 
 @pytest.fixture
@@ -162,54 +171,146 @@ def choosing(monkeypatch: pytest.MonkeyPatch) -> Iterator[type[_ChoosingPersonal
 	yield _ChoosingPersonalizeDialog
 
 
+def test_tabsAndListView(dialog: picker.EmojiPickerDialog) -> None:
+	assert [title for _page, title in dialog.notebook.pages] == ["Emoji", "Simbol", "Kaomoji"]
+	emojiPage, symbolPage, kaomojiPage = dialog.pages
+	assert emojiPage.subgroupChoice is not None
+	assert symbolPage.subgroupChoice is None and kaomojiPage.subgroupChoice is None
+	# Without recent items every tab starts at its first real category, with the first item selected.
+	assert emojiPage.resultsList.names[0] == emojiPage.rows[0].name
+	assert emojiPage.resultsList.selectedIndex() == 0
+
+
 def test_rowsMarkCustomizableEmoji(dialog: picker.EmojiPickerDialog) -> None:
 	_search(dialog, "jempol ke atas")
-	assert dialog.resultsList.items[0] == "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter"
+	assert dialog.page.resultsList.names[0] == "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter"
+	assert dialog.personalizeButton.isEnabled
 	_search(dialog, "indonesia")
-	assert dialog.resultsList.items[0] == "bendera Indonesia"
+	assert dialog.page.resultsList.names[0] == "bendera Indonesia"
+	assert not dialog.personalizeButton.isEnabled
+	_search(dialog, "tidak ada yang cocok sama sekali")
+	assert dialog.page.resultsList.names == ["Tidak ada hasil"]
+	assert dialog.page.selected() is None
 
 
 def test_enterInsertsWithoutAsking(dialog: picker.EmojiPickerDialog, choosing: type) -> None:
 	_search(dialog, "terima kasih")
-	assert dialog._rows[0].name == "kedua tangan dikatupkan"
-	dialog._onInsert(None)
+	assert dialog.page.rows[0].name == "kedua tangan dikatupkan"
+	event = _KeyEvent(_wx().WXK_RETURN)
+	dialog._onCharHook(event)
+	assert not event.isSkipped
 	assert choosing.opened == []
 	assert dialog.result == (chr(0x1F64F), True)
 	assert pickerData.decodeText(config.conf["emojiID"]["pickerRecent"][0]) == chr(0x1F64F)
 
 
+def test_enterOnButtonPressesTheButton(
+	dialog: picker.EmojiPickerDialog, monkeypatch: pytest.MonkeyPatch
+) -> None:
+	wx = _wx()
+	monkeypatch.setattr(wx.Window, "FindFocus", staticmethod(lambda: dialog.closeButton))
+	event = _KeyEvent(wx.WXK_RETURN)
+	dialog._onCharHook(event)
+	assert event.isSkipped
+	assert dialog.result == ("", False)
+
+
 def test_shiftEnterPersonalizesThenInserts(dialog: picker.EmojiPickerDialog, choosing: type) -> None:
 	choosing.answer = chr(0x1F64F) + chr(0x1F3FD)
 	_search(dialog, "terima kasih")
-	wx = nvda_mocks.sys.modules["wx"]
-	event = _KeyEvent(wx.WXK_RETURN, isShift=True)
+	event = _KeyEvent(_wx().WXK_RETURN, shift=True)
 	dialog._onCharHook(event)
 	assert not event.isSkipped
 	assert choosing.opened == [chr(0x1F64F)]
 	assert dialog.result == (chr(0x1F64F) + chr(0x1F3FD), True)
-	# Plain Enter goes on to the default button.
-	plain = _KeyEvent(wx.WXK_RETURN, isShift=False)
-	dialog._onCharHook(plain)
-	assert plain.isSkipped
 
 
 def test_shiftEnterOnPlainEmojiSaysSo(dialog: picker.EmojiPickerDialog, choosing: type) -> None:
 	_search(dialog, "indonesia")
-	dialog._onPersonalize()
+	dialog.personalize()
 	assert choosing.opened == []
 	assert nvda_mocks.spokenMessages[-1] == "Tidak dapat dipersonalisasi"
 
 
-def test_personalizedEmojiIntoChain(dialog: picker.EmojiPickerDialog, choosing: type) -> None:
+def test_chainShortcuts(dialog: picker.EmojiPickerDialog, choosing: type) -> None:
+	wx = _wx()
 	choosing.answer = chr(0x1F44D) + chr(0x1F3FD)
 	choosing.action = picker.ACTION_ADD_TO_CHAIN
 	_search(dialog, "jempol ke atas")
-	dialog._onPersonalize()
+	dialog.personalize()
 	_search(dialog, "indonesia")
-	dialog._onAddToChain(None)
+	dialog._onCharHook(_KeyEvent(wx.WXK_RETURN, ctrl=True))
 	assert nvda_mocks.spokenMessages[-1] == "bendera Indonesia ditambahkan, 2 dalam rangkaian"
-	dialog._onCopy(None)
+	dialog._onCharHook(_KeyEvent("R", ctrl=True))
+	assert nvda_mocks.spokenMessages[-1].startswith("2 dalam rangkaian: ")
+	dialog._onCharHook(_KeyEvent(wx.WXK_BACK, ctrl=True, shift=True))
+	assert nvda_mocks.spokenMessages[-1] == "bendera Indonesia dihapus dari rangkaian"
+	dialog.addSelectedToChain()
+	dialog._onCharHook(_KeyEvent("C", ctrl=True, shift=True))
 	assert dialog.result == (chr(0x1F44D) + chr(0x1F3FD) + _FLAG_ID, False)
+
+
+def test_clearChain(dialog: picker.EmojiPickerDialog) -> None:
+	_search(dialog, "indonesia")
+	dialog.addSelectedToChain()
+	dialog._onCharHook(_KeyEvent(_wx().WXK_DELETE, ctrl=True, shift=True))
+	assert dialog.chainField.value == ""
+	dialog.readChain()
+	assert nvda_mocks.spokenMessages[-1] == "Rangkaian kosong"
+
+
+def test_tabShortcuts(dialog: picker.EmojiPickerDialog) -> None:
+	wx = _wx()
+	dialog._onCharHook(_KeyEvent(wx.WXK_TAB, ctrl=True))
+	assert dialog.notebook.GetSelection() == 1
+	dialog._onCharHook(_KeyEvent(wx.WXK_TAB, ctrl=True, shift=True))
+	dialog._onCharHook(_KeyEvent(wx.WXK_TAB, ctrl=True, shift=True))
+	assert dialog.notebook.GetSelection() == 2
+	dialog._onCharHook(_KeyEvent("1", ctrl=True))
+	assert dialog.notebook.GetSelection() == 0
+	# Other keys go on to the focused control.
+	event = _KeyEvent("A")
+	dialog._onCharHook(event)
+	assert event.isSkipped
+
+
+def test_helpListsShortcuts(dialog: picker.EmojiPickerDialog) -> None:
+	dialog._onCharHook(_KeyEvent(_wx().WXK_F1))
+	assert "Ctrl+Tab" in nvda_mocks.FakeMessageDialog.shown[-1]
+
+
+def test_arrowsJumpBetweenSubgroups(dialog: picker.EmojiPickerDialog) -> None:
+	wx = _wx()
+	page = dialog.page
+	nvda_mocks.FakeCallLater.instances.clear()
+	firstSubgroup = page.rows[0].subgroup
+	page._onListKeyDown(_KeyEvent(wx.WXK_RIGHT))
+	index = page.resultsList.selectedIndex()
+	assert page.rows[index].subgroup != firstSubgroup
+	assert page.rows[index - 1].subgroup == firstSubgroup
+	announce = nvda_mocks.FakeCallLater.instances[-1]
+	announce.fire()
+	assert nvda_mocks.spokenMessages[-1] == picker.SUBGROUPS[page.rows[index].subgroup]
+	# From the middle of a subcategory, left goes to the start of the previous one.
+	page.resultsList.selectIndex(index + 1)
+	page._onListKeyDown(_KeyEvent(wx.WXK_LEFT))
+	assert page.resultsList.selectedIndex() == 0
+	page._onListKeyDown(_KeyEvent(wx.WXK_LEFT))
+	assert nvda_mocks.spokenMessages[-1] == "Subkategori pertama"
+	# Other keys are left to the list.
+	other = _KeyEvent(wx.WXK_RETURN)
+	page._onListKeyDown(other)
+	assert other.isSkipped
+
+
+def test_arrowsDoNothingWhileFiltered(dialog: picker.EmojiPickerDialog) -> None:
+	wx = _wx()
+	page = dialog.page
+	_search(dialog, "wajah")
+	spoken = len(nvda_mocks.spokenMessages)
+	page._onListKeyDown(_KeyEvent(wx.WXK_RIGHT))
+	assert page.resultsList.selectedIndex() == 0
+	assert len(nvda_mocks.spokenMessages) == spoken
 
 
 def test_personalizeDialog(data: pickerData.PickerData, matcher: EmojiMatcher) -> None:
@@ -223,11 +324,13 @@ def test_personalizeDialog(data: pickerData.PickerData, matcher: EmojiMatcher) -
 	personalize.toneChoice.SetSelection(4)
 	personalize._onOptionChanged(None)
 	assert personalize.resultField.value.startswith("wanita berlari warna kulit gelap")
-	personalize._confirm(picker.ACTION_COPY)
+	personalize._onCharHook(_KeyEvent("C", ctrl=True, shift=True))
 	assert personalize.text == runner.item.resolve("wanita", True, 4)
 	assert personalize.action == picker.ACTION_COPY
 	assert config.conf["emojiID"]["pickerSkinTone"] == 4
 	assert config.conf["emojiID"]["pickerGender"] == "wanita"
+	personalize._onCharHook(_KeyEvent(_wx().WXK_RETURN, ctrl=True))
+	assert personalize.action == picker.ACTION_ADD_TO_CHAIN
 
 
 def test_personalizeTwoPeople(data: pickerData.PickerData, matcher: EmojiMatcher) -> None:
@@ -245,17 +348,16 @@ def test_personalizeTwoPeople(data: pickerData.PickerData, matcher: EmojiMatcher
 
 
 def test_dialogKaomojiAndFavorites(dialog: picker.EmojiPickerDialog) -> None:
-	dialog.kindChoice.SetSelection(2)
-	dialog._onKindChanged(None)
-	assert not dialog.subgroupChoice.isEnabled
+	dialog.selectTab(2)
 	_search(dialog, "meja")
-	dialog._onToggleFavorite(None)
-	assert dialog.favoriteButton.label == "Hapus dari Favorit"
-	dialog.searchField.SetValue("")
-	dialog.categoryChoice.SetSelection(1)
-	dialog._onCategoryChanged(None)
-	dialog._fillResults()
-	assert [row.name for row in dialog._rows] == ["membalik meja karena kesal"]
+	dialog._onCharHook(_KeyEvent("D", ctrl=True))
+	assert dialog.favoriteButton.label == "Hapus dari Favorit (Ctrl+D)"
+	page = dialog.page
+	page.searchField.SetValue("")
+	page.categoryChoice.SetSelection(1)
+	page._onCategoryChanged(None)
+	page.fillResults()
+	assert [row.name for row in page.rows] == ["membalik meja karena kesal"]
 
 
 def test_insertPastesAndRestoresClipboard() -> None:

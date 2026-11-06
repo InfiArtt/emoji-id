@@ -205,8 +205,32 @@ class FakeWindow:
 	def ShowModal(self) -> int:
 		return 0
 
+	@staticmethod
+	def FindFocus() -> Any:
+		return None
+
 	def __getattr__(self, name: str) -> Callable[..., None]:
 		return lambda *args, **kwargs: None
+
+
+class FakeListCtrl(FakeWindow):
+	"""Stands in for a virtual list view; the selection is the first selected item."""
+
+	def Select(self, index: int, on: bool = True) -> None:
+		self.selection = index if on else -1
+
+	def GetFirstSelected(self) -> int:
+		return self.selection
+
+
+class FakeNotebook(FakeWindow):
+	def __init__(self, *args: Any, **kwargs: Any) -> None:
+		super().__init__(*args, **kwargs)
+		self.pages: list[tuple[Any, str]] = []
+		self.selection = 0
+
+	def AddPage(self, page: Any, title: str) -> None:
+		self.pages.append((page, title))
 
 
 class FakeCallLater:
@@ -246,6 +270,18 @@ _module(
 	BoxSizer=FakeWindow,
 	Choice=FakeWindow,
 	ListBox=FakeWindow,
+	ListCtrl=FakeListCtrl,
+	Notebook=FakeNotebook,
+	Panel=FakeWindow,
+	ListEvent=object,
+	BookCtrlEvent=object,
+	WXK_BACK=8,
+	WXK_TAB=9,
+	WXK_DELETE=127,
+	WXK_NUMPAD_DELETE=385,
+	WXK_LEFT=314,
+	WXK_RIGHT=316,
+	WXK_F1=340,
 	SpinCtrl=FakeWindow,
 	CommandEvent=object,
 	KeyEvent=object,
@@ -274,6 +310,13 @@ _module(
 			"EVT_LISTBOX",
 			"EVT_LISTBOX_DCLICK",
 			"EVT_CHAR_HOOK",
+			"EVT_KEY_DOWN",
+			"EVT_LIST_ITEM_SELECTED",
+			"EVT_NOTEBOOK_PAGE_CHANGED",
+			"LC_REPORT",
+			"LC_VIRTUAL",
+			"LC_SINGLE_SEL",
+			"LC_NO_HEADER",
 		)
 	},
 )

@@ -98,7 +98,11 @@ Jalankan kasus berikut sebelum mengubah `lastTestedNVDAVersion` atau merilis ver
 
 Tetapkan dulu tombol pintas untuk "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID.
 
-- Membuka dialog. Buka Notepad, lalu tekan tombol pintas itu. Hasil yang diharapkan: dialog "Sisipkan Emoji - Emoji ID" terbuka dengan fokus di kolom Cari. Dialog tidak bisa dibuka dari menu NVDA.
+- Membuka dialog. Buka Notepad, lalu tekan tombol pintas itu. Hasil yang diharapkan: dialog "Sisipkan Emoji - Emoji ID" terbuka di tab Emoji dengan fokus di kolom Cari. Dialog tidak bisa dibuka dari menu NVDA.
+- Posisi di daftar. Tekan Tab sampai ke daftar Hasil, lalu panah turun. Hasil yang diharapkan: NVDA menyebut nama emoji beserta posisinya, misalnya "2 dari 170".
+- Lompat subkategori. Di daftar Hasil kategori Wajah dan emosi, tekan panah kanan beberapa kali. Hasil yang diharapkan: pilihan pindah ke emoji pertama subkategori berikutnya, lalu nama subkategorinya diucapkan. Panah kiri kembali ke subkategori sebelumnya. Di subkategori pertama, panah kiri mengucapkan "Subkategori pertama". Di tab Simbol, panah kanan dan kiri tidak melakukan apa pun.
+- Tab. Tekan Control+Tab. Hasil yang diharapkan: pindah ke tab Simbol dan fokus di kolom Cari. Control+3 pindah ke tab Kaomoji, Control+1 kembali ke tab Emoji.
+- Tombol pintas. Tekan F1. Hasil yang diharapkan: muncul daftar semua tombol pintas. Tekan Tab di dialog utama sampai ke tombol-tombol. Hasil yang diharapkan: setiap tombol menyebut tombol pintasnya, misalnya "Tambah ke Rangkaian (Ctrl+Enter)". Tombol Personalisasi hanya aktif saat emoji yang dipilih dapat dipersonalisasi.
 - Mencari dan menyisipkan. Ketik "ngakak", lalu tekan Enter. Hasil yang diharapkan: dialog tertutup, 🤣 tertempel di Notepad, dan isi papan klip sebelumnya kembali.
 - Personalisasi. Buka dialog, cari "jempol". Hasil yang diharapkan: daftar menyebut "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter". Tekan Enter: 👍 langsung tertempel tanpa pertanyaan. Ulangi, lalu tekan Shift+Enter: dialog Personalisasi muncul. Atur Warna kulit ke Sedang, lalu tekan Enter: tertempel 👍🏽.
 - Dua orang. Cari "jabat", tekan Shift+Enter, atur Warna kulit orang pertama ke Cerah dan Warna kulit orang kedua ke Gelap, lalu tekan Enter. Hasil yang diharapkan: tertempel jabat tangan dengan dua warna kulit berbeda.
@@ -106,9 +110,10 @@ Tetapkan dulu tombol pintas untuk "Buka dialog sisipkan emoji" di Gestur Masukan
 - Emoji tanpa personalisasi. Cari "indonesia" dan tekan Shift+Enter. Hasil yang diharapkan: NVDA mengucapkan "Tidak dapat dipersonalisasi". Tekan Enter: bendera langsung tertempel.
 - Personalisasi ke rangkaian. Cari "jempol", tekan Shift+Enter, atur warna kulit, lalu tekan tombol Tambah ke Rangkaian. Hasil yang diharapkan: emoji berwarna kulit itu masuk ke Rangkaian dan dialog utama tetap terbuka.
 - Kecepatan. Gerakkan panah naik dan turun di kotak Kategori dan Subkategori. Hasil yang diharapkan: tidak terasa berat.
-- Rangkaian. Cari "kue ulang tahun", tekan Tambah ke Rangkaian, lalu cari "terima kasih" dan tekan Tambah ke Rangkaian. Tekan Sisipkan. Hasil yang diharapkan: 🎂🙏 tertempel sekaligus.
-- Kaomoji. Pilih Jenis Kaomoji, cari "bahu", lalu tekan Enter. Hasil yang diharapkan: `¯\_(ツ)_/¯` tertempel.
-- Favorit dan terakhir dipakai. Tekan Tambah ke Favorit pada sebuah emoji, tutup, lalu buka lagi dan pilih kategori Favorit. Hasil yang diharapkan: emoji itu ada di daftar. Kategori Terakhir dipakai berisi emoji yang tadi disisipkan.
+- Rangkaian. Cari "kue ulang tahun", tekan Control+Enter, lalu cari "terima kasih" dan tekan Control+Enter. Tekan Control+R. Hasil yang diharapkan: NVDA mengucapkan "2 dalam rangkaian: kue ulang tahun, kedua tangan dikatupkan". Tekan Enter: 🎂🙏 tertempel sekaligus.
+- Mengubah rangkaian. Tambahkan dua emoji ke rangkaian, tekan Control+Shift+Backspace, lalu Control+R. Hasil yang diharapkan: tinggal satu emoji. Tekan Control+Shift+Delete. Hasil yang diharapkan: "Rangkaian dikosongkan".
+- Kaomoji. Tekan Control+3, cari "bahu", lalu tekan Enter. Hasil yang diharapkan: `¯\_(ツ)_/¯` tertempel.
+- Favorit dan terakhir dipakai. Tekan Control+D pada sebuah emoji, tutup, lalu buka lagi dan pilih kategori Favorit. Hasil yang diharapkan: emoji itu ada di daftar. Kategori Terakhir dipakai berisi emoji yang tadi disisipkan.
 - Bahasa Inggris. Ganti bahasa NVDA ke bahasa Inggris dan mulai ulang NVDA. Hasil yang diharapkan: semua label, tombol, kategori, dan subkategori di dialog berbahasa Inggris. Nama emoji dan kaomoji tetap berbahasa Indonesia.
 
 ## Kasus uji mode baca ringkas

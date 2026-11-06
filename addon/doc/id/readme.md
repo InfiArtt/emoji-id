@@ -69,21 +69,33 @@ Dengan cara yang sama, Anda bisa memasang tombol pintasan untuk perintah "Aktifk
 
 Dialog Sisipkan Emoji dibuat mirip panel emoji Windows 11 (Windows+titik), tetapi semua namanya berbahasa Indonesia dan semua bagiannya bisa dicari. Dialog ini hanya bisa dibuka lewat perintah "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID. Perintah ini tidak punya tombol pintas bawaan, jadi tetapkan sendiri tombolnya dengan cara di bagian Perintah untuk menyalakan dan mematikan.
 
-Isi dialog, sesuai urutan tombol Tab:
+Dialog ini punya tiga tab: Emoji, Simbol, dan Kaomoji. Isi setiap tab, sesuai urutan tombol Tab:
 
-1. Jenis: Emoji, Simbol, atau Kaomoji.
-2. Cari. Hasil langsung diperbarui saat mengetik. Pencarian memakai nama Indonesia dan kata kunci, misalnya "ngakak", "terima kasih", atau "bendera jepang". Pencarian mencakup semua kategori jenis yang dipilih.
-3. Kategori, mengikuti kategori Windows, ditambah Terakhir dipakai dan Favorit.
-4. Subkategori, khusus emoji, misalnya Wajah tersenyum atau Bendera negara.
-5. Hasil. Tekan Enter untuk menyisipkan emoji yang dipilih.
-6. Rangkaian: daftar emoji yang dikumpulkan dengan tombol Tambah ke Rangkaian, untuk disisipkan sekaligus.
-7. Tombol Sisipkan, Tambah ke Rangkaian, Hapus Terakhir, Kosongkan Rangkaian, Salin, Tambah ke Favorit atau Hapus dari Favorit, Detail, dan Tutup.
+1. Cari. Hasil langsung diperbarui saat mengetik. Pencarian memakai nama Indonesia dan kata kunci, misalnya "ngakak", "terima kasih", atau "bendera jepang". Pencarian mencakup semua kategori di tab itu.
+2. Kategori, mengikuti kategori Windows, ditambah Terakhir dipakai dan Favorit.
+3. Subkategori, khusus tab Emoji, misalnya Wajah tersenyum atau Bendera negara. Pilihan ini menyaring daftar Hasil.
+4. Hasil. NVDA menyebut posisi item, misalnya "5 dari 140". Mengetik huruf melompat ke nama yang berawalan huruf itu. Di tab Emoji, saat Subkategori diatur ke Semua subkategori dan kolom Cari kosong, panah kanan melompat ke awal subkategori berikutnya dan panah kiri ke awal subkategori sebelumnya. Nama subkategorinya lalu diucapkan.
+
+Di bawah tab ada kolom Rangkaian, yaitu emoji yang dikumpulkan untuk disisipkan sekaligus, lalu tombol-tombol. Setiap tombol menyebut tombol pintasnya, dan tombol pintas itu bisa ditekan dari bagian mana pun di dialog:
+
+- Sisipkan (Enter): sisipkan emoji yang dipilih, atau seluruh rangkaian kalau rangkaian tidak kosong.
+- Personalisasi (Shift+Enter): hanya aktif untuk emoji yang dapat dipersonalisasi.
+- Tambah ke Rangkaian (Ctrl+Enter).
+- Hapus Terakhir (Ctrl+Shift+Backspace): hapus emoji terakhir dari rangkaian.
+- Kosongkan Rangkaian (Ctrl+Shift+Delete).
+- Salin (Ctrl+Shift+C): salin tanpa menyisipkan.
+- Tambah ke Favorit atau Hapus dari Favorit (Ctrl+D).
+- Detail (Alt+Enter).
+- Pintasan (F1): daftar semua tombol pintas.
+- Tutup (Escape).
+
+Tombol pintas lain tanpa tombol: Control+Tab dan Control+Shift+Tab untuk tab berikutnya atau sebelumnya, Control+1, Control+2, dan Control+3 untuk langsung ke tab Emoji, Simbol, atau Kaomoji, Control+F untuk ke kolom Cari, dan Control+R untuk membacakan isi rangkaian.
 
 Enter selalu langsung menyisipkan emoji yang dipilih. Emoji yang punya pilihan warna kulit, jenis kelamin, atau arah hadap diberi keterangan di daftar, misalnya "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter". Shift+Enter membuka dialog Personalisasi:
 
 - Yang muncul hanya aturan yang berlaku untuk emoji itu: jenis kelamin, arah hadap, warna kulit, dan warna kulit orang kedua untuk emoji dua orang seperti jabat tangan.
 - Kolom Hasil menyebut nama emoji jadinya.
-- Tekan Enter untuk menyisipkannya, atau pakai tombol Tambah ke Rangkaian atau Salin. Tekan Escape untuk batal.
+- Tekan Enter untuk menyisipkannya, Control+Enter untuk menambahkannya ke rangkaian, atau Control+Shift+C untuk menyalinnya. Tekan Escape untuk batal.
 
 Setelah Sisipkan ditekan, dialog langsung tertutup dan emoji ditempel ke tempat Anda mengetik. Isi papan klip sebelumnya dikembalikan. Kalau sebuah aplikasi tidak menerima tempelan, pakai tombol Salin, lalu tempel sendiri dengan Control+V. Pilihan personalisasi terakhir diingat untuk pemakaian berikutnya.
 

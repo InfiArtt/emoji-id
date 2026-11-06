@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-07 04:47+0700\n"
+"POT-Creation-Date: 2026-11-07 05:30+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +39,6 @@ msgid "Salin Nomor"
 msgstr "Copy Number"
 
 #. Translators: Button that closes the donation details dialog.
-#. Translators: Button that closes the insert emoji dialog.
 msgid "Tutup"
 msgstr "Close"
 
@@ -161,45 +160,24 @@ msgstr "Same as the first person"
 msgid "Hasil:"
 msgstr "Results:"
 
-#. Translators: Button that inserts the personalized emoji and closes the insert emoji dialog.
-#. Translators: Button that inserts the chosen emoji and closes the dialog.
-msgid "Sisipkan"
-msgstr "Insert"
+#. Translators: Button that inserts the personalized emoji. Enter is its shortcut.
+#. Translators: Button that inserts the chosen emoji and closes the dialog. Enter is its shortcut.
+msgid "Sisipkan (Enter)"
+msgstr "Insert (Enter)"
 
-#. Translators: Button that adds the personalized emoji to the collection.
-#. Translators: Button that adds the selected emoji to the collection.
-msgid "Tambah ke Rangkaian"
-msgstr "Add to Collection"
+#. Translators: Button adding the personalized emoji to the collection. Control+Enter is its shortcut.
+#. Translators: Button that adds the selected emoji to the collection. Control+Enter is its shortcut.
+msgid "Tambah ke Rangkaian (Ctrl+Enter)"
+msgstr "Add to Collection (Ctrl+Enter)"
 
-#. Translators: Button that copies the personalized emoji and closes the insert emoji dialog.
-#. Translators: Button that copies the chosen emoji to the clipboard and closes the dialog.
-msgid "Salin"
-msgstr "Copy"
+#. Translators: Button that copies the personalized emoji. Control+Shift+C is its shortcut.
+#. Translators: Button that copies the chosen emoji and closes. Control+Shift+C is its shortcut.
+msgid "Salin (Ctrl+Shift+C)"
+msgstr "Copy (Ctrl+Shift+C)"
 
-#. Translators: Button that closes the personalize emoji dialog without using the emoji.
-msgid "Batal"
-msgstr "Cancel"
-
-#. Translators: Title of the insert emoji dialog.
-msgid "Sisipkan Emoji - Emoji ID"
-msgstr "Insert Emoji - Emoji ID"
-
-#. Translators: Label of the choice between emoji, symbols and kaomoji in the insert emoji dialog.
-msgid "Jenis:"
-msgstr "Kind:"
-
-#. Translators: Kind of items in the insert emoji dialog.
-msgid "Emoji"
-msgstr "Emoji"
-
-#. Translators: Kind of items in the insert emoji dialog.
-#. Translators: Emoji category in the insert emoji dialog.
-msgid "Simbol"
-msgstr "Symbols"
-
-#. Translators: Kind of items in the insert emoji dialog.
-msgid "Kaomoji"
-msgstr "Kaomoji"
+#. Translators: Button that closes the personalize emoji dialog. Escape is its shortcut.
+msgid "Batal (Escape)"
+msgstr "Cancel (Escape)"
 
 #. Translators: Label of the search field in the insert emoji dialog.
 msgid "Cari:"
@@ -213,43 +191,79 @@ msgstr "Category:"
 msgid "Subkategori:"
 msgstr "Subcategory:"
 
+#. Translators: First choice of the subcategory list, showing every subcategory.
+msgid "Semua subkategori"
+msgstr "All subcategories"
+
+#. Translators: Shown in the results list when nothing matches.
+msgid "Tidak ada hasil"
+msgstr "No results"
+
+#. Translators: Announced when the left arrow is pressed in the first subcategory of the list.
+msgid "Subkategori pertama"
+msgstr "First subcategory"
+
+#. Translators: Announced when the right arrow is pressed in the last subcategory of the list.
+msgid "Subkategori terakhir"
+msgstr "Last subcategory"
+
+#. Translators: Title of the insert emoji dialog.
+msgid "Sisipkan Emoji - Emoji ID"
+msgstr "Insert Emoji - Emoji ID"
+
+#. Translators: Tab of the insert emoji dialog.
+msgid "Emoji"
+msgstr "Emoji"
+
+#. Translators: Tab of the insert emoji dialog.
+#. Translators: Emoji category in the insert emoji dialog.
+msgid "Simbol"
+msgstr "Symbols"
+
+#. Translators: Tab of the insert emoji dialog.
+msgid "Kaomoji"
+msgstr "Kaomoji"
+
 #. Translators: Label of the read-only field listing the emoji collected to insert together.
 msgid "Rangkaian:"
 msgstr "Collection:"
 
+#. Translators: Button that opens the personalize dialog. Shift+Enter is its shortcut.
+msgid "Personalisasi (Shift+Enter)"
+msgstr "Personalize (Shift+Enter)"
+
 #. Translators: Button that removes the last emoji from the collection.
-msgid "Hapus Terakhir"
-msgstr "Remove Last"
+msgid "Hapus Terakhir (Ctrl+Shift+Backspace)"
+msgstr "Remove Last (Ctrl+Shift+Backspace)"
 
 #. Translators: Button that empties the collection.
-msgid "Kosongkan Rangkaian"
-msgstr "Clear Collection"
+msgid "Kosongkan Rangkaian (Ctrl+Shift+Delete)"
+msgstr "Clear Collection (Ctrl+Shift+Delete)"
 
-#. Translators: Button that adds the selected item to the favorites.
-msgid "Tambah ke Favorit"
-msgstr "Add to Favorites"
+#. Translators: Button that reads details about the selected item. Alt+Enter is its shortcut.
+msgid "Detail (Alt+Enter)"
+msgstr "Details (Alt+Enter)"
 
-#. Translators: Button that reads details about the selected item.
-#. Translators: Title of the dialog with the details of an item.
-msgid "Detail"
-msgstr "Details"
+#. Translators: Button that lists the shortcuts of the insert emoji dialog. F1 is its shortcut.
+msgid "Pintasan (F1)"
+msgstr "Shortcuts (F1)"
 
-#. Translators: First choice of the subcategory list, showing every subcategory.
-msgid "Semua subkategori"
-msgstr "All subcategories"
+#. Translators: Button that closes the insert emoji dialog. Escape is its shortcut.
+msgid "Tutup (Escape)"
+msgstr "Close (Escape)"
 
 #. Translators: Added after the name of an emoji that can be personalized.
 #, python-brace-format
 msgid "{name}, dapat dipersonalisasi, tekan Shift+Enter"
 msgstr "{name}, can be personalized, press Shift+Enter"
 
-#. Translators: Shown in the results list when nothing matches.
-msgid "Tidak ada hasil"
-msgstr "No results"
+#. Translators: Button removing the selected item from the favorites. Control+D is its shortcut.
+msgid "Hapus dari Favorit (Ctrl+D)"
+msgstr "Remove from Favorites (Ctrl+D)"
 
-#. Translators: Button that removes the selected item from the favorites.
-msgid "Hapus dari Favorit"
-msgstr "Remove from Favorites"
+#. Translators: Button that adds the selected item to the favorites. Control+D is its shortcut.
+msgid "Tambah ke Favorit (Ctrl+D)"
+msgstr "Add to Favorites (Ctrl+D)"
 
 #. Translators: Announced when nothing is selected in the insert emoji dialog.
 msgid "Tidak ada yang dipilih"
@@ -275,6 +289,11 @@ msgstr "{name} removed from the collection"
 #. Translators: Announced when the collection is emptied.
 msgid "Rangkaian dikosongkan"
 msgstr "Collection cleared"
+
+#. Translators: Reads the collection. {count} is the number of items, {names} lists them.
+#, python-brace-format
+msgid "{count} dalam rangkaian: {names}"
+msgstr "{count} in collection: {names}"
 
 #. Translators: Announced when an item is removed from the favorites. {name} is its name.
 #, python-brace-format
@@ -314,6 +333,46 @@ msgstr "Can be personalized"
 #, python-brace-format
 msgid "Kata kunci: {keywords}"
 msgstr "Keywords: {keywords}"
+
+#. Translators: Title of the dialog with the details of an item.
+msgid "Detail"
+msgstr "Details"
+
+#. Translators: List of the shortcuts of the insert emoji dialog.
+msgid ""
+"Enter: sisipkan emoji yang dipilih, atau seluruh rangkaian.\n"
+"Shift+Enter: personalisasi warna kulit, jenis kelamin, atau arah.\n"
+"Ctrl+Enter: tambah ke rangkaian.\n"
+"Ctrl+Shift+Backspace: hapus emoji terakhir dari rangkaian.\n"
+"Ctrl+Shift+Delete: kosongkan rangkaian.\n"
+"Ctrl+R: bacakan isi rangkaian.\n"
+"Ctrl+Shift+C: salin tanpa menyisipkan.\n"
+"Ctrl+D: tambah ke favorit atau hapus dari favorit.\n"
+"Alt+Enter: detail emoji.\n"
+"Ctrl+Tab dan Ctrl+Shift+Tab: tab berikutnya atau sebelumnya.\n"
+"Ctrl+1, Ctrl+2, Ctrl+3: tab Emoji, Simbol, atau Kaomoji.\n"
+"Ctrl+F: pindah ke kolom Cari.\n"
+"Panah kanan dan kiri di daftar Hasil: lompat ke subkategori berikutnya atau sebelumnya, saat Subkategori diatur ke Semua subkategori.\n"
+"Escape: tutup."
+msgstr ""
+"Enter: insert the selected emoji, or the whole collection.\n"
+"Shift+Enter: personalize skin tone, gender or direction.\n"
+"Ctrl+Enter: add to the collection.\n"
+"Ctrl+Shift+Backspace: remove the last emoji from the collection.\n"
+"Ctrl+Shift+Delete: clear the collection.\n"
+"Ctrl+R: read the collection.\n"
+"Ctrl+Shift+C: copy without inserting.\n"
+"Ctrl+D: add to or remove from favorites.\n"
+"Alt+Enter: emoji details.\n"
+"Ctrl+Tab and Ctrl+Shift+Tab: next or previous tab.\n"
+"Ctrl+1, Ctrl+2, Ctrl+3: Emoji, Symbols or Kaomoji tab.\n"
+"Ctrl+F: move to the Search field.\n"
+"Right and left arrows in the Results list: jump to the next or previous subcategory, when Subcategory is set to All subcategories.\n"
+"Escape: close."
+
+#. Translators: Title of the list of shortcuts of the insert emoji dialog.
+msgid "Pintasan Sisipkan Emoji"
+msgstr "Insert Emoji Shortcuts"
 
 #. Translators: Emoji category in the insert emoji dialog.
 #. Translators: Symbol category in the insert emoji dialog.
@@ -1001,14 +1060,14 @@ msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Suppor
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 msgid ""
 "\n"
-"- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11: cari emoji, simbol, dan kaomoji dengan kata bahasa Indonesia, jelajahi kategori Windows, personalisasi warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah dengan Shift+Enter untuk emoji yang mendukungnya, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Tidak ada tombol pintas bawaan; tetapkan di Gestur Masukan.\n"
+"- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11, dengan tab Emoji, Simbol, dan Kaomoji: cari dengan kata bahasa Indonesia, jelajahi kategori Windows, personalisasi warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah dengan Shift+Enter untuk emoji yang mendukungnya, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Setiap tombol menyebut tombol pintasnya, dan F1 menampilkan semuanya. Dialog ini tidak punya tombol pintas bawaan; tetapkan di Gestur Masukan.\n"
 "- Mode baca ringkas: hanya membacakan sejumlah emoji berturut-turut, lalu \"dan N emoji lainnya\".\n"
 "- Emoji yang sama dan berulang sekarang dibacakan tanpa kata \"kali\", misalnya \"3 emoji bendera Indonesia\".\n"
 "- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi \"Emoji ID versi ... sudah versi terbaru\".\n"
 "\t"
 msgstr ""
 "\n"
-"- Insert Emoji dialog, modelled on the Windows 11 emoji panel: search emoji, symbols and kaomoji with Indonesian words, browse the Windows categories, personalize skin tones (also for each person of two person emoji), gender and direction with Shift+Enter for emoji that support it, keep favorites and recently used items, collect several emoji and insert them at once, or copy them. It has no default gesture: assign one in Input Gestures.\n"
+"- Insert Emoji dialog, modelled on the Windows 11 emoji panel, with Emoji, Symbols and Kaomoji tabs: search with Indonesian words, browse the Windows categories, personalize skin tones (also for each person of two person emoji), gender and direction with Shift+Enter for emoji that support it, keep favorites and recently used items, collect several emoji and insert them at once, or copy them. Every button names its shortcut, and F1 lists them all. The dialog has no default gesture: assign one in Input Gestures.\n"
 "- Brief reading mode: read only a set number of emoji in a row, then \"dan N emoji lainnya\".\n"
 "- Repeated identical emoji are now read without the word \"kali\", for example \"3 emoji bendera Indonesia\".\n"
 "- The update check message when no newer version exists now uses more natural Indonesian wording.\n"
