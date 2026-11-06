@@ -617,3 +617,38 @@ def test_openPickerOnlyWhereTyping(plugin: GlobalPlugin) -> None:
 	plugin.script_openEmojiPicker(None)
 	assert len(nvda_mocks.calledAfter) == 2
 	nvda_mocks.focusObject[0] = None
+
+
+def test_installTasksLoadsTranslationsOnlyWhenInstalling(monkeypatch: pytest.MonkeyPatch) -> None:
+	"""NVDA imports installTasks of the old version to uninstall it while updating.
+
+	Loading translations at import would make gettext keep the old catalog for the new version.
+	"""
+	import importlib.util
+
+	import addonHandler
+
+	calls: list[bool] = []
+	monkeypatch.setattr(addonHandler, "initTranslation", lambda: calls.append(True))
+	spec = importlib.util.spec_from_file_location("installTasks", _ROOT / "addon" / "installTasks.py")
+	module = importlib.util.module_from_spec(spec)
+	spec.loader.exec_module(module)
+	assert calls == []
+
+
+def test_oldCatalogIsForgotten() -> None:
+	import gettext
+
+	import emojiID
+
+	localeDir = _ROOT / "addon" / "locale"
+	ours = (gettext.GNUTranslations, str(localeDir / "en" / "LC_MESSAGES" / "nvda.mo"))
+	other = (gettext.GNUTranslations, str(_ROOT / "elsewhere" / "nvda.mo"))
+	gettext._translations[ours] = gettext.NullTranslations()
+	gettext._translations[other] = gettext.NullTranslations()
+	try:
+		emojiID._forgetOldCatalogs()
+		assert ours not in gettext._translations
+		assert other in gettext._translations
+	finally:
+		gettext._translations.pop(other, None)

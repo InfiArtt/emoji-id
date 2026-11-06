@@ -13,6 +13,8 @@ Two hooks are used:
 	before the speech sequence is built, so the filter would only see the English name.
 """
 
+import gettext
+import os
 import random
 from collections.abc import Callable
 
@@ -31,9 +33,32 @@ from logHandler import log
 from scriptHandler import getLastScriptRepeatCount, script
 from speech.types import SpeechSequence
 
-from .emojiData import EmojiMatcher, isRegionalIndicator
-from .settings import EmojiIDSettingsPanel, getConfig, isEnabled, registerConfig
-from .symbols import getSymbolLocale, isIndonesianSymbolsEnabled, setIndonesianSymbolsEnabled
+
+def _forgetOldCatalogs() -> None:
+	"""Drop translations that gettext cached from the files of the previous version.
+
+	When NVDA installs an update at startup, it first runs onUninstall of the old version.
+	Emoji ID 1.3.0 and older load their translations as soon as installTasks is imported,
+	so gettext kept the old catalog for this locale folder and new texts stayed untranslated
+	until NVDA restarted once more. Must run before any module of this package loads translations.
+	"""
+	localeDir = os.path.normcase(
+		os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "locale"))
+	)
+	cache = getattr(gettext, "_translations", None)
+	if not isinstance(cache, dict):
+		return
+	for key in list(cache):
+		path = key[1] if isinstance(key, tuple) and len(key) > 1 else None
+		if isinstance(path, str) and os.path.normcase(path).startswith(localeDir + os.sep):
+			del cache[key]
+
+
+_forgetOldCatalogs()
+
+from .emojiData import EmojiMatcher, isRegionalIndicator  # noqa: E402
+from .settings import EmojiIDSettingsPanel, getConfig, isEnabled, registerConfig  # noqa: E402
+from .symbols import getSymbolLocale, isIndonesianSymbolsEnabled, setIndonesianSymbolsEnabled  # noqa: E402
 
 addonHandler.initTranslation()
 

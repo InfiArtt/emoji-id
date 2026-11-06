@@ -17,8 +17,6 @@ from gui.guiHelper import wxCallOnMain
 from gui.message import MessageDialog, ReturnCode
 from logHandler import log
 
-addonHandler.initTranslation()
-
 # Keep in sync with globalPlugins/emojiID/donation.py.
 # installTasks cannot import the plugin package, because it is not installed yet.
 GOPAY_NUMBER = "085128011831"
@@ -75,6 +73,11 @@ def _markWelcomeShown() -> None:
 
 
 def onInstall() -> None:
+	# Load translations here rather than when the module is imported. NVDA also imports this module
+	# to run onUninstall from the old version while it installs an update, at startup; gettext would
+	# then keep the old catalog for the locale path that the new version takes over, and new texts
+	# would stay untranslated until NVDA restarted once more.
+	addonHandler.initTranslation()
 	try:
 		wxCallOnMain(_showWelcome)
 	except Exception:

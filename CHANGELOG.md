@@ -24,6 +24,10 @@ Format mengikuti Keep a Changelog.
 - Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali". Tiga 🇮🇩 berturut-turut dibacakan "3 emoji bendera Indonesia", bukan lagi "emoji 3 kali bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
 
+### Diperbaiki
+
+- Setelah memasang pembaruan Emoji ID, teks baru langsung tampil dalam bahasa NVDA. Sebelumnya NVDA harus dimulai ulang sekali lagi, karena NVDA menjalankan tugas pencopotan versi lama saat memasang versi baru, dan tugas itu memuat terjemahan lama. Saat memperbarui dari versi 1.3.0, perbaikan ini juga berlaku.
+
 ### Untuk pengembang
 
 - Data dialog Sisipkan Emoji dibuat dengan `tools/build_picker_data.py` menjadi `data/picker.json`. Daftar kaomoji ada di `tools/kaomoji.tsv`.

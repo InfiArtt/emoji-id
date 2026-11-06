@@ -33,6 +33,7 @@ addon_info = AddonInfo(
 - Mode baca ringkas: hanya membacakan sejumlah emoji berturut-turut, lalu "dan N emoji lainnya".
 - Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali", misalnya "3 emoji bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
+- Setelah memasang pembaruan, teks baru langsung tampil dalam bahasa NVDA tanpa perlu memulai ulang NVDA dua kali.
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",
