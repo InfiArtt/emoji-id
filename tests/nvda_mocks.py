@@ -224,6 +224,12 @@ class FakeCallLater:
 	def Stop(self) -> None:
 		self.isStopped = True
 
+	def IsRunning(self) -> bool:
+		return not self.isStopped
+
+	def Restart(self, delayMs: int) -> None:
+		self.delayMs = delayMs
+
 	def fire(self) -> None:
 		self.func(*self.args)
 
@@ -250,6 +256,7 @@ _module(
 			"HORIZONTAL",
 			"VERTICAL",
 			"ALIGN_RIGHT",
+			"ALIGN_CENTER_VERTICAL",
 			"RIGHT",
 			"ALL",
 			"EXPAND",

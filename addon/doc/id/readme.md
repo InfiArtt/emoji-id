@@ -76,14 +76,16 @@ Isi dialog, sesuai urutan tombol Tab:
 3. Kategori, mengikuti kategori Windows, ditambah Terakhir dipakai dan Favorit.
 4. Subkategori, khusus emoji, misalnya Wajah tersenyum atau Bendera negara.
 5. Hasil. Tekan Enter untuk menyisipkan emoji yang dipilih.
-6. Warna kulit, untuk emoji orang dan tangan.
-7. Warna kulit orang kedua, untuk emoji dua orang seperti jabat tangan dan pasangan.
-8. Jenis kelamin: netral, pria, atau wanita, untuk emoji yang punya ketiga versi itu.
-9. Arah: bawaan atau menghadap kanan, untuk emoji seperti orang berlari dan orang dengan tongkat putih.
-10. Rangkaian: daftar emoji yang dikumpulkan dengan tombol Tambah ke Rangkaian, untuk disisipkan sekaligus.
-11. Tombol Sisipkan, Tambah ke Rangkaian, Hapus Terakhir, Kosongkan Rangkaian, Salin, Tambah ke Favorit atau Hapus dari Favorit, Detail, dan Tutup.
+6. Rangkaian: daftar emoji yang dikumpulkan dengan tombol Tambah ke Rangkaian, untuk disisipkan sekaligus.
+7. Tombol Sisipkan, Tambah ke Rangkaian, Hapus Terakhir, Kosongkan Rangkaian, Salin, Tambah ke Favorit atau Hapus dari Favorit, Detail, dan Tutup.
 
-Setelah Sisipkan ditekan, dialog langsung tertutup dan emoji ditempel ke tempat Anda mengetik. Isi papan klip sebelumnya dikembalikan. Kalau sebuah aplikasi tidak menerima tempelan, pakai tombol Salin, lalu tempel sendiri dengan Control+V. Pilihan warna kulit dan jenis kelamin terakhir diingat untuk pemakaian berikutnya.
+Emoji yang punya pilihan warna kulit, jenis kelamin, atau arah hadap diberi keterangan "dapat dipersonalisasi" di daftar, misalnya "jempol ke atas, dapat dipersonalisasi". Saat emoji seperti itu disisipkan, ditambahkan ke rangkaian, atau disalin, muncul dialog Personalisasi:
+
+- Pilihan "Tanpa personalisasi" sudah terpilih. Tekan Enter untuk langsung memakai emoji aslinya.
+- Pilih "Personalisasi" untuk menampilkan aturannya. Yang muncul hanya aturan yang berlaku untuk emoji itu: jenis kelamin, arah hadap, warna kulit, dan warna kulit orang kedua untuk emoji dua orang seperti jabat tangan.
+- Kolom Hasil menyebut nama emoji jadinya. Tekan Enter untuk memakainya, atau Escape untuk batal.
+
+Setelah Sisipkan ditekan, dialog langsung tertutup dan emoji ditempel ke tempat Anda mengetik. Isi papan klip sebelumnya dikembalikan. Kalau sebuah aplikasi tidak menerima tempelan, pakai tombol Salin, lalu tempel sendiri dengan Control+V. Pilihan personalisasi terakhir diingat untuk pemakaian berikutnya.
 
 ## Pembaruan
 

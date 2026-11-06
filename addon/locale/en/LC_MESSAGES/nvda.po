@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-07 04:15+0700\n"
+"POT-Creation-Date: 2026-11-07 04:40+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,6 +103,80 @@ msgstr "Copied to the clipboard"
 msgid "Gagal menyisipkan emoji"
 msgstr "Could not insert the emoji"
 
+#. Translators: Title of the dialog for choosing skin tone, gender and direction of an emoji.
+msgid "Personalisasi Emoji"
+msgstr "Personalize Emoji"
+
+#. Translators: Introduction of the personalize emoji dialog. {name} is the emoji name.
+#, python-brace-format
+msgid "Emoji: {name}"
+msgstr "Emoji: {name}"
+
+#. Translators: Label of the choice between using the emoji as it is or personalizing it.
+msgid "Pilihan:"
+msgstr "Choice:"
+
+#. Translators: Choice that uses the emoji without changes.
+msgid "Tanpa personalisasi"
+msgstr "No personalization"
+
+#. Translators: Choice that shows the skin tone, gender and direction options.
+msgid "Personalisasi"
+msgstr "Personalize"
+
+#. Translators: Gender choice in the personalize emoji dialog.
+msgid "Netral"
+msgstr "Neutral"
+
+#. Translators: Gender choice in the personalize emoji dialog.
+msgid "Pria"
+msgstr "Man"
+
+#. Translators: Gender choice in the personalize emoji dialog.
+msgid "Wanita"
+msgstr "Woman"
+
+#. Translators: Label of the gender choice in the personalize emoji dialog.
+msgid "Jenis kelamin:"
+msgstr "Gender:"
+
+#. Translators: Label of the direction choice in the personalize emoji dialog.
+msgid "Arah:"
+msgstr "Direction:"
+
+#. Translators: Direction choice in the personalize emoji dialog.
+msgid "Bawaan"
+msgstr "Default"
+
+#. Translators: Direction choice in the personalize emoji dialog.
+msgid "Menghadap kanan"
+msgstr "Facing right"
+
+#. Translators: Label of the skin tone choice in the personalize emoji dialog.
+msgid "Warna kulit:"
+msgstr "Skin tone:"
+
+#. Translators: Label of the first person's skin tone choice in two person emoji.
+msgid "Warna kulit orang pertama:"
+msgstr "First person's skin tone:"
+
+#. Translators: Label of the skin tone choice for the second person in two person emoji.
+msgid "Warna kulit orang kedua:"
+msgstr "Second person's skin tone:"
+
+#. Translators: Choice that gives the second person the same skin tone as the first.
+msgid "Sama dengan orang pertama"
+msgstr "Same as the first person"
+
+#. Translators: Label of the read-only field naming the personalized emoji.
+#. Translators: Label of the results list in the insert emoji dialog.
+msgid "Hasil:"
+msgstr "Results:"
+
+#. Translators: Button that closes the personalize emoji dialog without using the emoji.
+msgid "Batal"
+msgstr "Cancel"
+
 #. Translators: Title of the insert emoji dialog.
 msgid "Sisipkan Emoji - Emoji ID"
 msgstr "Insert Emoji - Emoji ID"
@@ -135,50 +209,6 @@ msgstr "Category:"
 #. Translators: Label of the subcategory choice in the insert emoji dialog.
 msgid "Subkategori:"
 msgstr "Subcategory:"
-
-#. Translators: Label of the results list in the insert emoji dialog.
-msgid "Hasil:"
-msgstr "Results:"
-
-#. Translators: Label of the skin tone choice in the insert emoji dialog.
-msgid "Warna kulit:"
-msgstr "Skin tone:"
-
-#. Translators: Label of the skin tone choice for the second person in two person emoji.
-msgid "Warna kulit orang kedua:"
-msgstr "Second person's skin tone:"
-
-#. Translators: Choice that gives the second person the same skin tone as the first.
-msgid "Sama dengan orang pertama"
-msgstr "Same as the first person"
-
-#. Translators: Label of the gender choice in the insert emoji dialog.
-msgid "Jenis kelamin:"
-msgstr "Gender:"
-
-#. Translators: Gender choice in the insert emoji dialog.
-msgid "Netral"
-msgstr "Neutral"
-
-#. Translators: Gender choice in the insert emoji dialog.
-msgid "Pria"
-msgstr "Man"
-
-#. Translators: Gender choice in the insert emoji dialog.
-msgid "Wanita"
-msgstr "Woman"
-
-#. Translators: Label of the direction choice in the insert emoji dialog.
-msgid "Arah:"
-msgstr "Direction:"
-
-#. Translators: Direction choice in the insert emoji dialog.
-msgid "Bawaan"
-msgstr "Default"
-
-#. Translators: Direction choice in the insert emoji dialog.
-msgid "Menghadap kanan"
-msgstr "Facing right"
 
 #. Translators: Label of the read-only field listing the emoji collected to insert together.
 msgid "Rangkaian:"
@@ -216,6 +246,11 @@ msgstr "Details"
 #. Translators: First choice of the subcategory list, showing every subcategory.
 msgid "Semua subkategori"
 msgstr "All subcategories"
+
+#. Translators: Added after the name of an emoji that can be personalized.
+#, python-brace-format
+msgid "{name}, dapat dipersonalisasi"
+msgstr "{name}, can be personalized"
 
 #. Translators: Shown in the results list when nothing matches.
 msgid "Tidak ada hasil"
@@ -275,6 +310,10 @@ msgstr "Category: {category}"
 #, python-brace-format
 msgid "Subkategori: {subgroup}"
 msgstr "Subcategory: {subgroup}"
+
+#. Translators: Line of the details of an emoji whose skin tone, gender or direction can be chosen.
+msgid "Dapat dipersonalisasi"
+msgstr "Can be personalized"
 
 #. Translators: Line of the details of an item. {keywords} lists its search keywords.
 #, python-brace-format
@@ -967,14 +1006,14 @@ msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Suppor
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 msgid ""
 "\n"
-"- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11: cari emoji, simbol, dan kaomoji dengan kata bahasa Indonesia, jelajahi kategori Windows, pilih warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Tidak ada tombol pintas bawaan; tetapkan di Gestur Masukan.\n"
+"- Dialog Sisipkan Emoji yang mirip panel emoji Windows 11: cari emoji, simbol, dan kaomoji dengan kata bahasa Indonesia, jelajahi kategori Windows, personalisasi warna kulit (juga per orang untuk emoji dua orang), jenis kelamin, dan arah untuk emoji yang mendukungnya, simpan favorit dan daftar terakhir dipakai, rangkai beberapa emoji lalu sisipkan sekaligus, atau salin. Tidak ada tombol pintas bawaan; tetapkan di Gestur Masukan.\n"
 "- Mode baca ringkas: hanya membacakan sejumlah emoji berturut-turut, lalu \"dan N emoji lainnya\".\n"
 "- Emoji yang sama dan berulang sekarang dibacakan tanpa kata \"kali\", misalnya \"3 emoji bendera Indonesia\".\n"
 "- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi \"Emoji ID versi ... sudah versi terbaru\".\n"
 "\t"
 msgstr ""
 "\n"
-"- Insert Emoji dialog, modelled on the Windows 11 emoji panel: search emoji, symbols and kaomoji with Indonesian words, browse the Windows categories, choose skin tones (also for each person of two person emoji), gender and direction, keep favorites and recently used items, collect several emoji and insert them at once, or copy them. It has no default gesture: assign one in Input Gestures.\n"
+"- Insert Emoji dialog, modelled on the Windows 11 emoji panel: search emoji, symbols and kaomoji with Indonesian words, browse the Windows categories, personalize skin tones (also for each person of two person emoji), gender and direction for emoji that support it, keep favorites and recently used items, collect several emoji and insert them at once, or copy them. It has no default gesture: assign one in Input Gestures.\n"
 "- Brief reading mode: read only a set number of emoji in a row, then \"dan N emoji lainnya\".\n"
 "- Repeated identical emoji are now read without the word \"kali\", for example \"3 emoji bendera Indonesia\".\n"
 "- The update check message when no newer version exists now uses more natural Indonesian wording.\n"

@@ -78,14 +78,16 @@ The dialog contains, in Tab order:
 3. Category, following the Windows categories, plus Most recently used and Favorites.
 4. Subcategory, for emoji only, such as Smiling faces or Country flags.
 5. Results. Press Enter to insert the selected emoji.
-6. Skin tone, for people and hand emoji.
-7. Second person's skin tone, for two person emoji such as handshake and couples.
-8. Gender: neutral, man or woman, for emoji that exist in all three.
-9. Direction: default or facing right, for emoji such as a person running or a person with a white cane.
-10. Collection: emoji gathered with Add to Collection, to insert together.
-11. Buttons Insert, Add to Collection, Remove Last, Clear Collection, Copy, Add to Favorites or Remove from Favorites, Details, and Close.
+6. Collection: emoji gathered with Add to Collection, to insert together.
+7. Buttons Insert, Add to Collection, Remove Last, Clear Collection, Copy, Add to Favorites or Remove from Favorites, Details, and Close.
 
-After Insert, the dialog closes and the emoji is pasted where you were typing. The previous clipboard text is put back. If an application does not accept pasting, use Copy and paste with Control+V yourself. The last skin tone and gender are remembered.
+Emoji with a skin tone, gender or direction to choose are marked "dapat dipersonalisasi" (can be personalized) in the list, for example "jempol ke atas, dapat dipersonalisasi". When you insert, collect or copy such an emoji, the Personalize dialog opens:
+
+- "No personalization" is already chosen. Press Enter to use the emoji as it is.
+- Choose "Personalize" to show the options. Only the options that apply to that emoji appear: gender, direction, skin tone, and the second person's skin tone for two person emoji such as handshake.
+- The Result field names the emoji you will get. Press Enter to use it, or Escape to cancel.
+
+After Insert, the dialog closes and the emoji is pasted where you were typing. The previous clipboard text is put back. If an application does not accept pasting, use Copy and paste with Control+V yourself. The last personalization choices are remembered.
 
 ## Updates
 

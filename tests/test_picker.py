@@ -105,42 +105,108 @@ def test_historyEncodingKeepsKaomojiSafe() -> None:
 	assert all(set(item) <= set("0123456789ABCDEF-") for item in history)
 
 
-def test_dialogSearchAndInsert(dialog: picker.EmojiPickerDialog) -> None:
-	dialog.searchField.SetValue("terima kasih")
+def _search(dialog: picker.EmojiPickerDialog, query: str) -> None:
+	dialog.searchField.SetValue(query)
 	dialog._onFilterChanged(None)
+	# Results follow typing after a short delay; run it now.
+	dialog._fillResults()
+
+
+class _ChoosingPersonalizeDialog:
+	"""Stands in for the personalize dialog and confirms a preset choice."""
+
+	answer: str | None = None
+	actions: list[str] = []
+
+	def __init__(self, parent: object, entry: pickerData.Entry, nameOf: object, actionLabel: str) -> None:
+		self.text = _ChoosingPersonalizeDialog.answer or entry.text
+		_ChoosingPersonalizeDialog.actions.append(actionLabel)
+
+	def ShowModal(self) -> int:
+		return nvda_mocks.sys.modules["wx"].ID_OK
+
+	def Destroy(self) -> None:
+		pass
+
+
+def test_rowsMarkCustomizableEmoji(dialog: picker.EmojiPickerDialog) -> None:
+	_search(dialog, "jempol ke atas")
+	assert dialog.resultsList.items[0] == "jempol ke atas, dapat dipersonalisasi"
+	_search(dialog, "indonesia")
+	assert dialog.resultsList.items[0] == "bendera Indonesia"
+
+
+def test_insertPlainEmojiDirectly(dialog: picker.EmojiPickerDialog, monkeypatch: pytest.MonkeyPatch) -> None:
+	_ChoosingPersonalizeDialog.actions.clear()
+	monkeypatch.setattr(picker, "PersonalizeDialog", _ChoosingPersonalizeDialog)
+	_search(dialog, "indonesia")
+	dialog._onInsert(None)
+	# A flag cannot be personalized, so no question is asked.
+	assert _ChoosingPersonalizeDialog.actions == []
+	assert dialog.result == (_FLAG_ID, True)
+	assert pickerData.decodeText(config.conf["emojiID"]["pickerRecent"][0]) == _FLAG_ID
+
+
+def test_insertCustomizableEmojiAsksFirst(
+	dialog: picker.EmojiPickerDialog, monkeypatch: pytest.MonkeyPatch
+) -> None:
+	_ChoosingPersonalizeDialog.actions.clear()
+	_ChoosingPersonalizeDialog.answer = chr(0x1F64F) + chr(0x1F3FD)
+	monkeypatch.setattr(picker, "PersonalizeDialog", _ChoosingPersonalizeDialog)
+	_search(dialog, "terima kasih")
 	assert dialog._rows[0].name == "kedua tangan dikatupkan"
 	dialog._onInsert(None)
-	assert dialog.result == (chr(0x1F64F), True)
-	assert dialog.endModalCode is not None
-	assert pickerData.decodeText(config.conf["emojiID"]["pickerRecent"][0]) == chr(0x1F64F)
+	_ChoosingPersonalizeDialog.answer = None
+	assert _ChoosingPersonalizeDialog.actions == ["Sisipkan"]
+	assert dialog.result == (chr(0x1F64F) + chr(0x1F3FD), True)
 
 
-def test_dialogChainAndSkinTone(dialog: picker.EmojiPickerDialog) -> None:
-	dialog.toneChoice.SetSelection(3)
-	dialog._onVariantChanged(None)
-	dialog.searchField.SetValue("jempol ke atas")
-	dialog._onFilterChanged(None)
+def test_dialogChain(dialog: picker.EmojiPickerDialog, monkeypatch: pytest.MonkeyPatch) -> None:
+	_ChoosingPersonalizeDialog.answer = chr(0x1F44D) + chr(0x1F3FD)
+	monkeypatch.setattr(picker, "PersonalizeDialog", _ChoosingPersonalizeDialog)
+	_search(dialog, "jempol ke atas")
 	dialog._onAddToChain(None)
-	dialog.searchField.SetValue("indonesia")
-	dialog._onFilterChanged(None)
+	_ChoosingPersonalizeDialog.answer = None
+	_search(dialog, "indonesia")
 	dialog._onAddToChain(None)
 	assert nvda_mocks.spokenMessages[-1] == "bendera Indonesia ditambahkan, 2 dalam rangkaian"
 	dialog._onCopy(None)
 	assert dialog.result == (chr(0x1F44D) + chr(0x1F3FD) + _FLAG_ID, False)
-	assert config.conf["emojiID"]["pickerSkinTone"] == 3
+
+
+def test_personalizeDialog(data: pickerData.PickerData, matcher: EmojiMatcher) -> None:
+	config.conf["emojiID"] = dict(nvda_mocks.DEFAULT_CONFIG)
+	runner = next(entry for entry in pickerData.emojiEntries(data, matcher.lookup) if entry.text == _RUNNER)
+	personalize = picker.PersonalizeDialog(None, runner, matcher.lookup, "Sisipkan")
+	# Without personalization, Enter uses the emoji as it is.
+	personalize._onOk(None)
+	assert personalize.text == _RUNNER
+	personalize.modeChoice.SetSelection(1)
+	personalize._onModeChanged(None)
+	personalize.genderChoice.SetSelection(2)
+	personalize.directionChoice.SetSelection(1)
+	personalize.toneChoice.SetSelection(4)
+	personalize._onOptionChanged(None)
+	assert personalize.resultField.value.startswith("wanita berlari warna kulit gelap")
+	personalize._onOk(None)
+	assert personalize.text == runner.item.resolve("wanita", True, 4)
+	assert config.conf["emojiID"]["pickerSkinTone"] == 4
+	assert config.conf["emojiID"]["pickerGender"] == "wanita"
+	# A runner is one person, so there is no second skin tone choice.
+	assert personalize.secondToneChoice is None
 
 
 def test_dialogKaomojiAndFavorites(dialog: picker.EmojiPickerDialog) -> None:
 	dialog.kindChoice.SetSelection(2)
 	dialog._onKindChanged(None)
-	assert not dialog.toneChoice.isEnabled
-	dialog.searchField.SetValue("meja")
-	dialog._onFilterChanged(None)
+	assert not dialog.subgroupChoice.isEnabled
+	_search(dialog, "meja")
 	dialog._onToggleFavorite(None)
 	assert dialog.favoriteButton.label == "Hapus dari Favorit"
 	dialog.searchField.SetValue("")
 	dialog.categoryChoice.SetSelection(1)
 	dialog._onCategoryChanged(None)
+	dialog._fillResults()
 	assert [row.name for row in dialog._rows] == ["membalik meja karena kesal"]
 
 

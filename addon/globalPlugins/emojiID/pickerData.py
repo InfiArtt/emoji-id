@@ -49,6 +49,10 @@ class EmojiItem:
 		found = {key.split("|")[0] if key.split("|")[0] != _FACING_RIGHT else "" for key in self.variants}
 		return [gender for gender in GENDERS if gender in found]
 
+	def isCustomizable(self) -> bool:
+		"""Whether the user can choose a skin tone, gender or direction for this emoji."""
+		return self.toneSlots() > 0 or len(self.genders()) > 1 or self.canFaceRight()
+
 	def canFaceRight(self) -> bool:
 		return any(_FACING_RIGHT in key.split("|") for key in self.variants)
 

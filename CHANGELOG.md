@@ -9,7 +9,7 @@ Format mengikuti Keep a Changelog.
 - Dialog Sisipkan Emoji, dibuat mirip panel emoji Windows 11:
   - Ada tiga jenis: Emoji, Simbol, dan Kaomoji. Kategorinya mengikuti Windows, ditambah 100 subkategori emoji resmi Unicode yang namanya ditulis dalam bahasa Indonesia.
   - Pencarian memakai nama Indonesia dan kata kunci CLDR bahasa Indonesia, misalnya "ngakak" atau "terima kasih". Berbeda dari Windows, simbol dan kaomoji juga bisa dicari.
-  - Pilihan warna kulit, termasuk warna kulit per orang untuk emoji dua orang seperti jabat tangan, ditambah pilihan jenis kelamin dan arah hadap.
+  - Emoji yang punya pilihan warna kulit, jenis kelamin, atau arah hadap diberi keterangan "dapat dipersonalisasi" di daftar. Saat dipilih, muncul dialog Personalisasi dengan pilihan "Tanpa personalisasi" atau "Personalisasi". Hanya aturan yang berlaku untuk emoji itu yang ditampilkan, termasuk warna kulit per orang untuk emoji dua orang seperti jabat tangan.
   - Daftar terakhir dipakai, favorit, rangkaian beberapa emoji yang disisipkan sekaligus, tombol Salin, dan tombol Detail.
   - Berisi 82 kaomoji bernama Indonesia dalam kategori Windows, serta simbol huruf Latin dan huruf Yunani bernama Indonesia.
   - Dialog langsung tertutup setelah menyisipkan, lalu teksnya ditempel ke tempat mengetik. Isi papan klip sebelumnya dikembalikan.
