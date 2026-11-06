@@ -29,10 +29,7 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
-- Tanda baca dan simbol sekarang dibacakan dalam bahasa Indonesia, walaupun suara TTS berbahasa Inggris. Kamusnya mencakup 806 tanda baca dan simbol, mengikuti EYD Edisi V dan KBBI bila ada.
-- Tingkat simbol NVDA tetap berlaku.
-- Fitur ini aktif secara bawaan dan bisa dimatikan di pengaturan Emoji ID, di pengaturan Ucapan NVDA, atau dengan perintah baru di Gestur Masukan.
-- Pemeriksa pembaruan: saat NVDA dijalankan, Emoji ID memeriksa versi terbaru di GitHub. Pemeriksaan juga bisa dilakukan dengan tombol Periksa Pembaruan Sekarang di pengaturan Emoji ID.
+- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
 	"""),
 	# Author(s)
 	addon_author="Rexya Muhamad <rexya2017@gmail.com>",
