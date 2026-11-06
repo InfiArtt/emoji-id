@@ -130,7 +130,7 @@ def _showCheckFailed() -> None:
 def _showUpToDate(installed: str) -> None:
 	MessageDialog.alert(
 		# Translators: Shown when no newer version exists. {version} is the installed version.
-		_("Emoji ID versi {version} sudah yang terbaru.").format(version=installed),
+		_("Emoji ID versi {version} sudah versi terbaru.").format(version=installed),
 		# Translators: Title of the update check dialogs.
 		_("Pembaruan Emoji ID"),
 	)

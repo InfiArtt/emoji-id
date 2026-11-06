@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-07 03:18+0700\n"
+"POT-Creation-Date: 2026-11-07 03:39+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -161,7 +161,7 @@ msgstr "Emoji ID Update"
 
 #. Translators: Shown when no newer version exists. {version} is the installed version.
 #, python-brace-format
-msgid "Emoji ID versi {version} sudah yang terbaru."
+msgid "Emoji ID versi {version} sudah versi terbaru."
 msgstr "Emoji ID version {version} is the latest version."
 
 #. Translators: Shown when a newer version exists. {new} and {installed} are version numbers.

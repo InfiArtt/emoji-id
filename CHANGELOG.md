@@ -2,6 +2,12 @@
 
 Format mengikuti Keep a Changelog.
 
+## [Belum dirilis]
+
+### Diubah
+
+- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
+
 ## [1.3.0] - 2026-11-07
 
 ### Ditambahkan
