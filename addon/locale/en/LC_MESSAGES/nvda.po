@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: emojiID\n"
 "Report-Msgid-Bugs-To: 'nvda-translations@groups.io'\n"
-"POT-Creation-Date: 2026-11-07 03:40+0700\n"
+"POT-Creation-Date: 2026-11-07 03:50+0700\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,8 +116,8 @@ msgid "Kata awalan hanya sekali untuk emoji berturut-turut"
 msgstr "Prefix only once for consecutive emoji"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
-msgid "Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"
-msgstr "Collapse repeated identical emoji (for example '3 kali wajah gembira')"
+msgid "Gabungkan emoji yang sama dan berulang (misalnya '3 wajah gembira')"
+msgstr "Collapse repeated identical emoji (for example '3 wajah gembira')"
 
 #. Translators: Checkbox in the Emoji ID settings panel.
 msgid "Sertakan detail warna kulit"
@@ -267,11 +267,13 @@ msgstr "Reads emoji in Indonesian, whatever language your TTS voice uses. Suppor
 #. Translators: what's new content for the add-on version to be shown in the add-on store
 msgid ""
 "\n"
+"- Emoji yang sama dan berulang sekarang dibacakan tanpa kata \"kali\", misalnya \"3 emoji bendera Indonesia\".\n"
 "- Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi \"Emoji ID versi ... sudah versi terbaru\".\n"
 "\t"
 msgstr ""
 "\n"
-"- The update check message when no newer version exists now reads \"Emoji ID version ... is the latest version\" in a more natural Indonesian wording.\n"
+"- Repeated identical emoji are now read without the word \"kali\", for example \"3 emoji bendera Indonesia\".\n"
+"- The update check message when no newer version exists now uses more natural Indonesian wording.\n"
 "\t"
 
 #. Translators: Name of the symbol dictionary shown in NVDA's speech settings.

@@ -214,7 +214,7 @@ class EmojiMatcher:
 		:param text: Text that may contain emoji.
 		:param prefix: Word spoken before each emoji name, such as "emoji". Empty for none.
 		:param isPrefixOnce: Speak the prefix only before the first emoji of a run of emoji.
-		:param shouldCollapseRepeated: Speak repeated identical emoji as "N kali <name>".
+		:param shouldCollapseRepeated: Speak repeated identical emoji as a count and one name.
 		:param hasSkinToneDetail: Include skin tone descriptions.
 		:param shouldCleanSymbols: Remove punctuation from emoji names.
 		:return: The text with emoji replaced.
@@ -232,12 +232,13 @@ class EmojiMatcher:
 			nonlocal isInEmojiRun
 			if currentName is None or currentCount <= 0:
 				return
-			if shouldCollapseRepeated and currentCount > 1:
-				itemText = f"{currentCount} kali {currentName}"
-			else:
-				itemText = " ".join([currentName] * currentCount)
+			isCollapsed = shouldCollapseRepeated and currentCount > 1
+			itemText = currentName if isCollapsed else " ".join([currentName] * currentCount)
 			if prefix and not (isPrefixOnce and isInEmojiRun):
 				itemText = f"{prefix} {itemText}"
+			if isCollapsed:
+				# The count comes first, as in "3 emoji bendera Indonesia".
+				itemText = f"{currentCount} {itemText}"
 			# Keep the name apart from adjacent text or emoji.
 			if resultParts and not resultParts[-1].endswith((" ", "\t", "\n")):
 				resultParts.append(" ")

@@ -52,7 +52,7 @@ Panduan ini ditujukan bagi pengguna tunanetra untuk memverifikasi fungsionalitas
 ## Kasus Uji 8: Penggabungan Emoji Berulang (Collapse Repeated)
 - Tindakan: Ketik tiga emoji identik berurutan: `😀😀😀`.
 - Hasil yang Diharapkan:
-  - Jika opsi gabungkan berulang aktif: `emoji 3 kali wajah gembira`.
+  - Jika opsi gabungkan berulang aktif: `3 emoji wajah gembira`.
   - Jika opsi gabungkan nonaktif: `emoji wajah gembira emoji wajah gembira emoji wajah gembira`.
 
 ## Kasus Uji 9: Variasi Warna Kulit (Skin Tone Detail)

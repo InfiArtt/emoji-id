@@ -41,7 +41,7 @@ Open the NVDA menu, Preferences, Settings, and choose the Emoji ID category. The
 2. Add a prefix word before emoji names. On by default.
 3. Prefix word. The word spoken before each emoji name. "emoji" by default.
 4. Prefix only once for consecutive emoji. When checked, the prefix is spoken only before the first emoji in a run.
-5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 kali wajah gembira".
+5. Collapse repeated identical emoji. When checked, three 😀 in a row are read as "3 wajah gembira", or "3 emoji wajah gembira" with the prefix word.
 6. Include skin tone details. When unchecked, only the base emoji name is read.
 7. Remove hyphens and parentheses from emoji names. On by default. "kupu-kupu" is sent to the synthesizer as "kupu kupu" and parentheses are removed, so synthesizers such as Eloquence do not say "dash" or "left paren". Punctuation outside emoji names is not changed.
 8. Read punctuation and symbols in Indonesian. On by default. See the Punctuation and symbols section.

@@ -89,7 +89,7 @@ class EmojiIDSettingsPanel(SettingsPanel):
 			wx.CheckBox(
 				self,
 				# Translators: Checkbox in the Emoji ID settings panel.
-				label=_("Gabungkan emoji yang sama dan berulang (misalnya '3 kali wajah gembira')"),
+				label=_("Gabungkan emoji yang sama dan berulang (misalnya '3 wajah gembira')"),
 			),
 		)
 		self.collapseRepeatedCheckbox.SetValue(conf["collapseRepeated"])

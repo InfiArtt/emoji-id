@@ -75,7 +75,7 @@ def test_mixedText(matcher: EmojiMatcher) -> None:
 
 
 def test_collapseRepeated(matcher: EmojiMatcher) -> None:
-	assert matcher.replaceInText("😀😀😀", shouldCollapseRepeated=True) == "3 kali wajah gembira"
+	assert matcher.replaceInText("😀😀😀", shouldCollapseRepeated=True) == "3 wajah gembira"
 	assert (
 		matcher.replaceInText("😀😀😀", shouldCollapseRepeated=False)
 		== "wajah gembira wajah gembira wajah gembira"
@@ -99,8 +99,8 @@ def test_collapseRepeated(matcher: EmojiMatcher) -> None:
 			False,
 			"emoji wajah gembira berurai air mata tangan melambai pria dengan tongkat putih",
 		),
-		("😂 😂 😂", True, True, "emoji 3 kali wajah gembira berurai air mata"),
-		("😂, 😂, 😂", True, True, "emoji 3 kali wajah gembira berurai air mata"),
+		("😂 😂 😂", True, True, "3 emoji wajah gembira berurai air mata"),
+		("😂, 😂, 😂", True, True, "3 emoji wajah gembira berurai air mata"),
 	],
 )
 def test_prefix(

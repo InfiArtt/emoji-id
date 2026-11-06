@@ -29,6 +29,7 @@ addon_info = AddonInfo(
 	# Brief changelog for this version
 	# Translators: what's new content for the add-on version to be shown in the add-on store
 	addon_changelog=_("""
+- Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali", misalnya "3 emoji bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
 	"""),
 	# Author(s)

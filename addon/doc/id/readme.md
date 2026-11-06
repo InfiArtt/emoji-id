@@ -39,7 +39,7 @@ Buka menu NVDA, Preferensi, Pengaturan, lalu pilih kategori Emoji ID. Pilihan ya
 2. Tambahkan kata awalan sebelum nama emoji. Bawaannya aktif.
 3. Kata awalan. Kata yang diucapkan sebelum nama emoji. Bawaannya "emoji".
 4. Kata awalan hanya sekali untuk emoji berturut-turut. Jika dicentang, kata awalan hanya diucapkan sebelum emoji pertama dalam satu deret emoji.
-5. Gabungkan emoji yang sama dan berulang. Jika dicentang, tiga 😀 berturut-turut dibacakan "3 kali wajah gembira".
+5. Gabungkan emoji yang sama dan berulang. Jika dicentang, tiga 😀 berturut-turut dibacakan "3 wajah gembira", atau "3 emoji wajah gembira" jika kata awalan aktif.
 6. Sertakan detail warna kulit. Jika tidak dicentang, hanya nama dasar emoji yang dibacakan.
 7. Bersihkan tanda hubung dan tanda kurung pada nama emoji. Bawaannya aktif. "kupu-kupu" dikirim ke synthesizer sebagai "kupu kupu", dan tanda kurung dihapus, supaya synthesizer seperti Eloquence tidak mengucapkan "dash" atau "left paren". Tanda baca di luar nama emoji tidak diubah.
 8. Bacakan tanda baca dan simbol dalam bahasa Indonesia. Bawaannya aktif. Lihat bagian Tanda baca dan simbol.

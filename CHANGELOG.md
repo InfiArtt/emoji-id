@@ -6,6 +6,7 @@ Format mengikuti Keep a Changelog.
 
 ### Diubah
 
+- Emoji yang sama dan berulang sekarang dibacakan tanpa kata "kali". Tiga 🇮🇩 berturut-turut dibacakan "3 emoji bendera Indonesia", bukan lagi "emoji 3 kali bendera Indonesia".
 - Pesan pemeriksa pembaruan saat tidak ada versi baru sekarang berbunyi "Emoji ID versi ... sudah versi terbaru".
 
 ## [1.3.0] - 2026-11-07
