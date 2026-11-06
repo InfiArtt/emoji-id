@@ -16,6 +16,7 @@ from collections.abc import Callable
 
 import addonHandler
 import api
+import controlTypes
 import core
 import gui
 import ui
@@ -24,6 +25,8 @@ from gui import guiHelper
 from gui.message import MessageDialog
 from keyboardHandler import KeyboardInputGesture
 from logHandler import log
+from NVDAObjects import NVDAObject
+from NVDAObjects.behaviors import EditableText, Terminal
 
 from . import pickerData
 from .emojiData import cleanNameSymbols
@@ -102,6 +105,27 @@ def openPicker(nameOf: Callable[[str], str | None]) -> None:
 		_isOpen = False
 	if text:
 		wx.CallLater(_PASTE_DELAY_MS, insertText if shouldPaste else copyText, text)
+
+
+def isTypingPlace(obj: NVDAObject | None) -> bool:
+	"""Whether text pasted into this focus object would be typed there.
+
+	Editable text, editable documents (Word, email bodies, web text fields) and terminals count.
+	Read-only text, buttons, lists, menus and web pages in browse mode outside a text field do not.
+	"""
+	if obj is None:
+		return False
+	role = obj.role
+	if role == controlTypes.Role.TERMINAL or isinstance(obj, Terminal):
+		return True
+	states = obj.states
+	if controlTypes.State.READONLY in states:
+		return False
+	return (
+		controlTypes.State.EDITABLE in states
+		or role == controlTypes.Role.EDITABLETEXT
+		or isinstance(obj, EditableText)
+	)
 
 
 def copyText(text: str) -> None:

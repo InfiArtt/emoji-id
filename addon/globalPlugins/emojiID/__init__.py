@@ -17,6 +17,7 @@ import random
 from collections.abc import Callable
 
 import addonHandler
+import api
 import characterProcessing
 import config
 import core
@@ -27,7 +28,7 @@ import ui
 import wx
 from gui.settingsDialogs import NVDASettingsDialog
 from logHandler import log
-from scriptHandler import script
+from scriptHandler import getLastScriptRepeatCount, script
 from speech.types import SpeechSequence
 
 from .emojiData import EmojiMatcher, isRegionalIndicator
@@ -167,8 +168,14 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		description=_("Buka dialog sisipkan emoji"),
 	)
 	def script_openEmojiPicker(self, gesture: inputCore.InputGesture) -> None:
-		from .picker import openPicker
+		from .picker import isTypingPlace, openPicker
 
+		# Pressed once, the dialog only opens where text can be typed; pressed twice, it opens anyway,
+		# for applications that do not tell NVDA their text fields are editable.
+		if getLastScriptRepeatCount() == 0 and not isTypingPlace(api.getFocusObject()):
+			# Translators: Announced when the insert emoji command is used outside a place to type.
+			ui.message(_("Bukan tempat mengetik. Tekan dua kali untuk tetap membuka"))
+			return
 		# Leave the script handler before showing a modal dialog.
 		wx.CallAfter(openPicker, self._matcher.lookup)
 

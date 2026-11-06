@@ -69,6 +69,8 @@ Dengan cara yang sama, Anda bisa memasang tombol pintasan untuk perintah "Aktifk
 
 Dialog Sisipkan Emoji dibuat mirip panel emoji Windows 11 (Windows+titik), tetapi semua namanya berbahasa Indonesia dan semua bagiannya bisa dicari. Dialog ini hanya bisa dibuka lewat perintah "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID. Perintah ini tidak punya tombol pintas bawaan, jadi tetapkan sendiri tombolnya dengan cara di bagian Perintah untuk menyalakan dan mematikan.
 
+Agar tidak terbuka tanpa sengaja, dialog hanya terbuka di tempat mengetik: kolom teks, dokumen yang bisa diedit seperti Word atau badan email, kolom isian di halaman web, dan terminal. Di tempat lain, misalnya tombol, daftar, desktop, teks hanya baca, atau halaman web dalam mode jelajah di luar kolom isian, NVDA mengucapkan "Bukan tempat mengetik. Tekan dua kali untuk tetap membuka". Kalau sebuah aplikasi punya kolom teks yang tidak dikenali NVDA, tekan tombol pintasnya dua kali cepat untuk tetap membuka dialog.
+
 Dialog ini punya tiga tab: Emoji, Simbol, dan Kaomoji. Isi setiap tab, sesuai urutan tombol Tab:
 
 1. Cari. Hasil langsung diperbarui saat mengetik. Pencarian memakai nama Indonesia dan kata kunci, misalnya "ngakak", "terima kasih", atau "bendera jepang". Pencarian mencakup semua kategori di tab itu.

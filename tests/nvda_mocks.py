@@ -118,10 +118,13 @@ _module("inputCore", InputGesture=object)
 spokenMessages: list[str] = []
 _module("ui", message=spokenMessages.append)
 clipboard: list[str] = []
+#: The object api.getFocusObject returns; tests replace it.
+focusObject: list[Any] = [None]
 _module(
 	"api",
 	copyToClip=lambda text, notify=False: clipboard.append(text) or True,
 	getClipData=lambda: clipboard[-1] if clipboard else "",
+	getFocusObject=lambda: focusObject[0],
 )
 sentGestures: list[str] = []
 
@@ -149,7 +152,42 @@ def _script(**kwargs: Any) -> Callable[[Callable[..., Any]], Callable[..., Any]]
 	return decorator
 
 
-_module("scriptHandler", script=_script)
+#: What getLastScriptRepeatCount returns: 0 for a first press, 1 for a second quick press.
+scriptRepeatCount = [0]
+_module("scriptHandler", script=_script, getLastScriptRepeatCount=lambda: scriptRepeatCount[0])
+
+
+class _Role:
+	EDITABLETEXT = "editableText"
+	TERMINAL = "terminal"
+	DOCUMENT = "document"
+	BUTTON = "button"
+
+
+class _State:
+	EDITABLE = "editable"
+	READONLY = "readonly"
+
+
+_module("controlTypes", Role=_Role, State=_State)
+
+
+class FakeNVDAObject:
+	def __init__(self, role: str = _Role.BUTTON, states: set[str] | None = None) -> None:
+		self.role = role
+		self.states = states or set()
+
+
+class FakeEditableText(FakeNVDAObject):
+	pass
+
+
+class FakeTerminal(FakeNVDAObject):
+	pass
+
+
+nvdaObjectsBehaviors = _module("NVDAObjects.behaviors", EditableText=FakeEditableText, Terminal=FakeTerminal)
+_module("NVDAObjects", NVDAObject=FakeNVDAObject, behaviors=nvdaObjectsBehaviors)
 
 
 class _GlobalPlugin:

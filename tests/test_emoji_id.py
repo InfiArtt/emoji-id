@@ -579,3 +579,41 @@ def test_updateOfferOpensReleasePage(monkeypatch: pytest.MonkeyPatch) -> None:
 	nvda_mocks.FakeMessageDialog.askAnswer = nvda_mocks.ReturnCode.CANCEL
 	assert opened == [release.pageUrl]
 	assert "1.4.0" in nvda_mocks.FakeMessageDialog.shown[-1]
+
+
+@pytest.mark.parametrize(
+	("obj", "expected"),
+	[
+		(nvda_mocks.FakeNVDAObject("editableText"), True),
+		(nvda_mocks.FakeNVDAObject("document", {"editable"}), True),
+		(nvda_mocks.FakeEditableText("pane"), True),
+		(nvda_mocks.FakeNVDAObject("terminal", {"readonly"}), True),
+		(nvda_mocks.FakeTerminal("pane"), True),
+		(nvda_mocks.FakeNVDAObject("editableText", {"readonly"}), False),
+		# A web page in browse mode.
+		(nvda_mocks.FakeNVDAObject("document", {"readonly"}), False),
+		(nvda_mocks.FakeNVDAObject("button"), False),
+		(None, False),
+	],
+)
+def test_isTypingPlace(obj: object, expected: bool) -> None:
+	from emojiID.picker import isTypingPlace
+
+	assert isTypingPlace(obj) == expected
+
+
+def test_openPickerOnlyWhereTyping(plugin: GlobalPlugin) -> None:
+	nvda_mocks.focusObject[0] = nvda_mocks.FakeNVDAObject("button")
+	nvda_mocks.scriptRepeatCount[0] = 0
+	plugin.script_openEmojiPicker(None)
+	assert nvda_mocks.calledAfter == []
+	assert nvda_mocks.spokenMessages[-1] == "Bukan tempat mengetik. Tekan dua kali untuk tetap membuka"
+	# Pressed twice, it opens anyway.
+	nvda_mocks.scriptRepeatCount[0] = 1
+	plugin.script_openEmojiPicker(None)
+	assert len(nvda_mocks.calledAfter) == 1
+	nvda_mocks.scriptRepeatCount[0] = 0
+	nvda_mocks.focusObject[0] = nvda_mocks.FakeNVDAObject("editableText")
+	plugin.script_openEmojiPicker(None)
+	assert len(nvda_mocks.calledAfter) == 2
+	nvda_mocks.focusObject[0] = None

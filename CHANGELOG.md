@@ -16,6 +16,7 @@ Format mengikuti Keep a Changelog.
   - Berisi 82 kaomoji bernama Indonesia dalam kategori Windows, serta simbol huruf Latin dan huruf Yunani bernama Indonesia.
   - Dialog langsung tertutup setelah menyisipkan, lalu teksnya ditempel ke tempat mengetik. Isi papan klip sebelumnya dikembalikan.
   - Dialog hanya dibuka lewat perintahnya di Gestur Masukan, yang tidak punya tombol pintas bawaan.
+  - Dialog hanya terbuka di tempat mengetik, misalnya kolom teks, dokumen yang bisa diedit, atau terminal. Di tempat lain NVDA mengucapkan "Bukan tempat mengetik. Tekan dua kali untuk tetap membuka". Menekan tombol pintasnya dua kali cepat tetap membuka dialog, untuk aplikasi yang kolom teksnya tidak dikenali NVDA.
 - Mode baca ringkas: pengaturan "Jumlah emoji berturut-turut yang dibacakan". Misalnya dengan angka 3, deretan delapan emoji dibacakan tiga nama, lalu "dan 5 emoji lainnya". Bawaannya 0, artinya semua dibacakan.
 
 ### Diubah

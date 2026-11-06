@@ -99,6 +99,8 @@ Jalankan kasus berikut sebelum mengubah `lastTestedNVDAVersion` atau merilis ver
 Tetapkan dulu tombol pintas untuk "Buka dialog sisipkan emoji" di Gestur Masukan, kategori Emoji ID.
 
 - Membuka dialog. Buka Notepad, lalu tekan tombol pintas itu. Hasil yang diharapkan: dialog "Sisipkan Emoji - Emoji ID" terbuka di tab Emoji dengan fokus di kolom Cari. Dialog tidak bisa dibuka dari menu NVDA.
+- Bukan tempat mengetik. Fokus ke desktop atau ke sebuah tombol, lalu tekan tombol pintasnya sekali. Hasil yang diharapkan: NVDA mengucapkan "Bukan tempat mengetik. Tekan dua kali untuk tetap membuka" dan dialog tidak terbuka. Tekan dua kali cepat: dialog terbuka.
+- Tempat mengetik lain. Coba buka dialog dengan sekali tekan di Word, kolom alamat browser, kolom komentar di halaman web, badan email, dan Command Prompt. Hasil yang diharapkan: dialog langsung terbuka. Di halaman web dalam mode jelajah, di luar kolom isian, dialog tidak terbuka dengan sekali tekan.
 - Posisi di daftar. Tekan Tab sampai ke daftar Hasil, lalu panah turun. Hasil yang diharapkan: NVDA menyebut nama emoji beserta posisinya, misalnya "2 dari 170".
 - Lompat subkategori. Di daftar Hasil kategori Wajah dan emosi, tekan panah kanan beberapa kali. Hasil yang diharapkan: pilihan pindah ke emoji pertama subkategori berikutnya, lalu nama subkategorinya diucapkan. Panah kiri kembali ke subkategori sebelumnya. Di subkategori pertama, panah kiri mengucapkan "Subkategori pertama". Di tab Simbol, panah kanan dan kiri tidak melakukan apa pun.
 - Tab. Tekan Control+Tab. Hasil yang diharapkan: pindah ke tab Simbol dan fokus di kolom Cari. Control+3 pindah ke tab Kaomoji, Control+1 kembali ke tab Emoji.

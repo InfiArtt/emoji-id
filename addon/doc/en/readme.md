@@ -71,6 +71,8 @@ In the same way, you can assign a gesture to "Turns Indonesian punctuation and s
 
 The Insert Emoji dialog is modelled on the Windows 11 emoji panel (Windows+period), but every name is Indonesian and every part can be searched. It opens only through the "Opens the insert emoji dialog" command in Input Gestures, Emoji ID category. The command has no default gesture, so assign one as described in the Toggle command section.
 
+So that it does not open by accident, the dialog only opens where you can type: text fields, editable documents such as Word or an email body, form fields on web pages, and terminals. Elsewhere, for example on a button, a list, the desktop, read-only text, or a web page in browse mode outside a form field, NVDA says "Not a place to type. Press twice to open anyway". If an application has a text field NVDA does not recognize, press the gesture twice quickly to open the dialog anyway.
+
 The dialog has three tabs: Emoji, Symbols and Kaomoji. Each tab contains, in Tab order:
 
 1. Search. Results update as you type. Search uses Indonesian names and keywords, for example "ngakak", "terima kasih" or "bendera jepang", across every category of the tab.
