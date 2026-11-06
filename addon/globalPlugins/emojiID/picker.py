@@ -113,11 +113,16 @@ def insertText(text: str) -> None:
 		core.callLater(_RESTORE_CLIPBOARD_DELAY_MS, api.copyToClip, previous)
 
 
-class PersonalizeDialog(wx.Dialog):
-	"""Choose skin tones, gender and direction for one emoji before using it.
+#: What the user does with an emoji, in the insert emoji and personalize dialogs.
+ACTION_INSERT = "insert"
+ACTION_ADD_TO_CHAIN = "addToChain"
+ACTION_COPY = "copy"
 
-	Only the choices this emoji supports are shown, and only after "Personalisasi" is chosen.
-	Pressing Enter right away uses the emoji without changes.
+
+class PersonalizeDialog(wx.Dialog):
+	"""Choose skin tones, gender and direction for one emoji, opened with Shift+Enter.
+
+	Only the choices this emoji supports are shown.
 	"""
 
 	def __init__(
@@ -125,35 +130,23 @@ class PersonalizeDialog(wx.Dialog):
 		parent: wx.Window,
 		entry: pickerData.Entry,
 		nameOf: Callable[[str], str | None],
-		actionLabel: str,
 	) -> None:
 		# Translators: Title of the dialog for choosing skin tone, gender and direction of an emoji.
 		super().__init__(parent, title=_("Personalisasi Emoji"))
 		assert entry.item is not None
 		self._item = entry.item
 		self._nameOf = nameOf
+		#: The chosen emoji text and action, set when the dialog is confirmed.
 		self.text = entry.text
+		self.action = ACTION_INSERT
 		conf = getConfig()
 
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
 		sHelper = guiHelper.BoxSizerHelper(self, orientation=wx.VERTICAL)
 		# Translators: Introduction of the personalize emoji dialog. {name} is the emoji name.
 		sHelper.addItem(wx.StaticText(self, label=_("Emoji: {name}").format(name=entry.name)))
-		self.modeChoice = sHelper.addLabeledControl(
-			# Translators: Label of the choice between using the emoji as it is or personalizing it.
-			_("Pilihan:"),
-			wx.Choice,
-			choices=[
-				# Translators: Choice that uses the emoji without changes.
-				_("Tanpa personalisasi"),
-				# Translators: Choice that shows the skin tone, gender and direction options.
-				_("Personalisasi"),
-			],
-		)
-		self.modeChoice.SetSelection(0)
 
 		self.toneChoice = self.secondToneChoice = self.genderChoice = self.directionChoice = None
-		self._options: list[wx.Window] = []
 		genders = self._item.genders()
 		self._genders = genders
 		if len(genders) > 1:
@@ -165,106 +158,87 @@ class PersonalizeDialog(wx.Dialog):
 				# Translators: Gender choice in the personalize emoji dialog.
 				pickerData.GENDER_FEMALE: _("Wanita"),
 			}
-			self.genderChoice = self._addOption(
-				sHelper,
+			self.genderChoice = sHelper.addLabeledControl(
 				# Translators: Label of the gender choice in the personalize emoji dialog.
 				_("Jenis kelamin:"),
-				wx.Choice(self, choices=[labels[gender] for gender in genders]),
+				wx.Choice,
+				choices=[labels[gender] for gender in genders],
 			)
 			saved = conf["pickerGender"]
 			self.genderChoice.SetSelection(genders.index(saved) if saved in genders else 0)
 		if self._item.canFaceRight():
-			self.directionChoice = self._addOption(
-				sHelper,
+			self.directionChoice = sHelper.addLabeledControl(
 				# Translators: Label of the direction choice in the personalize emoji dialog.
 				_("Arah:"),
-				wx.Choice(
-					self,
-					choices=[
-						# Translators: Direction choice in the personalize emoji dialog.
-						_("Bawaan"),
-						# Translators: Direction choice in the personalize emoji dialog.
-						_("Menghadap kanan"),
-					],
-				),
+				wx.Choice,
+				choices=[
+					# Translators: Direction choice in the personalize emoji dialog.
+					_("Bawaan"),
+					# Translators: Direction choice in the personalize emoji dialog.
+					_("Menghadap kanan"),
+				],
 			)
 			self.directionChoice.SetSelection(0)
 		slots = max(self._item.toneSlots(gender) for gender in genders)
 		if slots:
-			self.toneChoice = self._addOption(
-				sHelper,
+			self.toneChoice = sHelper.addLabeledControl(
 				# Translators: Label of the skin tone choice in the personalize emoji dialog.
 				_("Warna kulit:")
 				if slots == 1
 				# Translators: Label of the first person's skin tone choice in two person emoji.
 				else _("Warna kulit orang pertama:"),
-				wx.Choice(self, choices=list(SKIN_TONES)),
+				wx.Choice,
+				choices=list(SKIN_TONES),
 			)
 			self.toneChoice.SetSelection(conf["pickerSkinTone"])
 		if slots == 2:
-			self.secondToneChoice = self._addOption(
-				sHelper,
+			self.secondToneChoice = sHelper.addLabeledControl(
 				# Translators: Label of the skin tone choice for the second person in two person emoji.
 				_("Warna kulit orang kedua:"),
-				wx.Choice(
-					self,
-					choices=[
-						# Translators: Choice that gives the second person the same skin tone as the first.
-						_("Sama dengan orang pertama"),
-						*SKIN_TONES[1:],
-					],
-				),
+				wx.Choice,
+				choices=[
+					# Translators: Choice that gives the second person the same skin tone as the first.
+					_("Sama dengan orang pertama"),
+					*SKIN_TONES[1:],
+				],
 			)
 			self.secondToneChoice.SetSelection(conf["pickerSecondSkinTone"])
-		self.resultField = self._addOption(
-			sHelper,
+		self.resultField = sHelper.addLabeledControl(
 			# Translators: Label of the read-only field naming the personalized emoji.
 			_("Hasil:"),
-			wx.TextCtrl(self, style=wx.TE_READONLY, size=(380, -1)),
+			wx.TextCtrl,
+			style=wx.TE_READONLY,
+			size=(380, -1),
 		)
 
 		buttons = guiHelper.ButtonHelper(wx.HORIZONTAL)
-		self.okButton = buttons.addButton(self, wx.ID_OK, label=actionLabel)
+		# Translators: Button that inserts the personalized emoji and closes the insert emoji dialog.
+		self.insertButton = buttons.addButton(self, label=_("Sisipkan"))
+		# Translators: Button that adds the personalized emoji to the collection.
+		self.addToChainButton = buttons.addButton(self, label=_("Tambah ke Rangkaian"))
+		# Translators: Button that copies the personalized emoji and closes the insert emoji dialog.
+		self.copyButton = buttons.addButton(self, label=_("Salin"))
 		# Translators: Button that closes the personalize emoji dialog without using the emoji.
 		buttons.addButton(self, wx.ID_CANCEL, label=_("Batal"))
 		sHelper.addItem(buttons)
 		mainSizer.Add(sHelper.sizer, border=guiHelper.BORDER_FOR_DIALOGS, flag=wx.ALL)
-		self.SetSizer(mainSizer)
-		self.okButton.SetDefault()
+		self.SetSizerAndFit(mainSizer)
+		self.insertButton.SetDefault()
 		self.SetEscapeId(wx.ID_CANCEL)
 
-		self.modeChoice.Bind(wx.EVT_CHOICE, self._onModeChanged)
 		for choice in (self.genderChoice, self.directionChoice, self.toneChoice, self.secondToneChoice):
 			if choice is not None:
 				choice.Bind(wx.EVT_CHOICE, self._onOptionChanged)
-		self.okButton.Bind(wx.EVT_BUTTON, self._onOk)
-		self._showOptions(False)
-		self.CentreOnScreen()
-		self.modeChoice.SetFocus()
-
-	def _addOption(self, sHelper: guiHelper.BoxSizerHelper, label: str, control: wx.Window) -> wx.Window:
-		"""Add a labelled control that stays hidden until "Personalisasi" is chosen."""
-		labelText = wx.StaticText(self, label=label)
-		row = wx.BoxSizer(wx.HORIZONTAL)
-		row.Add(labelText, flag=wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, border=10)
-		row.Add(control)
-		sHelper.addItem(row)
-		self._options.extend((labelText, control))
-		return control
-
-	def _showOptions(self, isShown: bool) -> None:
-		for window in self._options:
-			window.Show(isShown)
+		self.insertButton.Bind(wx.EVT_BUTTON, lambda evt: self._confirm(ACTION_INSERT))
+		self.addToChainButton.Bind(wx.EVT_BUTTON, lambda evt: self._confirm(ACTION_ADD_TO_CHAIN))
+		self.copyButton.Bind(wx.EVT_BUTTON, lambda evt: self._confirm(ACTION_COPY))
 		self._updateResult()
-		self.Layout()
-		self.Fit()
-
-	def _isPersonalized(self) -> bool:
-		return self.modeChoice.GetSelection() == 1
+		self.CentreOnScreen()
+		first = self.genderChoice or self.directionChoice or self.toneChoice
+		if first is not None:
+			first.SetFocus()
 
 	def _resolve(self) -> str:
-		if not self._isPersonalized():
-			return self._item.resolve()
 		gender = self._genders[self.genderChoice.GetSelection()] if self.genderChoice else ""
 		isFacingRight = bool(self.directionChoice and self.directionChoice.GetSelection() == 1)
 		tone = self.toneChoice.GetSelection() if self.toneChoice else 0
@@ -275,22 +249,19 @@ class PersonalizeDialog(wx.Dialog):
 		text = self._resolve()
 		self.resultField.SetValue(cleanNameSymbols(self._nameOf(text) or text))
 
-	def _onModeChanged(self, evt: wx.CommandEvent) -> None:
-		self._showOptions(self._isPersonalized())
-
 	def _onOptionChanged(self, evt: wx.CommandEvent) -> None:
 		self._updateResult()
 
-	def _onOk(self, evt: wx.CommandEvent) -> None:
+	def _confirm(self, action: str) -> None:
 		self.text = self._resolve()
-		if self._isPersonalized():
-			conf = getConfig()
-			if self.toneChoice:
-				conf["pickerSkinTone"] = self.toneChoice.GetSelection()
-			if self.secondToneChoice:
-				conf["pickerSecondSkinTone"] = self.secondToneChoice.GetSelection()
-			if self.genderChoice:
-				conf["pickerGender"] = self._genders[self.genderChoice.GetSelection()]
+		self.action = action
+		conf = getConfig()
+		if self.toneChoice:
+			conf["pickerSkinTone"] = self.toneChoice.GetSelection()
+		if self.secondToneChoice:
+			conf["pickerSecondSkinTone"] = self.secondToneChoice.GetSelection()
+		if self.genderChoice:
+			conf["pickerGender"] = self._genders[self.genderChoice.GetSelection()]
 		self.EndModal(wx.ID_OK)
 
 
@@ -385,6 +356,7 @@ class EmojiPickerDialog(wx.Dialog):
 		self.clearChainButton.Bind(wx.EVT_BUTTON, self._onClearChain)
 		self.favoriteButton.Bind(wx.EVT_BUTTON, self._onToggleFavorite)
 		self.detailButton.Bind(wx.EVT_BUTTON, self._onDetail)
+		self.Bind(wx.EVT_CHAR_HOOK, self._onCharHook)
 
 		self._fillCategories()
 		self.CentreOnScreen()
@@ -443,7 +415,7 @@ class EmojiPickerDialog(wx.Dialog):
 	def _rowName(self, entry: pickerData.Entry) -> str:
 		if entry.item is not None and entry.item.isCustomizable() and entry.text == entry.item.resolve():
 			# Translators: Added after the name of an emoji that can be personalized.
-			return _("{name}, dapat dipersonalisasi").format(name=entry.name)
+			return _("{name}, dapat dipersonalisasi, tekan Shift+Enter").format(name=entry.name)
 		return entry.name
 
 	def _fillResults(self) -> None:
@@ -510,25 +482,6 @@ class EmojiPickerDialog(wx.Dialog):
 			else _("Tambah ke Favorit"),
 		)
 
-	def _personalized(self, entry: pickerData.Entry, actionLabel: str) -> pickerData.Entry | None:
-		"""Ask for skin tone, gender and direction when the emoji has them.
-
-		:return: The entry to use, or ``None`` when the user cancelled.
-		"""
-		if entry.item is None or not entry.item.isCustomizable() or entry.text != entry.item.resolve():
-			return entry
-		dialog = PersonalizeDialog(self, entry, self._nameOf, actionLabel)
-		try:
-			if dialog.ShowModal() != wx.ID_OK:
-				return None
-			text = dialog.text
-		finally:
-			dialog.Destroy()
-		name = cleanNameSymbols(self._nameOf(text) or entry.name)
-		return pickerData.Entry(
-			text, name, entry.kind, entry.category, entry.subgroup, entry.keywords, entry.item
-		)
-
 	def _finish(self, entries: list[pickerData.Entry], shouldPaste: bool) -> None:
 		conf = getConfig()
 		recent = list(conf["pickerRecent"])
@@ -538,7 +491,7 @@ class EmojiPickerDialog(wx.Dialog):
 		self.result = ("".join(entry.text for entry in entries), shouldPaste)
 		self.EndModal(wx.ID_OK)
 
-	def _useSelectionOrChain(self, shouldPaste: bool, actionLabel: str) -> None:
+	def _useSelectionOrChain(self, shouldPaste: bool) -> None:
 		if self._chain:
 			self._finish(list(self._chain), shouldPaste)
 			return
@@ -547,29 +500,58 @@ class EmojiPickerDialog(wx.Dialog):
 			# Translators: Announced when nothing is selected in the insert emoji dialog.
 			ui.message(_("Tidak ada yang dipilih"))
 			return
-		chosen = self._personalized(entry, actionLabel)
-		if chosen is not None:
-			self._finish([chosen], shouldPaste)
+		self._finish([entry], shouldPaste)
 
 	def _onInsert(self, evt: wx.CommandEvent) -> None:
-		# Translators: Button that inserts the chosen emoji and closes the dialog.
-		self._useSelectionOrChain(True, _("Sisipkan"))
+		self._useSelectionOrChain(shouldPaste=True)
 
 	def _onCopy(self, evt: wx.CommandEvent) -> None:
-		# Translators: Button that copies the chosen emoji to the clipboard and closes the dialog.
-		self._useSelectionOrChain(False, _("Salin"))
+		self._useSelectionOrChain(shouldPaste=False)
+
+	def _onCharHook(self, evt: wx.KeyEvent) -> None:
+		isEnter = evt.GetKeyCode() in (wx.WXK_RETURN, wx.WXK_NUMPAD_ENTER)
+		if isEnter and evt.ShiftDown() and not evt.ControlDown() and not evt.AltDown():
+			self._onPersonalize()
+			return
+		evt.Skip()
+
+	def _onPersonalize(self) -> None:
+		"""Open the personalize dialog for the selected emoji, then do what the user chose there."""
+		entry = self._selected()
+		if entry is None or entry.item is None or not entry.item.isCustomizable():
+			# Translators: Announced when Shift+Enter is pressed on an item that cannot be personalized.
+			ui.message(_("Tidak dapat dipersonalisasi"))
+			return
+		dialog = PersonalizeDialog(self, entry, self._nameOf)
+		try:
+			if dialog.ShowModal() != wx.ID_OK:
+				return
+			text, action = dialog.text, dialog.action
+		finally:
+			dialog.Destroy()
+		chosen = pickerData.Entry(
+			text,
+			cleanNameSymbols(self._nameOf(text) or entry.name),
+			entry.kind,
+			entry.category,
+			entry.subgroup,
+			entry.keywords,
+			entry.item,
+		)
+		if action == ACTION_ADD_TO_CHAIN:
+			self._addToChain(chosen)
+		else:
+			self._finish([*self._chain, chosen], shouldPaste=action == ACTION_INSERT)
 
 	def _updateChainField(self) -> None:
 		self.chainField.SetValue(", ".join(entry.name for entry in self._chain))
 
 	def _onAddToChain(self, evt: wx.CommandEvent) -> None:
 		entry = self._selected()
-		if entry is None:
-			return
-		# Translators: Button that adds the selected emoji to the collection.
-		chosen = self._personalized(entry, _("Tambah ke Rangkaian"))
-		if chosen is None:
-			return
+		if entry is not None:
+			self._addToChain(entry)
+
+	def _addToChain(self, chosen: pickerData.Entry) -> None:
 		self._chain.append(chosen)
 		self._updateChainField()
 		# Translators: Announced when an item is added to the collection. {name} is its name,

@@ -79,11 +79,11 @@ Isi dialog, sesuai urutan tombol Tab:
 6. Rangkaian: daftar emoji yang dikumpulkan dengan tombol Tambah ke Rangkaian, untuk disisipkan sekaligus.
 7. Tombol Sisipkan, Tambah ke Rangkaian, Hapus Terakhir, Kosongkan Rangkaian, Salin, Tambah ke Favorit atau Hapus dari Favorit, Detail, dan Tutup.
 
-Emoji yang punya pilihan warna kulit, jenis kelamin, atau arah hadap diberi keterangan "dapat dipersonalisasi" di daftar, misalnya "jempol ke atas, dapat dipersonalisasi". Saat emoji seperti itu disisipkan, ditambahkan ke rangkaian, atau disalin, muncul dialog Personalisasi:
+Enter selalu langsung menyisipkan emoji yang dipilih. Emoji yang punya pilihan warna kulit, jenis kelamin, atau arah hadap diberi keterangan di daftar, misalnya "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter". Shift+Enter membuka dialog Personalisasi:
 
-- Pilihan "Tanpa personalisasi" sudah terpilih. Tekan Enter untuk langsung memakai emoji aslinya.
-- Pilih "Personalisasi" untuk menampilkan aturannya. Yang muncul hanya aturan yang berlaku untuk emoji itu: jenis kelamin, arah hadap, warna kulit, dan warna kulit orang kedua untuk emoji dua orang seperti jabat tangan.
-- Kolom Hasil menyebut nama emoji jadinya. Tekan Enter untuk memakainya, atau Escape untuk batal.
+- Yang muncul hanya aturan yang berlaku untuk emoji itu: jenis kelamin, arah hadap, warna kulit, dan warna kulit orang kedua untuk emoji dua orang seperti jabat tangan.
+- Kolom Hasil menyebut nama emoji jadinya.
+- Tekan Enter untuk menyisipkannya, atau pakai tombol Tambah ke Rangkaian atau Salin. Tekan Escape untuk batal.
 
 Setelah Sisipkan ditekan, dialog langsung tertutup dan emoji ditempel ke tempat Anda mengetik. Isi papan klip sebelumnya dikembalikan. Kalau sebuah aplikasi tidak menerima tempelan, pakai tombol Salin, lalu tempel sendiri dengan Control+V. Pilihan personalisasi terakhir diingat untuk pemakaian berikutnya.
 

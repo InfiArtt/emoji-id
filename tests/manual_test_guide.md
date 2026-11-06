@@ -100,10 +100,11 @@ Tetapkan dulu tombol pintas untuk "Buka dialog sisipkan emoji" di Gestur Masukan
 
 - Membuka dialog. Buka Notepad, lalu tekan tombol pintas itu. Hasil yang diharapkan: dialog "Sisipkan Emoji - Emoji ID" terbuka dengan fokus di kolom Cari. Dialog tidak bisa dibuka dari menu NVDA.
 - Mencari dan menyisipkan. Ketik "ngakak", lalu tekan Enter. Hasil yang diharapkan: dialog tertutup, 🤣 tertempel di Notepad, dan isi papan klip sebelumnya kembali.
-- Personalisasi. Buka dialog, cari "jempol". Hasil yang diharapkan: daftar menyebut "jempol ke atas, dapat dipersonalisasi". Tekan Enter: dialog Personalisasi muncul dengan "Tanpa personalisasi". Tekan Enter lagi: tertempel 👍 tanpa warna kulit. Ulangi, pilih "Personalisasi", atur Warna kulit ke Sedang, lalu tekan Enter: tertempel 👍🏽.
-- Dua orang. Cari "jabat", tekan Enter, pilih "Personalisasi", atur Warna kulit orang pertama ke Cerah dan Warna kulit orang kedua ke Gelap, lalu tekan Enter. Hasil yang diharapkan: tertempel jabat tangan dengan dua warna kulit berbeda.
-- Jenis kelamin dan arah. Cari "berlari", tekan Enter, pilih "Personalisasi", atur Jenis kelamin ke Wanita dan Arah ke Menghadap kanan. Hasil yang diharapkan: kolom Hasil menyebut "wanita berlari ... menghadap kanan".
-- Emoji tanpa personalisasi. Cari "indonesia" dan tekan Enter. Hasil yang diharapkan: bendera langsung tertempel tanpa dialog Personalisasi.
+- Personalisasi. Buka dialog, cari "jempol". Hasil yang diharapkan: daftar menyebut "jempol ke atas, dapat dipersonalisasi, tekan Shift+Enter". Tekan Enter: 👍 langsung tertempel tanpa pertanyaan. Ulangi, lalu tekan Shift+Enter: dialog Personalisasi muncul. Atur Warna kulit ke Sedang, lalu tekan Enter: tertempel 👍🏽.
+- Dua orang. Cari "jabat", tekan Shift+Enter, atur Warna kulit orang pertama ke Cerah dan Warna kulit orang kedua ke Gelap, lalu tekan Enter. Hasil yang diharapkan: tertempel jabat tangan dengan dua warna kulit berbeda.
+- Jenis kelamin dan arah. Cari "berlari", tekan Shift+Enter, atur Jenis kelamin ke Wanita dan Arah ke Menghadap kanan. Hasil yang diharapkan: kolom Hasil menyebut "wanita berlari ... menghadap kanan".
+- Emoji tanpa personalisasi. Cari "indonesia" dan tekan Shift+Enter. Hasil yang diharapkan: NVDA mengucapkan "Tidak dapat dipersonalisasi". Tekan Enter: bendera langsung tertempel.
+- Personalisasi ke rangkaian. Cari "jempol", tekan Shift+Enter, atur warna kulit, lalu tekan tombol Tambah ke Rangkaian. Hasil yang diharapkan: emoji berwarna kulit itu masuk ke Rangkaian dan dialog utama tetap terbuka.
 - Kecepatan. Gerakkan panah naik dan turun di kotak Kategori dan Subkategori. Hasil yang diharapkan: tidak terasa berat.
 - Rangkaian. Cari "kue ulang tahun", tekan Tambah ke Rangkaian, lalu cari "terima kasih" dan tekan Tambah ke Rangkaian. Tekan Sisipkan. Hasil yang diharapkan: 🎂🙏 tertempel sekaligus.
 - Kaomoji. Pilih Jenis Kaomoji, cari "bahu", lalu tekan Enter. Hasil yang diharapkan: `¯\_(ツ)_/¯` tertempel.

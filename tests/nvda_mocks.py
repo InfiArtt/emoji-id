@@ -248,6 +248,9 @@ _module(
 	ListBox=FakeWindow,
 	SpinCtrl=FakeWindow,
 	CommandEvent=object,
+	KeyEvent=object,
+	WXK_RETURN=13,
+	WXK_NUMPAD_ENTER=370,
 	CallLater=FakeCallLater,
 	CallAfter=lambda *args: calledAfter.append(args),
 	**{
@@ -270,6 +273,7 @@ _module(
 			"EVT_CHOICE",
 			"EVT_LISTBOX",
 			"EVT_LISTBOX_DCLICK",
+			"EVT_CHAR_HOOK",
 		)
 	},
 )
